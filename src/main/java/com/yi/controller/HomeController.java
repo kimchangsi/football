@@ -36,4 +36,12 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	@RequestMapping(value = "/spot", method = RequestMethod.GET)
+	public String header() {
+		logger.info("hedaer");
+		
+		return "spot/spot";
+	}
+	
 }
