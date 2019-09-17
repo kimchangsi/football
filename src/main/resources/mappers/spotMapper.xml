@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.spotMapper">
+	<insert id="insert" parameterType="SpotVO">
+		insert into spot(s_name,s_addr,s_tel,s_img) values(#{sName},#{sAddr},#{sTel},#{sImg})
+	</insert>
+	
+	<select id="selectByAll" resultType="SpotVO">
+		select * from spot
+	</select>
+</mapper>

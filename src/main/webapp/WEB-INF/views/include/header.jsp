@@ -44,11 +44,11 @@
 			</h1>
 			<nav class="primary-nav">
 				<ul>
-					<li><a href="#">지점</a></li>
-					<li><a href="#">구장</a></li>
-					<li><a href="#">매치/용병</a></li>
-					<li><a href="#">리그</a></li>
-					<li><a href="#">고객센터</a></li>
+					<li><a href="#" class="nav_li">지점</a></li>
+					<li><a href="#" class="nav_li">구장</a></li>
+					<li><a href="#" class="nav_li">매치/용병</a></li>
+					<li><a href="#" class="nav_li">리그</a></li>
+					<li><a href="#" class="nav_li">고객센터</a></li>
 				</ul>
 			</nav>
 			
