@@ -6,10 +6,7 @@ public class MemberVO {
 	private String mId;
 	private String mName;
 	private String mPwd;
-	private String mPwd1;
-	private String mTel1;
-	private String mTel2;
-	private String mTel3;
+	private String mTel;
 	private Date mJoin;
 	private String mImg;
 	private String mPosition;
@@ -42,36 +39,12 @@ public class MemberVO {
 		this.mPwd = mPwd;
 	}
 
-	public String getmPwd1() {
-		return mPwd1;
+	public String getmTel() {
+		return mTel;
 	}
 
-	public void setmPwd1(String mPwd1) {
-		this.mPwd1 = mPwd1;
-	}
-
-	public String getmTel1() {
-		return mTel1;
-	}
-
-	public void setmTel1(String mTel1) {
-		this.mTel1 = mTel1;
-	}
-
-	public String getmTel2() {
-		return mTel2;
-	}
-
-	public void setmTel2(String mTel2) {
-		this.mTel2 = mTel2;
-	}
-
-	public String getmTel3() {
-		return mTel3;
-	}
-
-	public void setmTel3(String mTel3) {
-		this.mTel3 = mTel3;
+	public void setmTel(String mTel) {
+		this.mTel = mTel;
 	}
 
 	public Date getmJoin() {
@@ -132,10 +105,9 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [mId=" + mId + ", mName=" + mName + ", mPwd=" + mPwd + ", mPwd1=" + mPwd1 + ", mTel1=" + mTel1
-				+ ", mTel2=" + mTel2 + ", mTel3=" + mTel3 + ", mJoin=" + mJoin + ", mImg=" + mImg + ", mPosition="
-				+ mPosition + ", mTeam=" + mTeam + ", mMcCount=" + mMcCount + ", mWithdrawal=" + mWithdrawal
-				+ ", mPayPrice=" + mPayPrice + "]";
+		return "MemberVO [mId=" + mId + ", mName=" + mName + ", mPwd=" + mPwd + ", mTel=" + mTel + ", mJoin=" + mJoin
+				+ ", mImg=" + mImg + ", mPosition=" + mPosition + ", mTeam=" + mTeam + ", mMcCount=" + mMcCount
+				+ ", mWithdrawal=" + mWithdrawal + ", mPayPrice=" + mPayPrice + "]";
 	}
 
 }
