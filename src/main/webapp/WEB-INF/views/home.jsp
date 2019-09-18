@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,23 +12,10 @@
 	
 
 	<!-- 공통css -->
-	<link rel="stylesheet" type="text/css" href="resources/css/common.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/commonH.css">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700" rel="stylesheet">
 
-	<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/favicon/manifest.json">
+	
 	<meta name="msapplication-TileColor" content="#2c3c57">
 	<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#2c3c57">
@@ -39,11 +26,13 @@
 
 	<!-- 공통js -->
 	<script type="text/javascript" async="async" src="https://www.google-analytics.com/analytics.js"></script>
-	<script type="text/javascript" src="resources/js/common/common.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/js/common.js"></script>
 	<!-- //공통js -->
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-116234591-1"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -79,7 +68,7 @@
 							<a href="https://www.instagram.com/hmfutsalpark/" class="insta" target="_blank"><span class="hide">instagram</span></a>
 						</li>
 						<li><a href="/locate/locate.asp">지점</a></li>
-						<li><a href="/rese/rese.asp">대관</a></li>
+						<li><a href="/rese/rese.asp">구장</a></li>
 						<li><a href="/comm/match/match_apply.asp">매치/용병</a></li>
 						<li><a href="/league/league.asp" class="f_hvn">H-LEAGUE</a></li>
 						<li><a href="/cust/comm_notice.asp">고객센터</a></li> 
@@ -91,7 +80,7 @@
 						<li class="insta"><a href="https://www.instagram.com/hmfutsalpark/" target="_blank"><span class="hide">instagram</span></a></li>
 
 						
-						<li class="login"><a href="https://hmfutsalpark.com/member/login.asp">MEMBER LOGIN</a></li>
+						<li class="login"><a href="auth/login">MEMBER LOGIN</a></li>
 						
 					</ul>
 				</div>
@@ -112,7 +101,7 @@
 				<div class="menu on">
 					<ul>
 						<li><a href="/locate/locate.asp"><span>BRANCH</span><span class="ov">지점</span></a></li>
-						<li><a href="/rese/rese.asp"><span>RESERVATION</span><span class="ov">대관</span></a></li>
+						<li><a href="/rese/rese.asp"><span>RESERVATION</span><span class="ov">구장</span></a></li>
 						<li><a href="/comm/match/match_apply.asp"><span>MATCHING</span><span class="ov">매치/용병</span></a></li>
 						<li><a href="/league/league.asp"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
 						<li><a href="/cust/comm_notice.asp"><span>CUSTOMER</span><span class="ov">고객센터</span></a></li> 
@@ -137,6 +126,10 @@
 					<video id="video01" class="pblock" autoplay="" playsinline="" muted="" loop="" title=""> 
 						<source src="resources/data/main.mp4" type="video/mp4"> 
 					</video>
+					
+					<video id="video02" class="mblock" autoplay="" playsinline="" muted="" loop="" title=""> 
+						<source src="resources/data/main_m.mp4" type="video/mp4"> 
+					</video>
 				</div>
 				<!-- //영상 배경 -->
 			</div>
@@ -151,7 +144,7 @@
 				
 					<span class="img" onclick="javscript:window.open('http://hmfutsalpark.com/league/league.asp','_self');">
 				
-				<img src="/files/popup/10201909045436652. AIA생명 2019 H풋살리그 포스터.jpg" alt="">
+				
 				</span>
 
 				<div class="today">
@@ -161,50 +154,52 @@
 		</div>
 		<div class="layer_dim" style="display: none;"></div>
 		<!-- //Layer popup -->
+			<!-- <script>
+				$(function() {
+					cookiedata = document.cookie;
+					if (cookiedata.indexOf("popLayer1=done") < 0) {
 
-<script type="text/javascript">
-$(function(){
-	 cookiedata = document.cookie;
-	 if (cookiedata.indexOf("popLayer1=done") < 0) { 
-	 	
-		 $("#noticePop1").show();
-		$('.layer_dim').show();
-		$('html').addClass('hidden');
-	 }
-});
+						$("#noticePop1").show();
+						$('.layer_dim').show();
+						$('html').addClass('hidden');
+					}
+				});
 
-$(".layer_dim").on("click",function(e){
-		$('html').removeClass('hidden');
-		$('.layer_dim').hide();
-	  document.getElementById('noticePop1').style.visibility = "hidden";
-});
+				$(".layer_dim").on("click",function(e) {
+									$('html').removeClass('hidden');
+									$('.layer_dim').hide();
+									document.getElementById('noticePop1').style.visibility = "hidden";
+								});
 
- function setCookie(name, value, expiredays) {
-	  var todayDate = new Date();
-	  todayDate.setDate(todayDate.getDate() + expiredays);
-	  document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
- }
+				function setCookie(name, value, expiredays) {
+					var todayDate = new Date();
+					todayDate.setDate(todayDate.getDate() + expiredays);
+					document.cookie = name + "=" + escape(value)
+							+ "; path=/; expires=" + todayDate.toGMTString()
+							+ ";"
+				}
 
- function noticePop1Close(e) {
-	  if (e.checked) {
-			setCookie("popLayer1", "done", 1);
-	  }
-		$('html').removeClass('hidden');
-		$('.layer_dim').hide();
-	  document.getElementById('noticePop1').style.visibility = "hidden";
- }
+				function noticePop1Close(e) {
+					if (e.checked) {
+						setCookie("popLayer1", "done", 1);
+					}
+					$('html').removeClass('hidden');
+					$('.layer_dim').hide();
+					document.getElementById('noticePop1').style.visibility = "hidden";
+				}
 
- function closeWin1() {
-		$('html').removeClass('hidden');
-		$('.layer_dim').hide();
-	  document.getElementById('noticePop1').style.visibility = "hidden";
- }
-</script>
+				function closeWin1() {
+					$('html').removeClass('hidden');
+					$('.layer_dim').hide();
+					document.getElementById('noticePop1').style.visibility = "hidden";
+				}
+			</script> -->
 
-		
-		<!-- //Contents -->
+
+
+			<!-- //Contents -->
 	</section>
-<script language="Javascript">
+<!-- <script language="Javascript">
 	$(window).load(function() {
 		$(".rank_wrap").css("display","block");
 		var slide01 = $('.rank_list').bxSlider({
@@ -219,7 +214,7 @@ $(".layer_dim").on("click",function(e){
 			hideControlOnEnd: true
 		});
 	});
-</script>
+</script> -->
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="footer_wrap">
