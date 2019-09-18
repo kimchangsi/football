@@ -1,33 +1,16 @@
 package com.yi.domain;
 
+import java.util.List;
+
 public class SpotVO {
 	private int sNo;
 	private String sName;
 	private String sAddr;
 	private String sTel;
 	private String sImg;
+	private List<GroundVO> sGsno; 
 
-	public SpotVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public SpotVO(int sNo, String sName, String sAddr, String sTel, String sImg) {
-		super();
-		this.sNo = sNo;
-		this.sName = sName;
-		this.sAddr = sAddr;
-		this.sTel = sTel;
-		this.sImg = sImg;
-	}
-
-	public SpotVO(String sName, String sAddr, String sTel, String sImg) {
-		super();
-		this.sName = sName;
-		this.sAddr = sAddr;
-		this.sTel = sTel;
-		this.sImg = sImg;
-	}
+	
 
 	public int getsNo() {
 		return sNo;
@@ -67,6 +50,16 @@ public class SpotVO {
 
 	public void setsImg(String sImg) {
 		this.sImg = sImg;
+	}
+	
+	
+
+	public List<GroundVO> getsGsno() {
+		return sGsno;
+	}
+
+	public void setsGsno(List<GroundVO> sGsno) {
+		this.sGsno = sGsno;
 	}
 
 	@Override

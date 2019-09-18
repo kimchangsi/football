@@ -12,7 +12,7 @@
 #video_wrap #main_title {
 	position: absolute;
 	left: 360px;
-	bottom: 15px;
+	bottom: 30px;
 	font-size: 80px;
 	color: white;
 }
@@ -176,6 +176,7 @@
 
 .list_wrap .cont .info2 .t_wrap .btn_wrap {
 	margin-top: 20px;
+	text-align: left;
 }
 
 .list_wrap .cont .info2 .t_wrap .btn_wrap a {

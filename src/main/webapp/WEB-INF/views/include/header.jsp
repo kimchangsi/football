@@ -44,8 +44,8 @@
 			</h1>
 			<nav class="primary-nav">
 				<ul>
-					<li><a href="#" class="nav_li">지점</a></li>
-					<li><a href="#" class="nav_li">구장</a></li>
+					<li><a href="${pageContext.request.contextPath}/spot" class="nav_li">지점</a></li>
+					<li><a href="${pageContext.request.contextPath}/reservation" class="nav_li">구장</a></li>
 					<li><a href="#" class="nav_li">매치/용병</a></li>
 					<li><a href="#" class="nav_li">리그</a></li>
 					<li><a href="#" class="nav_li">고객센터</a></li>

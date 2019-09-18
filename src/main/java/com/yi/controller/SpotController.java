@@ -20,6 +20,7 @@ import com.yi.domain.SpotVO;
 import com.yi.service.SpotService;
 
 @Controller
+
 public class SpotController {
 	private static final Logger logger = LoggerFactory.getLogger(SpotController.class);
 	@Autowired
@@ -27,7 +28,7 @@ public class SpotController {
 	
 	private String innerUploadPath = "resources/images/spot"; //서버에 업로드
 	
-	
+	//지점 메인화면
 	@RequestMapping(value = "/spot", method = RequestMethod.GET)
 	public String header(Model model) throws Exception {
 		logger.info("spot");
@@ -39,13 +40,14 @@ public class SpotController {
 		return "spot/spot";
 	}
 	
-	
+	//관리자 지점
 	@RequestMapping(value = "/innerUpload", method = RequestMethod.GET)
 	public String innerUploadForm() {
 		logger.info("---------------------------innerUpload get");
 		return "manager/innerUploadForm";
 	}
 	
+	//관리자 지점 등록 후
 	@RequestMapping(value = "/innerUpload", method = RequestMethod.POST)
 	public String innerUploadPost(SpotVO spot, MultipartFile file, HttpServletRequest request, Model model)
 			throws Exception {

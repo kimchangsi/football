@@ -3,6 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yi.mapper.spotMapper">
+	<resultMap type="SpotVO" id="resultSpot">
+		<id column="s_no" property="sNo"/>
+		<result column="s_name" property="sName"/>
+		<result column="s_name" property="sAddr"/>
+		<result column="s_name" property="sTel"/>
+		<result column="s_name" property="sImg"/>
+	</resultMap>
+	
+	<resultMap type="SpotVO" id="resultSpotByKcm" extends="resultSpot">
+		<collection property="sGsno" resultMap="com.yi.mapper.groundMapper.resultGround"/>
+	</resultMap>
+
+
+
+
 	<insert id="insert" parameterType="SpotVO">
 		insert into spot(s_name,s_addr,s_tel,s_img) values(#{sName},#{sAddr},#{sTel},#{sImg})
 	</insert>
