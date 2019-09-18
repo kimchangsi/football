@@ -1314,6 +1314,7 @@ button.dis:hover	span	span {
 	width: 100%;
 	overflow: hidden;
 	margin-bottom: 15px;
+	display: none;    
 }
 
 .time_wrap_item{
@@ -1324,14 +1325,61 @@ button.dis:hover	span	span {
 	margin-right: 5px;
 	margin-bottom: 5px;
 	padding: 2px; 
-	background: #989898;
+	background: red;
 	color:white;
+}
+.time_wrap_item_ok{
+	border: 1px solid gray;
+	background: #989898;
 }
 
 .time_wrap_item p{
 	text-align: center;
 	
 }
+
+
+
+
+/* 예약정보 */
+
+.content2_1  .tit	{padding-left:18px; background:#2c3c57; color:#fff; font-size:20px; line-height:70px;}
+.content2_1  .table_wrap	{margin:0}
+.content2_1  .table_wrap table	{border:1px solid #c4c4c4; border-top:0}
+.content2_1  .table_wrap table tbody tr th	{ padding-top:20px; border:0; font-size:16px; text-align:left; vertical-align:top}
+.content2_1  .table_wrap table tbody tr td	{padding:3px 20px; border:0;  height:49px; font-size:18px; text-align:left}
+.content2_1  .table_wrap table tbody tr td .price	{font-weight:700} 
+.content2_1  .table_wrap table tbody tr td textarea	{width:100%; height:100px}
+.content2_1  .table_wrap table tbody tr:first-child th	{padding-top:25px}
+.content2_1  .table_wrap table tbody tr:first-child td	{padding-top:16px}
+.content2_1  .table_wrap table tbody tr:last-child td	{padding-bottom:16px}
+
+
+.content2_1  .table_wrap table tbody .phone	{font-size:0; line-height:0}
+.content2_1  .table_wrap table tbody .phone input	{width:31.333333%}
+.content2_1  .table_wrap table tbody .phone span	{display:inline-block; width:3%; font-size:11px; text-align:center; vertical-align:middle;}
+.content2_1  .chk	{margin-top:22px}
+.content2_1  .btn_wrap	{margin-top:33px}
+.content2_1  .btn_wrap .btn_big	{width:100%}
+.content2_1  .btn_wrap .btn_big span	{display:inline-block; padding-left:50px; background:url('/images/content/icon_btn_rese.png') no-repeat 0 center;}
+
+#gg span{
+	margin: 0;
+	padding: 0;
+}
+
+#ttt{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#ttt tbody{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 </style>
 <script>
 
@@ -1354,6 +1402,8 @@ button.dis:hover	span	span {
 
 
 	$(function() {
+		
+		var sNo = ${sNo};
 		
 		$(".tab_wrap li").click(function() {
 			$(".on").removeClass("on");
@@ -1390,23 +1440,66 @@ button.dis:hover	span	span {
 								"green");
 						$(".ui-state-active").css("color", "white");
 						$("#sel_date").text(selected); 
+						$("#select02 option").eq(0).prop("selected", true);
+						$("#time_wrap").hide();	
+						
+
+						
 					}
 				})
 				
-				
-				
 				var date= getTodayDate()
 				$("#sel_date").text(date); 
-		
+				
 		
 		
 		//구장선택박스 체인지 이벤트
 		
 		$("#select02").on("change", function() {
 			var gNo = $("#select02 :selected").val();
+			var sDate = $("#sel_date").text();
+			
+			if(gNo!=0){
+				$("#time_wrap").slideDown(500);
+				$(".time_wrap_item").addClass('time_wrap_item_ok');
+			
+				$.ajax({
+					url:"form2/"+sNo+"/"+sDate+"/"+gNo,
+					type:"get",
+					dataType:"json",
+					success:function(res){
+						console.log(res); 
+						console.log(res[0].rtime); 
+						for (var i = 0; i < res.length; i++) {
+							var text = res[i].rtime;
+							var subText = text.substr(11, 13);
+							for (var j = 0; j < $(".ptime").length; j++) {
+								var $a = $(".ptime:contains("+subText+")").eq(j);
+								
+								if ( $a.text() != '' ) {
+									$a.parent().removeClass('time_wrap_item_ok');
+								}
+							}
+							/*  */
+						}
+					}
+				})
+			}else{
+				$("#time_wrap").slideUp(500);					
+			}
 			
 			
+		})
+		
+		
+		/* 시간 클릭시 */
+		$(".time_wrap_item_ok").click(function() {
+			$("#tdDate").text($("#sel_date").text());
+			$("#tdGround").text($("#select02 :selected").attr("data-a"));
+			$("#tdTime").text($(this).find(".ptime").text());
 			
+			var pPrice = $(this).find(".pPrice").text();
+			$("#tdPrice").text(pPrice.substring(0, pPrice.length-1));
 		})
 
 	})
@@ -1448,7 +1541,7 @@ button.dis:hover	span	span {
 					<select id="select02" name="branch_code">
 							 <option value="0">구장을 선택해주세요</option> 
 							 <c:forEach var="gr" items="${gList }">
-							 	<option value="${gr.gNo }">${gr.gName }</option>
+							 	<option data-a="${gr.gName }" value="${gr.gNo }">${gr.gName }</option>
 							 </c:forEach>
 								
 
@@ -1457,43 +1550,95 @@ button.dis:hover	span	span {
 				<div class="content2_1">
 					<span class="sel_span">시간 선택</span>
 					<div id="time_wrap">
-						<div class="time_wrap_item" >
-							<p>08:00 ~ 10:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">08:00 ~ 10:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>10:00 ~ 12:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">10:00 ~ 12:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>12:00 ~ 14:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">12:00 ~ 14:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>14:00 ~ 16:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">14:00 ~ 16:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>16:00 ~ 18:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">16:00 ~ 18:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>18:00 ~ 20:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">18:00 ~ 20:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>20:00 ~ 22:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">20:00 ~ 22:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item" >
-							<p>22:00 ~ 24:00</p>
-							<p>80000원</p>
+						<div class="time_wrap_item time_wrap_item_ok" >
+							<p class="ptime">22:00 ~ 24:00</p>
+							<p class="pPrice">80000원</p>
 						</div>
 					</div>
 				</div>
 				<div class="content2_1">
-					<span class="sel_span">합 계</span> <span id="sel_date"></span>
+					<span class="sel_span">예약 정보</span> <span id="sel_date"></span>
+					<br>
+					
+					<div class="table_wrap">
+					<p class="tit">대관 예약자 정보 입력</p>
+								<table id="ttt">
+								<colgroup>
+									<col style="width:25%">
+									<col style="">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row">신청자</th>
+										<td><span id="tdMember"></span></td>
+									</tr>
+									<tr>
+										<th scope="row">연락처</th>
+										<td>
+											<span id="tdTel"></span>
+										</td>
+									</tr>
+								  
+								
+									<tr>
+										<th scope="row">예약일자</th>
+										<td id="dateBottom" ><span id="tdDate"></span></td>
+									</tr>
+									<tr>
+										<th scope="row">선택구장</th>
+										<td id="stadiumBottom" ><span id="tdGround"></span></td>
+									</tr>
+									<tr>
+										<th scope="row">예약시간</th>
+										<td id="timeBottom" ><span id="tdTime"></span></td>
+									</tr>
+									
+									<tr>
+										<th scope="row">총 결제금액</th>
+										<td><span id="tdPrice"></span>원</td>
+									</tr>
+								
+								</tbody>
+								</table>
+							</div>
+
+							  
+
+							<div class="btn_wrap">
+								<button type="button" class="btn_big gray" id="gg"><span>대관예약하기</span></button>
+							</div>
 				</div>
+				
+				
+				
 			</div>
 			
 		</div>

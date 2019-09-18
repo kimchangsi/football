@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yi.mapper.groundMapper">
+<mapper namespace="com.yi.mappers.groundMapper">
 	<resultMap type="GroundVO" id="resultGround">
 		<id column="g_no" property="gNo"/>
 		<result column="g_name" property="gName"/>
@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<resultMap type="GroundVO" id="resultGroundByKcm" extends="resultGround">
-		<association property="gSno" resultMap="com.yi.mapper.spotMapper.resultSpot"></association>
+		<association property="gSno" resultMap="com.yi.mappers.spotMapper.resultSpot"></association>
 	</resultMap>
 	
 	
