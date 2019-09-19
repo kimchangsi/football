@@ -7,15 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.yi.domain.GroundVO;
 import com.yi.domain.ReservationVO;
+import com.yi.domain.SpotVO;
 import com.yi.persistence.GroundDao;
 import com.yi.persistence.ReservationDao;
+import com.yi.persistence.SpotDao;
 @Service
 public class ReservationSericeImpl implements ReservationService {
 	@Autowired
 	ReservationDao rDao;
 	@Autowired
 	GroundDao gDao;
-	
+	@Autowired
+	SpotDao sDao;
 	
 
 	@Override
@@ -26,6 +29,11 @@ public class ReservationSericeImpl implements ReservationService {
 	@Override
 	public List<ReservationVO> selectByrGnoRtime(int rGno, String rTime) throws Exception {
 		return rDao.selectByrGnoRtime(rGno, rTime);
+	}
+
+	@Override
+	public SpotVO selectBySno(int sNo) throws Exception {
+		return sDao.selectBySno(sNo);
 	}
 
 }

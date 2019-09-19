@@ -51,11 +51,16 @@ public class ReservationController {
 			logger.info("reservation Form"+sNo);
 			
 			List<GroundVO> gList = reseService.selectGroundBygNo(sNo); //지점의 구장들 리스트
-			for (GroundVO groundVO : gList) {
+			SpotVO s = reseService.selectBySno(sNo);//지점의 정보들
+			
+			/*for (GroundVO groundVO : gList) {
 				logger.info(groundVO.toString());
-			}
+			}*/
+			
+			logger.info(s.toString());
 			model.addAttribute("gList",gList);
 			model.addAttribute("sNo", sNo);
+			model.addAttribute("s",s);
 			
 			return "reservation/reseForm";
 		}

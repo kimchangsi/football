@@ -19,4 +19,5 @@
 	<select id="selectBygNo" resultMap="resultGroundByKcm">
 		select * from ground where g_sno=#{gno};
 	</select>
+	
 </mapper>

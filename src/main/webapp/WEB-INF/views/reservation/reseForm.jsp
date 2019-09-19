@@ -1270,7 +1270,7 @@ button.dis:hover	span	span {
 
 #ground_rese_content1{
 	width: 600px;
-	border: 1px solid black;
+	border: 1px solid #ccc;
 	float: left;
 	padding: 10px;
 }
@@ -1278,7 +1278,7 @@ button.dis:hover	span	span {
 #ground_rese_content2{
 	margin-left:50px;
 	width: 600px;
-	border: 1px solid black;
+	border: 1px solid #ccc;
 	float: left;
 	padding: 10px;
 }
@@ -1346,8 +1346,8 @@ button.dis:hover	span	span {
 .content2_1  .tit	{padding-left:18px; background:#2c3c57; color:#fff; font-size:20px; line-height:70px;}
 .content2_1  .table_wrap	{margin:0}
 .content2_1  .table_wrap table	{border:1px solid #c4c4c4; border-top:0}
-.content2_1  .table_wrap table tbody tr th	{ padding-top:20px; border:0; font-size:16px; text-align:left; vertical-align:top}
-.content2_1  .table_wrap table tbody tr td	{padding:3px 20px; border:0;  height:49px; font-size:18px; text-align:left}
+.content2_1  .table_wrap table tbody tr th	{ padding-top:20px; border:0; font-size:16px; text-align:left; vertical-align:top;  padding-left: 20px;}
+.content2_1  .table_wrap table tbody tr td	{padding:3px 20px; border:0;  height:49px; font-size:18px; text-align:left;} 
 .content2_1  .table_wrap table tbody tr td .price	{font-weight:700} 
 .content2_1  .table_wrap table tbody tr td textarea	{width:100%; height:100px}
 .content2_1  .table_wrap table tbody tr:first-child th	{padding-top:25px}
@@ -1378,6 +1378,38 @@ button.dis:hover	span	span {
 	width: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+
+.time_wrap_item_check{
+	background-color: blue;
+}
+
+/* 지점유의사항 */
+
+.tit_2{
+    background: #2c3c57;
+    color: #fff;
+    font-size: 20px;
+    line-height: 70px;
+    text-align: center;
+}
+
+#img_wrap img{
+	width: 100%;
+}
+
+.red_color{
+	color:red;
+}
+
+.green_color{
+	color:green;
+}
+
+#notice_wrap{
+	margin-bottom: 15px;
+	margin-top: 15px;
 }
 
 </style>
@@ -1442,6 +1474,7 @@ button.dis:hover	span	span {
 						$("#sel_date").text(selected); 
 						$("#select02 option").eq(0).prop("selected", true);
 						$("#time_wrap").hide();	
+						$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
 						
 
 						
@@ -1462,6 +1495,7 @@ button.dis:hover	span	span {
 			if(gNo!=0){
 				$("#time_wrap").slideDown(500);
 				$(".time_wrap_item").addClass('time_wrap_item_ok');
+				$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
 			
 				$.ajax({
 					url:"form2/"+sNo+"/"+sDate+"/"+gNo,
@@ -1494,6 +1528,9 @@ button.dis:hover	span	span {
 		
 		/* 시간 클릭시 */
 		$(".time_wrap_item_ok").click(function() {
+			
+			$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
+			$(this).addClass("time_wrap_item_check");
 			$("#tdDate").text($("#sel_date").text());
 			$("#tdGround").text($("#select02 :selected").attr("data-a"));
 			$("#tdTime").text($(this).find(".ptime").text());
@@ -1527,7 +1564,36 @@ button.dis:hover	span	span {
 		<h3 class="h_tit">구장예약</h3>
 		<div id="ground_rese">
 			<div id="ground_rese_content1">
-			
+				<div id="img_wrap">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/spot/${s.sImg}" alt="">			
+				</div>
+				<div>
+					<p class="tit_2">${s.sName }</p>
+				</div>
+				<div id="notice_wrap">
+					<h3>유의사항</h3>
+					<br>
+					<p>
+						<span class="red_color">1. 주의사항</span><br>
+							<span class="red_color">* 예약후 진행이 어려울실경우 사이트에서 꼭 취소 해주셔야 합니다.</span><br>
+							* 예약자와 입금자 이름이 다를 경우 반드시 전화주세요.<br>
+							<span class="red_color">* 우천시에는  풋살화는 대여 하지 않습니다.</span><br>
+							<span class="green_color">* 예약 시 이름과 전화번호 정확하게 기입 부탁드립니다.[연락처가 정확하지않을 경우(연락이안될시) 대관이 취소됩니다]</span><br>
+							3. 행사 목적 대관 신청 시 담당자와 사전 문의 바랍니다.<br>
+							4. 전 구역 금연지역입니다.<br>
+							(흡연은 지정된 장소를 이용해 주세요, (경기장내 흡연 적발 시 대관 취소 및 환불 불가)<br>
+							<span class="red_color">5. 화장실은 매장 2층에 위치해 있습니다.(노상방뇨 적발시 대관 취소 및 환불 불가) 전구역CCTV작동중입니다.</span><br>
+							6. 경기장 내 음료 및 음식물 반입 금지 (경기장 밖에서 드세요)<br>
+							7. 주차는 경기장 앞 7층 주차장을 이용하시기 바랍니다.<br>
+							8. 현장 카드결재 가능합니다. 현금영수증 발행은 현장 결제 시 가능합니다.<br>
+							9. 본 풋살파크는 CCTV 촬영되고 있습니다.<br>
+							10.분실물에 대한 책임은 본인에게 있습니다.<br>
+							11. 개인장비는 직접 지참하시기 바랍니다.(풋살화 등....) 조끼,공은 험멜 매장사무실로 오시면 빌려드립니다.<br>
+							12. 풋살화 이외 축구화 는 착용불가합니다. (잔디보호) 풋살화는 험멜 매장사무실로 오시면 대여해 드립니다. (비용발생)<br>
+							13. 야간 대관 이용 시 소음 관련 민원이 발생 할 수 있으니 고성, 욕설 등은 삼가해 주시기 바랍니다.<br>
+					</p>
+				</div>
 			</div>
 			
 			<div id="ground_rese_content2">
@@ -1589,7 +1655,7 @@ button.dis:hover	span	span {
 					<br>
 					
 					<div class="table_wrap">
-					<p class="tit">대관 예약자 정보 입력</p>
+					<p class="tit">구장 예약자 정보 입력</p>
 								<table id="ttt">
 								<colgroup>
 									<col style="width:25%">
@@ -1633,7 +1699,7 @@ button.dis:hover	span	span {
 							  
 
 							<div class="btn_wrap">
-								<button type="button" class="btn_big gray" id="gg"><span>대관예약하기</span></button>
+								<button type="button" class="btn_big gray" id="gg"><span>구장예약하기</span></button>
 							</div>
 				</div>
 				

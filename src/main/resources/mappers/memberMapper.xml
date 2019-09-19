@@ -28,4 +28,8 @@
 		m_withdrawal, m_pay_price)
 		VALUES(#{mId}, #{mName}, #{mPwd}, #{mTel}, now(), #{mImg}, #{mPosition}, 0, 0, 0);
 	</insert>
+	
+	<select id="selectByID" resultType="com.yi.domain.MemberVO">
+		select m_id,m_name,m_tel from member where m_id=#{mId};
+	</select>
 </mapper>

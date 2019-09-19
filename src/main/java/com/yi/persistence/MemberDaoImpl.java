@@ -18,4 +18,9 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.insert(namespace+".insert",vo);
 	}
 
+	@Override
+	public MemberVO selectByID(String mId) {
+		return sqlSession.selectOne(namespace + ".selectByID" , mId);
+	}
+
 }
