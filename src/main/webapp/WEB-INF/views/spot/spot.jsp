@@ -228,6 +228,17 @@
 	color:black;
 }
 </style>
+<script>
+	$(function() {
+		
+			//예약하기 클릭시 예약하기 페이지로 이동
+			$(".btn_rese").on("click",function(event){
+				var src = $(this).attr("data-src");
+		 		location.href="${pageContext.request.contextPath}/reservation/form?sNo="+src;
+				event.preventDefault();
+        });
+	})
+</script>
 <div id="video_wrap">
 	<video id="v"
 		src="${pageContext.request.contextPath}/resources/media/sub_01.mp4"
@@ -268,7 +279,7 @@
 						<a href="tel:010-6252-1007" class="tel">${spot.sTel}</a>
 					</p>
 					<div class="btn_wrap">
-						<a href="#" class="btn_rese"><span>예약하기</span></a>
+						<a href="#" class="btn_rese" data-src="${spot.sNo }"><span>예약하기</span></a>
 					</div>
 				</div>
 			</div>
@@ -297,7 +308,7 @@
 					<a href="tel:010-3770-7907" class="tel">${spot.sTel}</a> 
 				</p>
 				<div class="btn_wrap">
-					<a href="#" class="btn_rese"><span>예약하기</span></a>
+					<a href="#" class="btn_rese" data-src="${spot.sNo }"><span>예약하기</span></a>
 				</div>
 			</div>
 		</div>

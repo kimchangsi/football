@@ -37,7 +37,7 @@ public class ReservationController {
 		return "reservation/rese";
 	}
 	
-	//구장예약 확인화면
+	//구장예약 확인 화면
 	@RequestMapping(value = "/reservation/check", method = RequestMethod.GET)
 	public String check(Model model) throws Exception {
 		logger.info("reservation Check");
@@ -47,15 +47,20 @@ public class ReservationController {
 	
 	//구장예약 화면
 		@RequestMapping(value = "/reservation/form", method = RequestMethod.GET)
-		public String reservationPage(@RequestParam(required=true, name="gNo") int gNo, Model model) throws Exception {
-			logger.info("reservation Form"+gNo);
+		public String reservationPage(@RequestParam(required=true, name="sNo") int sNo, Model model) throws Exception {
+			logger.info("reservation Form"+sNo);
 			
-			List<GroundVO> gList = reseService.selectGroundBygNo(gNo); //지점의 구장들 리스트
-			for (GroundVO groundVO : gList) {
+			List<GroundVO> gList = reseService.selectGroundBygNo(sNo); //지점의 구장들 리스트
+			SpotVO s = reseService.selectBySno(sNo);//지점의 정보들
+			
+			/*for (GroundVO groundVO : gList) {
 				logger.info(groundVO.toString());
-			}
+			}*/
+			
+			logger.info(s.toString());
 			model.addAttribute("gList",gList);
-			model.addAttribute("sNo", gNo);
+			model.addAttribute("sNo", sNo);
+			model.addAttribute("s",s);
 			
 			return "reservation/reseForm";
 		}

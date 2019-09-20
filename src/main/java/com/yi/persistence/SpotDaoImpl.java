@@ -26,4 +26,10 @@ public class SpotDaoImpl implements SpotDao {
 		return sqlSession.selectList(namespace + ".selectByAll");
 	}
 
+	@Override
+	public SpotVO selectBySno(int sNo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".selectBySno",sNo);
+	}
+
 }

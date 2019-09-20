@@ -103,7 +103,6 @@
 	margin-left: -6px;
 	width: 13px;
 	height: 13px;
-	background: url('/images/content/bg_tab_arr.png') no-repeat 0 0
 }
 
 .tab_wrap ul li .tab_cont {
@@ -389,8 +388,6 @@
 	display: inline-block;
 	width: 36px;
 	height: 36px;
-	background: url('/images/content/btn_cal_prev.png') no-repeat center
-		center;
 	vertical-align: top
 }
 
@@ -398,19 +395,13 @@
 	display: inline-block;
 	width: 36px;
 	height: 36px;
-	background: url('/images/content/btn_cal_next.png') no-repeat center
-		center;
 	vertical-align: top
 }
 
 .rese_wrap .fl_wrap .fl_right .calendar_wrap .top .btn_prev:hover {
-	background: url('/images/content/btn_cal_prev_ov.png') no-repeat center
-		center;
 }
 
 .rese_wrap .fl_wrap .fl_right .calendar_wrap .top .btn_next:hover {
-	background: url('/images/content/btn_cal_next_ov.png') no-repeat center
-		center;
 }
 
 .rese_wrap .fl_wrap .fl_right .calendar_wrap .top .year {
@@ -770,7 +761,6 @@
 
 .rese_wrap .fl_wrap .fl_right .info_wrap .info_txt .tit {
 	padding: 22px 0 8px 30px;
-	background: url('/images/content/icon_info_tit.png') no-repeat 0 26px;
 	color: #ff0000;
 	font-size: 20px;
 	line-height: 30px
@@ -881,7 +871,6 @@
 .rese_wrap .fl_wrap .fl_right .int_wrap .btn_wrap .btn_big span {
 	display: inline-block;
 	padding-left: 50px;
-	background: url('/images/content/icon_btn_rese.png') no-repeat 0 center;
 }
 
 select {
@@ -1168,7 +1157,7 @@ button.dis:hover	span	span {
 		 	if(gNo==0){
 		 		alert("지점을 선택해주세요");
 		 	}else{
-		 		location.href="${pageContext.request.contextPath}/reservation/form?gNo="+gNo;
+		 		location.href="${pageContext.request.contextPath}/reservation/form?sNo="+gNo;
 		 	}
 			 event.preventDefault();
         });

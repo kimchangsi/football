@@ -25,4 +25,8 @@
 	<select id="selectByAll" resultType="SpotVO">
 		select * from spot
 	</select>
+	
+	<select id="selectBySno" resultType="SpotVO">
+		select * from spot where s_no = #{sNo}
+	</select>
 </mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mappers.reservationMapper">
+	<resultMap type="ReservationVO" id="reservationResult">
+		<id column="r_no" property="rNo"/>
+		<result column="r_time" property="rtime"/>
+		<result column="r_pay_time" property="rPayTime"/>
+		<result column="r_cancel" property="rCancel"/>
+	</resultMap>
+	
+	<resultMap type="ReservationVO" id="reservationResultByKcm" extends="reservationResult">
+		<association property="rMember" resultMap="com.yi.mappers.memberMapper.memberResultByKcm"></association>
+		<association property="rGno" resultMap="com.yi.mappers.groundMapper.resultGround"></association>
+	</resultMap>
+	
+	<resultMap type="ReservationVO" id="reservationResultByKcm2" extends="reservationResult">
+		<association property="rMember" resultMap="com.yi.mappers.memberMapper.memberResult"></association>
+		<association property="rGno" resultMap="com.yi.mappers.groundMapper.resultGround"></association>
+	</resultMap>
+	
+	<select id="selectByrGnoRtime"  parameterType="map"  resultMap="reservationResultByKcm2">
+		select r_no,r_time, r_pay_time, m_id, m_name,r_cancel, g_no from reservation left join member on reservation.r_member = member.m_id left join ground  on r_gno = g_no where r_gno=#{rGno} and  r_time like  concat('%',#{rTime},'%')
+	</select>
+	
+	
+	
+</mapper>

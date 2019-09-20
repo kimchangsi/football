@@ -3,6 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yi.mappers.memberMapper">
+	<resultMap type="MemberVO" id="memberResult">
+		<id column="m_id" property="mId"/>
+		<result column="m_name" property="mName"/>
+		<result column="m_pwd" property="mPwd"/>
+		<result column="m_tel" property="mTel"/>
+		<result column="m_join" property="mJoin"/>
+		<result column="m_img" property="mImg"/>
+		<result column="m_position" property="mPosition"/>
+		<result column="m_mc_count" property="mMcCount"/>
+		<result column="m_withdrawal" property="mWithdrawal"/>
+		<result column="m_pay_price" property="mPayPrice"/>
+	</resultMap>
+	
+	<resultMap type="MemberVO" id="memberResultByKcm" extends="memberResult">
+		<association property="mTeam" resultMap="com.yi.mappers.teamMapper.teamResult"></association>
+	</resultMap>
+
+
+
 	<insert id="insert" parameterType="MemberVO">
 		INSERT INTO `member`
 		(m_id, m_name, m_pwd, m_tel, m_join, m_img, m_position, m_mc_count,
@@ -12,5 +31,8 @@
 	
 	<select id="idcheck" parameterType="String" resultType="Integer">
 		select COUNT(*) from member where m_id = #{mId}
+	</select>	
+	<select id="selectByID" resultType="com.yi.domain.MemberVO">
+		select m_id,m_name,m_tel from member where m_id=#{mId};
 	</select>
 </mapper>

@@ -21,7 +21,9 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberVO idcheck(int mId) throws Exception {
 		return sqlSession.selectOne(namespace+".idcheck", mId);
-		
+	}	
+	public MemberVO selectByID(String mId) {
+		return sqlSession.selectOne(namespace + ".selectByID" , mId);
 	}
 
 }
