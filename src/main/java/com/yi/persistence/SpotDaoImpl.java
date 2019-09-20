@@ -14,7 +14,7 @@ public class SpotDaoImpl implements SpotDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	private static final String namespace = "com.yi.mapper.spotMapper";
+	private static final String namespace = "com.yi.mappers.spotMapper";
 
 	@Override
 	public void insert(SpotVO vo) throws Exception {

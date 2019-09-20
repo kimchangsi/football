@@ -14,7 +14,7 @@ public class GroundDaoImple implements GroundDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	private static final String namespace = "com.yi.mapper.groundMapper";
+	private static final String namespace = "com.yi.mappers.groundMapper";
 	
 	@Override
 	public List<GroundVO> selectBygNo(int gno) throws Exception {

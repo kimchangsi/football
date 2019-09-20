@@ -452,10 +452,9 @@ transform
 								href="#" onclick="OLoginM();" class="btn_middle">로그인</a>
 
 							<div class="btn_wrap">
-								<a href="#" class="find_id" onclick="openLayer('findIdDiv');">아이디
-									찾기</a> <a href="#" class="find_pw"
-									onclick="openLayer('findPwDiv');">비밀번호 찾기</a> <a
-									href="${pageContext.request.contextPath }/auth/join" class="join">회원가입</a>
+								<a href="#" class="find_id" onclick="openLayer('findIdDiv');">아이디 찾기</a>
+								<a href="#" class="find_pw"	onclick="openLayer('findPwDiv');">비밀번호 찾기</a>
+								<a href="${pageContext.request.contextPath }/auth/join" class="join">회원가입</a>
 							</div>
 
 
@@ -464,7 +463,7 @@ transform
 								<p class="tit">SNS 간편로그인</p>
 
 								<a target="HiddenFram3e" href="https://kauth.kakao.com/oauth/authorize?client_id=f63e560e25a4e1d83cd29940b1e4b9b6&amp;redirect_uri=http://hmfutsalpark.com/oauth&amp;response_type=code" class="kakao">카카오 계정으로 로그인</a> 
-								<a href="#" class="naver" id="naver_id_login" style="color: yellow;"><a	href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=LxMp51hu_X2eKW4vgNWg&amp;redirect_uri=http%3A%2F%2Fhmfutsalpark.com%2Fmember%2Fnaver_login_callback.asp&amp;state=9a2df062-e66e-4542-a1c9-ff0ab84047e2" id="naver_id_login_anchor">네이버 계정으로 로그인</a> </a> 
+								<a href="#" class="naver" id="naver_id_login" style="color: yellow;"> </a> 
 								<a href="#" class="face" onclick="fbLogin();">페이스북 계정으로 로그인</a>
 							</div>
 

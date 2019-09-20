@@ -18,4 +18,10 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.insert(namespace+".insert",vo);
 	}
 
+	@Override
+	public MemberVO idcheck(int mId) throws Exception {
+		return sqlSession.selectOne(namespace+".idcheck", mId);
+		
+	}
+
 }
