@@ -7,7 +7,7 @@
 		<id column="mb_no" property="mbNo"/>
 		<result column="mb_team_count" property="mbTeamCount"/>
 		<result column="mb_match_form" property="mbMatchForm"/>
-		<result column="mb_applivation" property="mbApplication"/>
+		<result column="mb_application" property="mbApplication"/>
 		<result column="mb_regdate" property="mbRegdate"/>
 		<result column="mb_enddate" property="mbEnddate"/>
 		<result column="mb_context" property="mbContext"/>
@@ -25,5 +25,14 @@
 	<insert id="insertMatch" parameterType="com.yi.domain.MatchBoardVO">
 		insert into match_board(mb_match_form,mb_application,mb_regdate,mb_context,mb_member,mb_gno,mb_time,mb_level) values (#{mbMatchForm},1,now(),#{mbContext},#{mbMember.mId},#{mbGno.gNo},#{mbTime},#{mbLevel})
 	</insert>
+	
+	<!-- 매치 게시판 전체 리스트 (페이징) -->
+	<select id="selectByAll" parameterType="SearchCriteria"  resultMap="resultMatchBoardByKcm">
+		select mb_no, mb_match_form, mb_application, mb_regdate, mb_enddate, mb_context, mb_member, mb_time, mb_level,g_no, g_name, g_price, g_time,s_no, s_name, s_addr, m_id, m_name,m_tel from match_board left join ground on match_board.mb_gno = ground.g_no left join spot on ground.g_sno = spot.s_no left join member on match_board.mb_member = member.m_id order by mb_no desc limit #{pageStart}, #{perPageNum} 
+	</select> 
+	<!-- 매치 게시판 전체 리스트  -->
+	<select id="selectByAll2"  resultMap="resultMatchBoardByKcm">
+		select mb_no, mb_match_form, mb_application, mb_regdate, mb_enddate, mb_context, mb_member, mb_time, mb_level,g_no, g_name, g_price, g_time,s_no, s_name, s_addr, m_id, m_name,m_tel from match_board left join ground on match_board.mb_gno = ground.g_no left join spot on ground.g_sno = spot.s_no left join member on match_board.mb_member = member.m_id order by mb_no desc  
+	</select> 
 	
 </mapper>

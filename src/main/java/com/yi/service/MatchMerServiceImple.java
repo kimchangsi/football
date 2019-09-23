@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yi.domain.GroundVO;
 import com.yi.domain.MatchBoardVO;
 import com.yi.domain.MemberVO;
+import com.yi.domain.SearchCriteria;
 import com.yi.domain.SpotVO;
 import com.yi.persistence.GroundDao;
 import com.yi.persistence.MatchBoardDao;
@@ -48,6 +49,20 @@ public class MatchMerServiceImple implements MatchMerService {
 	@Override
 	public void insertMatch(MatchBoardVO vo) throws Exception {
 		mbDao.insertMatch(vo);
+	}
+
+
+	@Override
+	public List<MatchBoardVO> selectByAllMatch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return mbDao.selectByAll(cri);
+	}
+
+
+	@Override
+	public List<MatchBoardVO> selectByAllMatch() throws Exception {
+		// TODO Auto-generated method stub
+		return mbDao.selectByAll2();
 	}
 	
 	
