@@ -59,19 +59,21 @@
 			<div class="member_wrap">
 				<h1 onclick="document.location.href='${pageContext.request.contextPath }';"><span class="hide">HM SPORTS</span></h1>
 
-				<form name="joinPost" method="post" action="joinPost" >
+				<form name="frmJoin" method="post" action="join2" enctype="multipart/form-data">
 				<div class="join_wrap info">
 					<dl>
 						<dt>아이디 <span>(필수)</span></dt>
 						<dd>
-							<input type="text"  name="mId" style="width:100%" />
+							<input type="text"  name="mId" style="width:75%" />
 							<span class="t_help">이미 사용중이거나 탈퇴한 아이디 입니다.</span>
+							<button id="" type="button" class="btn_check" onclick="cnfm_sms2();">중복확인</button>
+							<div id="checkMsg"></div>
 						</dd>
 						<dt>비밀번호 <span>(필수)</span></dt>
 						<dd>
 							<input type="password"  name="mPwd" style="width:100%" />
 							<span class="t_help">필수 항목 입니다.</span>
-						</dd>
+						</dd>  
 						<dt>비밀번호 재확인 <span>(필수)</span></dt>
 						<dd>
 							<input type="password"  name="mPwd1" style="width:100%" />
@@ -82,26 +84,18 @@
 							<input type="text"  name="mName" style="width:100%" />
 							<span class="t_help">필수 항목 입니다.</span>
 						</dd>
-						<dt>휴대전화 <span>(필수)</span></dt>
+						<dt>휴대전화 <span>(필수)</span></dt>   
 						<dd> 
 							<div class="phone">
-							<input type="text"  name="mTel1" maxlength=3 class="numberOnly" /><span>-</span>
-							<input type="text"  name="mTel2" maxlength=4 class="numberOnly" /><span>-</span>
-							<input type="text"  name="mTel3" maxlength=4 class="numberOnly" />
+							<input type="text"  name="mTel" maxlength=13 onKeyup="inputPhoneNumber(this);"/>
+							
 							<span class="t_help">필수 항목 입니다.</span>
 							</div>
 						</dd> 
-						<dt>회원사진</dt>
-						<dd> 
-							<div class="memberimg">
-								<input type="file" name="img" style="width: 100%">
-							</div>
-						</dd>	
-						
 						<dt>포지션</dt>
 						<dd> 
 							<div class="position">  
-								<select style="width: 100%; height: 60px; font-size: 20px; text-align: center;">   
+								<select style="width: 100%; height: 60px; font-size: 20px; text-align: center;" name="mPosition">   
 									<option>선택하세요</option>
 									<option>공격수</option> 
 									<option>미드필더</option> 
@@ -110,33 +104,60 @@
 								</select>
 							</div>
 						</dd>
+						
+						<dt>회원사진</dt>
+						<dd> 
+							<div class="memberimg">
+								<input type="file" name="file" style="width: 100%">
+							</div>
+						</dd>	
+						
+						
  					</dl>
 <script> 
 function cnfm_sms(){ 
-	var frm = document.joinPost;
+	var frm = document.frmJoin;
  
-	if (frm.mTel1.value == "") {
+	if (frm.mTel.value == "") {
 		alert("[휴대전화]을 입력하세요.");
-		frm.mTel1.focus();
+		frm.mTel.focus();
 		return;
 	} 
-
-	if (frm.mTel2.value == "") {
+	
+	/* if (frm.mTel2.value == "") {
 		alert("[휴대전화]을 입력하세요.");
 		frm.mTel2.focus();
 		return;
 	} 
-
+ 
 	if (frm.mTel3.value == "") {
 		alert("[휴대전화]을 입력하세요.");
 		frm.mTel3.focus();
 		return;
-	} 
-	var mTel = frm.mTel1.value+frm.mTel2.value+frm.mTel3.value
-	window.open("join_confirm_sms_send.asp?mTel="+mTel,"HiddenFrame");
+	}  */
+	var mTels = frm.mTel.value+frm.mTel2.value+frm.mTel3.value
+	window.open("join_confirm_sms_send.asp?mTel="+mTels,"HiddenFrame");
 }
+
+function cnfm_sms2(){ 
+	var frm = document.frmJoin;
+	
+	$.ajax({
+		url:"join3/"+frm.mId,
+		type:"get",
+		dataType:"json",
+		success:function(res){
+			console.log(res); 
+			if($.trim(data)==0){
+				  $('#checkMsg').html('<p style="color:blue">사용가능</p>');
+
+			}
+		}
+	})
+}
+
 function cnfm_sms_no(e){ 
-	var frm = document.joinPost;
+	var frm = document.frmJoin;
  
 	if (frm.sms_cnfm.value == "") {
 		alert("[문자 인증 수신번호]을 입력하세요.");
@@ -151,11 +172,45 @@ function not_sms_cnfmed(){
 	$("#sms_cnfm").val('');
 	$("#sms_cnfm").focus();
 }
+
+function inputPhoneNumber(obj) {
+
+
+
+    var number = obj.value.replace(/[^0-9]/g, "");
+    var phone = "";
+
+
+
+    if(number.length < 4) {
+        return number;
+    } else if(number.length < 7) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3);
+    } else if(number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+    } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+    }
+    if(number.value !== /[^0-9]/g){
+    	return 
+    }
+    obj.value = phone;
+}
 </script>
 					<div class="btn_wrap">
 						<button type="button" class="btn_middle" onCLick="checkForm();">가입하기</button>
 					</div>
-					
+					</div>
 					</form>
 
 					<div class="bot_info">
@@ -188,9 +243,9 @@ function not_sms_cnfmed(){
 	</section>
 
  
-<SCRIPT>
+<script>
 function CheckEmail(mStr){
-	var frm = document.joinPost;
+	var frm = document.frmJoin;
 	if (mStr !== "etc") {
 		frm.email2.readOnly = true;
 		frm.email2.value = mStr;
@@ -202,7 +257,7 @@ function CheckEmail(mStr){
 }
 
 function checkForm(){
-	var frm = document.joinPost;
+	var frm = document.frmJoin;
  
 	if (frm.mId.value == "") {
 		alert("[아이디]을 입력하세요.");
@@ -229,12 +284,17 @@ function checkForm(){
 		frm.mName.focus();
 		return;
 	}  
-	if (frm.mTel1.value == "") {
+	if (frm.mTel.value == "") {
 		alert("[핸드폰번호]를 입력하세요.");
 		frm.mTel1.focus();
 		return;
 	}
-	if (frm.mTel2.value == "") {
+	if (frm.mTel.value.length < 12){
+		alert("[핸드폰번호]를 확인해주세요.");
+		frm.mTel1.focus();
+		return;
+	}
+	/* if (frm.mTel2.value == "") {
 		alert("[핸드폰번호]를 입력하세요.");
 		frm.mTel2.focus();
 		return;
@@ -243,7 +303,7 @@ function checkForm(){
 		alert("[핸드폰번호]를 입력하세요.");
 		frm.mTel3.focus();
 		return;
-	} 
+	}  */
 	/*
 	if (CheckEmailTail(frm.email1.value) == false) {
 		alert("[이메일] 형식이 맞지 않습니다.");
@@ -258,12 +318,12 @@ function checkForm(){
 		return;
 	}
 	*/
- 
-	frm.target="HiddenFrame";
+ 	alert("회원가입 되셨습니다!")
+	frm.target="/auth/login";
 	frm.submit();
 }
 //-->
-</SCRIPT>
+</script>
 
 	<!-- Footer -->
 	<footer id="footer">

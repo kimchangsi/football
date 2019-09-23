@@ -29,6 +29,9 @@
 		VALUES(#{mId}, #{mName}, #{mPwd}, #{mTel}, now(), #{mImg}, #{mPosition}, 0, 0, 0);
 	</insert>
 	
+	<select id="idcheck" parameterType="String" resultType="Integer">
+		select COUNT(*) from member where m_id = #{mId}
+	</select>	
 	<select id="selectByID" resultType="com.yi.domain.MemberVO">
 		select m_id,m_name,m_tel from member where m_id=#{mId};
 	</select>

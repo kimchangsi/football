@@ -15,4 +15,11 @@ public class MemberServiceImpl implements MemberService{
 	public void insert(MemberVO vo) {
 		dao.insert(vo);
 	}
+
+	@Override
+	public MemberVO idcheck(int mId) throws Exception {
+		return dao.idcheck(mId);
+	}
+
+	
 }

@@ -1504,6 +1504,30 @@ button.dis:hover	span	span {
 	background: #003f96 !important;
 }
 
+.btn_check {
+	position: relative;
+	display: inline-block;
+	padding: 0 15px;
+	min-width: 109px;
+	background: #2c3c57;
+	color: #fff;
+	font-size: 20px;
+	line-height: 51px;
+	text-align: center;
+	vertical-align: middle;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-transition: all 0.25s ease-out;
+	-moz-transition: all 0.25s ease-out;
+	-ms-transition: all 0.25s ease-out;
+	-o-transition: all 0.25s ease-out;
+	transition: all 0.25s ease-out;
+}
+
+.btn_check:hover {
+	background: #003f96 !important;
+}
+
 .btn_big {
 	position: relative;
 	display: inline-block;
