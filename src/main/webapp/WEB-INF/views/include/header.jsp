@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/spot" class="nav_li">지점</a></li>
 					<li><a href="${pageContext.request.contextPath}/reservation" class="nav_li">구장</a></li>
-					<li><a href="#" class="nav_li">매치/용병</a></li>
+					<li><a href="${pageContext.request.contextPath}/match" class="nav_li">매치/용병</a></li>
 					<li><a href="#" class="nav_li">리그</a></li>
 					<li><a href="#" class="nav_li">고객센터</a></li>
 				</ul>

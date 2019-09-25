@@ -6,9 +6,9 @@
 	<resultMap type="SpotVO" id="resultSpot">
 		<id column="s_no" property="sNo"/>
 		<result column="s_name" property="sName"/>
-		<result column="s_name" property="sAddr"/>
-		<result column="s_name" property="sTel"/>
-		<result column="s_name" property="sImg"/>
+		<result column="s_addr" property="sAddr"/>
+		<result column="s_tel" property="sTel"/>
+		<result column="s_Img" property="sImg"/>
 	</resultMap>
 	
 	<resultMap type="SpotVO" id="resultSpotByKcm" extends="resultSpot">

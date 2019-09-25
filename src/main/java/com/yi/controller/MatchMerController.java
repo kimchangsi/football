@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yi.domain.GroundVO;
 import com.yi.domain.MatchBoardVO;
 import com.yi.domain.MemberVO;
+import com.yi.domain.PageMaker;
 import com.yi.domain.ReservationVO;
+import com.yi.domain.SearchCriteria;
 import com.yi.domain.SpotVO;
 import com.yi.service.MatchMerService;
 
@@ -30,8 +32,22 @@ public class MatchMerController {
 	private static final Logger logger = LoggerFactory.getLogger(MatchMerController.class);
 	//매치용병메인화면
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
-	public String header() throws Exception {
+	public String header(SearchCriteria cri,Model model) throws Exception {
 		logger.info("match");
+		logger.info(cri.toString());
+		List<MatchBoardVO> list = mService.selectByAllMatch(cri);
+		for (MatchBoardVO matchBoardVO : list) {
+			logger.info(matchBoardVO.toString());
+		}
+		
+		List<MatchBoardVO> list2 = mService.selectByAllMatch();
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(list2.size());
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pageMaker",pageMaker);
 		return "match/match";
 	}
 	
