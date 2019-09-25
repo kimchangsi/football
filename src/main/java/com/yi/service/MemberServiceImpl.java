@@ -21,5 +21,15 @@ public class MemberServiceImpl implements MemberService{
 		return dao.idcheck(mId);
 	}
 
+	@Override
+	public MemberVO selectMember(MemberVO vo) {
+		return dao.selectMember(vo);
+	}
+
+	@Override
+	public MemberVO selectMemberByIdAndPw(String mId, String mPwd) {
+		return dao.selectMemberByIdAndPw(mId, mPwd);
+	}
+
 	
 }

@@ -100,9 +100,9 @@
 
 				<div class="menu on">
 					<ul>
-						<li><a href="/locate/locate.asp"><span>BRANCH</span><span class="ov">지점</span></a></li>
-						<li><a href="/rese/rese.asp"><span>RESERVATION</span><span class="ov">구장</span></a></li>
-						<li><a href="/comm/match/match_apply.asp"><span>MATCHING</span><span class="ov">매치/용병</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/spot"><span>BRANCH</span><span class="ov">지점</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/reservation"><span>RESERVATION</span><span class="ov">구장</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/match"><span>MATCHING</span><span class="ov">매치/용병</span></a></li>
 						<li><a href="/league/league.asp"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
 						<li><a href="/cust/comm_notice.asp"><span>CUSTOMER</span><span class="ov">고객센터</span></a></li> 
 					</ul>

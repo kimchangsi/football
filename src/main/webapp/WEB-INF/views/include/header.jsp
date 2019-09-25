@@ -39,7 +39,7 @@
 	<header class="page-header">
 		<div class="inner">
 			<h1 class="site-logo">
-				<a href="#"> <img id="logo" src="${pageContext.request.contextPath}/resources/images/logo.jpg" >
+				<a href="/football/"> <img id="logo" src="${pageContext.request.contextPath}/resources/images/logo.jpg" >
 				</a>
 			</h1>
 			<nav class="primary-nav">
