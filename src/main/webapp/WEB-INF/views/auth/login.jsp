@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko" class="memb">
 <head>
@@ -423,7 +424,7 @@ transform
 
 		<section id="container">
 			<!-- Contents -->
-			<form name="frmLogin" method="post" action="login_ok.asp">
+			<form name="frmLogin" method="post" action="loginPost">
 				<input type="hidden" name="c_type" value="">
 				<div class="content">
 					<div class="member_wrap">
@@ -434,7 +435,7 @@ transform
 									<label for="id">아이디</label>
 								</dt>
 								<dd>
-									<input type="text" name="userid" value="" size="120"
+									<input type="text" name="mId" value="" size="120"
 										maxlength="120" style="width: 100%" placeholder="이메일"
 										tabindex="1">
 								</dd>
@@ -442,14 +443,14 @@ transform
 									<label for="pass">패스워드</label>
 								</dt>
 								<dd>
-									<input type="password" name="passwd" value="" size="12"
+									<input type="password" name="mPwd" value="" size="12"
 										maxlength="50" style="width: 100%" placeholder="비밀번호"
 										tabindex="2">
 								</dd>
 							</dl>
 							<span class="chk"><input type="checkbox" name="id_mem"
-								id="idsave"><label for="idsave">아이디 저장</label></span> <a
-								href="#" onclick="OLoginM();" class="btn_middle">로그인</a>
+								id="idsave"><label for="idsave">아이디 저장</label></span>
+								<a href="#" onclick="OLoginM();" class="btn_middle">로그인</a>
 
 							<div class="btn_wrap">
 								<a href="#" class="find_id" onclick="openLayer('findIdDiv');">아이디 찾기</a>
@@ -606,20 +607,25 @@ transform
 			}
 
 			function OLoginM() {
-				var str = EmptyChk(document.frmLogin.userid.value);
-				var str2 = EmptyChk(document.frmLogin.passwd.value);
-				if (str < 3) {
-					alert("아이디를 입력하여 주십시오.");
-					document.frmLogin.userid.focus();
-					return false;
-				} else if (str2 < 3) {
-					alert("비밀번호를 입력하여 주십시오.");
-					document.frmLogin.passwd.focus();
-					return false;
-				}
-				document.frmLogin.target = "HiddenFrame";
-				document.frmLogin.submit();
-
+				$.ajax({
+					url : "loginPost",
+					type : "post",
+					data : {"mId" : $("input[name='mId']").val(), "mPwd" : $("input[name='mPwd']").val()},
+					dataType : "text",
+					success : function(data){
+						console.log(data);
+						if(data=="fail"){
+							$("span").css("display","inline");
+						}else if(data=="success"){
+							$("form").submit();
+						}
+						
+					}
+				})
+				
+				<c:if test="${result=='success' }">
+					alert("가입성공. 로그인페이로 이동");
+				</c:if> 
 			}
 		</script>
 

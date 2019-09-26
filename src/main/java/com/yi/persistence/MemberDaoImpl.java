@@ -1,5 +1,8 @@
 package com.yi.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +27,19 @@ public class MemberDaoImpl implements MemberDao{
 	}	
 	public MemberVO selectByID(String mId) {
 		return sqlSession.selectOne(namespace + ".selectByID" , mId);
+	}
+
+	@Override
+	public MemberVO selectMember(MemberVO vo) {
+		return sqlSession.selectOne(namespace+".selectMember", vo);
+	}
+
+	@Override
+	public MemberVO selectMemberByIdAndPw(String mId, String mPwd) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mId", mId);
+		map.put("mPwd", mPwd);
+		return sqlSession.selectOne(namespace+".selectMemberByIdAndPw", map);
 	}
 
 }

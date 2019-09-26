@@ -32,7 +32,18 @@
 	<select id="idcheck" parameterType="String" resultType="Integer">
 		select COUNT(*) from member where m_id = #{mId}
 	</select>	
+	
+	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where m_id=#{mId}
+	</select>
 	<select id="selectByID" resultType="com.yi.domain.MemberVO">
 		select m_id,m_name,m_tel from member where m_id=#{mId};
+	</select>
+	
+	
+	
+	
+	<select id="selectMemberByIdAndPw" resultType="com.yi.domain.MemberVO">
+		select * from member where m_id=#{mId} and m_pwd=#{mPwd}
 	</select>
 </mapper>

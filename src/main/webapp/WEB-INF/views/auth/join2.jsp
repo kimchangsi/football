@@ -173,15 +173,16 @@ function not_sms_cnfmed(){
 	$("#sms_cnfm").focus();
 }
 
+
+
 function inputPhoneNumber(obj) {
 
-
-
+   
+ 
     var number = obj.value.replace(/[^0-9]/g, "");
     var phone = "";
-
-
-
+	
+   
     if(number.length < 4) {
         return number;
     } else if(number.length < 7) {
@@ -199,11 +200,12 @@ function inputPhoneNumber(obj) {
         phone += "-";
         phone += number.substr(3, 4);
         phone += "-";
-        phone += number.substr(7);
+        phone += number.substr(7); 
     }
-    if(number.value !== /[^0-9]/g){
-    	return 
-    }
+    
+   
+   
+   
     obj.value = phone;
 }
 </script>

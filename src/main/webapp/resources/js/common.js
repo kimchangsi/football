@@ -66,7 +66,7 @@ jQuery(function($){
             $(this).val(inputVal.replace(/[^0-9]/gi,''));
         }
     });
-
+ 
 });
 
 var stCommon = {
