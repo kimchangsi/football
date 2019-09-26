@@ -16,4 +16,5 @@ public interface MatchMerService {
 	public List<MatchBoardVO> selectByAllMatch(SearchCriteria cri) throws Exception; //매치 리스트가져오기;
 	public List<MatchBoardVO> selectByAllMatch() throws Exception; //매치 리스트가져오기;
 	public void updateDeadLine(int mbNo) throws Exception; //마감클릭시 마감으로 변경
+	public void updateMatchBoard(MatchBoardVO vo) throws Exception;// 매치게시물 수정
 }	

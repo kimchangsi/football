@@ -39,4 +39,10 @@ public class MatchBoardDaoImple implements MatchBoardDao {
 		
 	}
 
+	@Override
+	public void updateMatchBoard(MatchBoardVO vo) throws Exception {
+		sqlSession.update(namespace + ".updateMatchBoard",vo);
+		
+	}
+
 }

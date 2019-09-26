@@ -71,6 +71,13 @@ public class MatchMerServiceImple implements MatchMerService {
 		mbDao.updateDeadLine(mbNo);
 		
 	}
+
+
+	@Override
+	public void updateMatchBoard(MatchBoardVO vo) throws Exception {
+		mbDao.updateMatchBoard(vo);
+		
+	}
 	
 	
 

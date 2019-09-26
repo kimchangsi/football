@@ -50,7 +50,7 @@
 	list-style: none;
 	overflow: hidden;
 	clear: both;
-	width: 600px;
+	width: 630px;
 	margin: 20px auto;
 	padding: 0;
 }
@@ -354,6 +354,8 @@ a.btn_page.next {
 			$("#dApp").text(application);
 			$("#dMemo").text(context); 
 			$("#mbNo").text(mbNo);
+			$("#postmbNo").val(mbNo);
+			$("#postPage").val($(".active").text());
 			
 			var datePickerDate = $("#dTime").text().substring(0, 10);
 			$("#datepicker").val(datePickerDate);
@@ -579,7 +581,9 @@ a.btn_page.next {
 
 		<div class="layer_cont">
 			<div class="table_wrap" id="detail">
-				<form>
+				<form action="${pageContext.request.contextPath}/match/update" method="POST">
+					<input type="hidden" name="mbNo" id="postmbNo">
+					<input type="hidden" name="page" id="postPage">
 					<table>
 						<tbody>
 							<tr>
@@ -588,7 +592,7 @@ a.btn_page.next {
 								<td class="al_left"><span id="dName"></span></td>
 								<th scope="row">매치형태</th>
 								<td class="al_left"><span id="dForm"></span> <select
-									class="select_all" name="gNo" id="dForm2">
+									class="select_all" name="mbMatchForm" id="dForm2">
 										<option value="0">매치형태 선택</option>
 										<option value="5:5">5:5</option>
 										<option value="6:6">6:6</option>
@@ -597,7 +601,7 @@ a.btn_page.next {
 							<tr>
 								<th scope="row">지점</th>
 								<td class="al_left" colspan="3"><span id="dSpot"></span><select
-									class="select_all" name="gNo" id="dSpot2">
+									class="select_all" name="sNo" id="dSpot2">
 										<option value="0">지점 선택</option>
 										<c:forEach var="sList" items="${spotList }">
 									<option value="${sList.sNo}">${sList.sName}</option>
@@ -623,7 +627,7 @@ a.btn_page.next {
 								<th scope="row">구장</th>
 								<td class="al_left" colspan="3"><span id="dGround"></span>
 									<select class="select_all" name="gNo" id="dGround2">
-										<option value="0">구장 선택</option>
+										<option value="0">구장 선택</option>  
 								</select></td>
 							</tr>
 
@@ -635,7 +639,7 @@ a.btn_page.next {
 							<tr>
 								<th scope="row">팀 수준</th>
 								<td class="al_left" colspan="3"><span id="dLevel"></span><select
-									class="select_all" name="gNo" id="dLevel2">
+									class="select_all" name="mbLevel" id="dLevel2">
 										<option value="0">팀수준 선택</option>
 										<option value="상">상</option>
 										<option value="중상">중상</option>
@@ -647,10 +651,10 @@ a.btn_page.next {
 							<tr>
 								<th scope="row">신청가능여부</th>
 								<td class="al_left" colspan="3"><span id="dApp"></span><select
-									class="select_all" name="gNo" id="dApp2">
-										<option value="0">신청가능여부 선택</option>
+									class="select_all" name="mbApplication" id="dApp2">
+										<option value="2">신청가능여부 선택</option>
 										<option value="1">가능</option>
-										<option value="2">마감</option>
+										<option value="0">마감</option>
 								</select></td>
 							</tr>
 							<tr>
