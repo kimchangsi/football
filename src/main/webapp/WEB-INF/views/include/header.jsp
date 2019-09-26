@@ -9,7 +9,7 @@
 <title>풋살 예약</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
+<script> 
 	$(function() {
 		
 		
@@ -37,6 +37,7 @@
 </script>
 </head>
 <body>
+	<div id="body">
 	<header class="page-header">
 		<div class="inner">
 			<h1 class="site-logo">

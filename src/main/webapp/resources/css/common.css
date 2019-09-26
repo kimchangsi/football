@@ -11,6 +11,10 @@
 	position: relative;
 	
 } */
+
+#body{
+	z-index: 100;
+}
 .page-header {
 	position: absolute;
 	top: 80px;

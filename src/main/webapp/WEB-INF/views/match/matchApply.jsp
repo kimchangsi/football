@@ -8,6 +8,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/commonH.css"
 	type="text/css">
+	
 <style>
 .btn_base.match span {
 	display: inline-block;

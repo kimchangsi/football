@@ -64,6 +64,13 @@ public class MatchMerServiceImple implements MatchMerService {
 		// TODO Auto-generated method stub
 		return mbDao.selectByAll2();
 	}
+
+
+	@Override
+	public void updateDeadLine(int mbNo) throws Exception {
+		mbDao.updateDeadLine(mbNo);
+		
+	}
 	
 	
 
