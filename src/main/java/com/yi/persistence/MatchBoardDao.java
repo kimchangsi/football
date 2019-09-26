@@ -9,4 +9,5 @@ public interface MatchBoardDao {
 	public void insertMatch(MatchBoardVO vo) throws Exception;
 	public List<MatchBoardVO> selectByAll(SearchCriteria cri) throws Exception;
 	public List<MatchBoardVO> selectByAll2() throws Exception;
+	public void updateDeadLine(int mbNo) throws Exception;
 }

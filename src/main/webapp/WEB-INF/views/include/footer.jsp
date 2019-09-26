@@ -16,5 +16,6 @@
 			<p class="copy">COPYRIGHT© HM SPORTS. ALLRIGHT RESERVED</p>
 		</div>
 	</footer>
+	</div> 
 </body>
 </html>
