@@ -240,7 +240,7 @@ a.btn_page.next {
 		$("#detailUpdate").hide();
 		$("#deadLine").hide();
 
-		$("#h_bar2").text("매치신청 수정하기");
+		$("#h_bar2").text("용병신청 수정하기");
 	}
 	/* 상세보기 input태그 숨기기 */
 	function hideInput() {
@@ -253,7 +253,7 @@ a.btn_page.next {
 		$("#dApp2").hide();
 		$("#dMemo2").hide();
 		$("#detailUpdateInfo").hide();
-		$("#h_bar2").text("매치신청 상세보기");
+		$("#h_bar2").text("용병신청 상세보기");
 
 	}
 	/* 상세보기 input태그 보이기 */
@@ -319,18 +319,18 @@ a.btn_page.next {
 		
 		
 		
-		//매치등록
+		//용병등록
 		$("#btn_match_add").on("click", function(event) {
-			location.href = "${pageContext.request.contextPath}/match/apply";
+			location.href = "${pageContext.request.contextPath}/mercenary/apply";
 			event.preventDefault();
 		});
 
 		/* 상세보기클릭시 */
 		$(".detailItem").click(function() {
 			$("#detailDiv").show();
-			var matchForm = $(this).find("td").eq(0).text();
-			var spotName = $(this).find("td").eq(1).text();
-			var time = $(this).find("td").eq(2).text();
+			var matchForm = $(this).find("td").eq(2).text();  
+			var spotName = $(this).find("td").eq(0).text();
+			var time = $(this).find("td").eq(1).text();
 			var name = $(this).find("td").eq(3).text();
 			var application = $(this).find("td").eq(5).find("span").text();
 			var ground = $(this).attr("data-ground");
@@ -421,7 +421,7 @@ a.btn_page.next {
 							if (a == false) {
 								return false;
 							}
-							location.href = "${pageContext.request.contextPath }/match2?page="
+							location.href = "${pageContext.request.contextPath }/mercenary2?page="
 									+ page + "&mbNo=" + mbNo;
 							event.preventDefault();
 						});
@@ -452,7 +452,7 @@ a.btn_page.next {
 		})
 		
 		
-		
+	
 		
 		
 		
@@ -480,57 +480,57 @@ a.btn_page.next {
 	<div class="tab_wrap">
 		<ul>
 
-			<li class="on"><a
-				href="${pageContext.request.contextPath}/match">매치신청</a></li> 
- 
-			<li><a href="${pageContext.request.contextPath}/mercenary">용병모집</a></li> 
+			<li ><a
+				href="${pageContext.request.contextPath}/match">매치신청</a></li>
+
+			<li class="on"><a href="${pageContext.request.contextPath}/mercenary">용병모집</a></li>
 
 		</ul>
 	</div>
 	<div class="match_wrap">
-		<h3 class="h_tit">매치신청</h3>
+		<h3 class="h_tit">용병신청</h3>
 		<div id="match_table_wrap">
 			<div class="table_top">
-				<a href="#" class="btn_base match" id="btn_match_add"><span>매치등록</span></a>
+				<a href="#" class="btn_base match" id="btn_match_add"><span>용병등록</span></a>
 			</div>
 
 
 			<div class="table_wrap list">
 				<table>
-					<caption>매치신청 리스트</caption>
+					<caption>용병신청 리스트</caption>
 
 					<thead>
 						<tr>
-							<th scope="col" class="tb">매치형태</th>
 							<th scope="col">지점구분</th>
 							<th scope="col">매치일자</th>
+							<th scope="col">모집인원</th>
 							<th scope="col" class="tb">작성자</th>
 							<th scope="col" class="tb">작성일자</th>
 							<th scope="col">신청</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="matchList" items="${list}">
+						<c:forEach var="merList" items="${list}">
 							<tr style="cursor: pointer" class="detailItem"
-								data-ground="${matchList.mbGno.gName}"
-								data-tel="${matchList.mbMember.mTel}"
-								data-level="${matchList.mbLevel }"
-								data-context="${matchList.mbContext }"
-								data-mbNo="${matchList.mbNo }" 
-								data-gNo="${matchList.mbGno.gNo}"
-								data-sNo="${matchList.mbGno.gSno.sNo}"
+								data-ground="${merList.mcbGno.gName}"
+								data-tel="${merList.mcbMember.mTel}"
+								data-level="${merList.mcbLevel }"
+								data-context="${merList.mcbContext }"
+								data-mbNo="${merList.mcbNo }" 
+								data-gNo="${merList.mcbGno.gNo}"
+								data-sNo="${merList.mcbGno.gSno.sNo}"
 								
 								 >
-								<td class="tb tbcolor">${matchList.mbMatchForm }</td>
-								<td>${matchList.mbGno.gSno.sName }</td>
-								<td>${matchList.mbTime }</td>
-								<td class="tb">${matchList.mbMember.mName }</td>
+								<td>${merList.mcbGno.gSno.sName }</td>
+								<td>${merList.mcbTime }</td>
+								<td>${merList.mcbRmCnt }</td>
+								<td class="tb">${merList.mcbMember.mName }</td>
 								<td class="tb"><fmt:formatDate
-										value="${matchList.mbRegdate }" pattern="yyyy-MM-dd" /></td>
-								<c:if test="${matchList.mbApplication==1}">
+										value="${merList.mcbRegdate }" pattern="yyyy-MM-dd" /></td>
+								<c:if test="${merList.mcbDeadlineWd==1}">
 									<td><span class="state">가능</span></td>
 								</c:if>
-								<c:if test="${matchList.mbApplication==0}">
+								<c:if test="${merList.mcbDeadlineWd==0}">
 									<td><span class="state end">마감</span></td>
 								</c:if>
 
@@ -551,17 +551,17 @@ a.btn_page.next {
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li><a class="btn_page prev"
-							href="${pageContext.request.contextPath }/match?page=${pageMaker.startPage-10 }">
+							href="${pageContext.request.contextPath }/mercenary?page=${pageMaker.startPage-10 }">
 								&nbsp&nbsp </a></li>
 					</c:if>
 					<c:forEach var="idx" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage }">
 						<li ${pageMaker.cri.page == idx ? 'class="active"' : '' }><a
-							href="${pageContext.request.contextPath }/match?page=${idx }">${idx }</a></li>
+							href="${pageContext.request.contextPath }/mercenary?page=${idx }">${idx }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
 						<li><a class="btn_page next"
-							href="${pageContext.request.contextPath }/match?page=${pageMaker.endPage+1 }">
+							href="${pageContext.request.contextPath }/mercenary?page=${pageMaker.endPage+1 }">
 								&nbsp&nbsp </a></li>
 					</c:if>
 				</ul>
@@ -574,15 +574,15 @@ a.btn_page.next {
 
 
 	<div class="layer_popup class" id="detailDiv" style="display: none;">
-		<h1 class="h_bar" id="h_bar2">매치신청 상세보기</h1>
+		<h1 class="h_bar" id="h_bar2">용병신청 상세보기</h1>
 		<button type="button" class="btn_closed close">
 			<span class="hide">closed</span>
 		</button>
 
 		<div class="layer_cont">
 			<div class="table_wrap" id="detail">
-				<form action="${pageContext.request.contextPath}/match/update" method="POST">
-					<input type="hidden" name="mbNo" id="postmbNo">
+				<form action="${pageContext.request.contextPath}/mercenary/update" method="POST">
+					<input type="hidden" name="mcbNo" id="postmbNo">
 					<input type="hidden" name="page" id="postPage">
 					<table>
 						<tbody>
@@ -590,13 +590,31 @@ a.btn_page.next {
 
 								<th scope="row">작성자</th>
 								<td class="al_left"><span id="dName"></span></td>
-								<th scope="row">매치형태</th>
+								<th scope="row">모집인원</th>
 								<td class="al_left"><span id="dForm"></span> <select
-									class="select_all" name="mbMatchForm" id="dForm2">
-										<option value="0">매치형태 선택</option>
-										<option value="5:5">5:5</option>
-										<option value="6:6">6:6</option>
+									class="select_all" name="mcbRmCnt" id="dForm2">
+										<option value="0">모집인원 선택</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
 								</select>
+							</tr>
+							<tr>
+								<th scope="row">매치일자</th>
+								<td class="al_left" colspan="3"><span id="dTime"></span><input
+									type="text" name="mcbTime" id="datepicker"><select
+									class="select_all" name="mcbTime2" id="dTime3">
+										<option value="0">시간 선택</option>
+										<option value="08:00 ~ 10:00">08:00 ~ 10:00</option>
+										<option value="10:00 ~ 12:00">10:00 ~ 12:00</option>
+										<option value="12:00 ~ 14:00">12:00 ~ 14:00</option>
+										<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
+										<option value="18:00 ~ 20:00">18:00 ~ 20:00</option>
+										<option value="20:00 ~ 22:00">20:00 ~ 22:00</option>
+										<option value="22:00 ~ 24:00">22:00 ~ 24:00</option>
+								</select></td> 
 							</tr>
 							<tr>
 								<th scope="row">지점</th>
@@ -608,21 +626,7 @@ a.btn_page.next {
 								</c:forEach>
 								</select></td>
 							</tr>
-							<tr>
-								<th scope="row">매치일자</th>
-								<td class="al_left" colspan="3"><span id="dTime"></span><input
-									type="text" name="mbTime" id="datepicker"><select
-									class="select_all" name="mbTime2" id="dTime3">
-										<option value="0">시간 선택</option>
-										<option value="08:00 ~ 10:00">08:00 ~ 10:00</option>
-										<option value="10:00 ~ 12:00">10:00 ~ 12:00</option>
-										<option value="12:00 ~ 14:00">12:00 ~ 14:00</option>
-										<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
-										<option value="18:00 ~ 20:00">18:00 ~ 20:00</option>
-										<option value="20:00 ~ 22:00">20:00 ~ 22:00</option>
-										<option value="22:00 ~ 24:00">22:00 ~ 24:00</option>
-								</select></td>
-							</tr>
+							
 							<tr>
 								<th scope="row">구장</th>
 								<td class="al_left" colspan="3"><span id="dGround"></span>
@@ -639,7 +643,7 @@ a.btn_page.next {
 							<tr>
 								<th scope="row">팀 수준</th>
 								<td class="al_left" colspan="3"><span id="dLevel"></span><select
-									class="select_all" name="mbLevel" id="dLevel2">
+									class="select_all" name="mcbLevel" id="dLevel2">
 										<option value="0">팀수준 선택</option>
 										<option value="상">상</option>
 										<option value="중상">중상</option>
@@ -651,7 +655,7 @@ a.btn_page.next {
 							<tr>
 								<th scope="row">신청가능여부</th>
 								<td class="al_left" colspan="3"><span id="dApp"></span><select
-									class="select_all" name="mbApplication" id="dApp2">
+									class="select_all" name="mcbDeadlineWd" id="dApp2">
 										<option value="2">신청가능여부 선택</option>
 										<option value="1">가능</option>
 										<option value="0">마감</option>
@@ -659,7 +663,7 @@ a.btn_page.next {
 							</tr>
 							<tr>
 								<td class="al_left" colspan="4"><div id="dMemo"></div> <textarea
-										id="dMemo2" class=input_fo name="mbContext" rows="" cols=""
+										id="dMemo2" class=input_fo name="mcbContext" rows="" cols=""
 										placeholder="내용을 입력하세요." style="width: 100%; height: 150px;"></textarea></td>
 							</tr>
 

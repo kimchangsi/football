@@ -94,7 +94,7 @@
 			
 			if(sNo!=0){
 				$.ajax({
-					url:"appliy/"+sNo,
+					url:"${pageContext.request.contextPath}/match/appliy/"+sNo,
 					type:"get",
 					dataType:"json",
 					success:function(res){
@@ -129,19 +129,19 @@
 	<div class="tab_wrap">
 		<ul>
 
-			<li class="on"><a
+			<li ><a
 				href="${pageContext.request.contextPath}/match">매치신청</a></li>
 
-			<li><a href="${pageContext.request.contextPath}/mercenary">용병모집</a></li>
+			<li class="on"><a href="${pageContext.request.contextPath}/mercenary">용병모집</a></li>
 
 		</ul>
 	</div>
 	<div class="match_wrap">
-		<form method="POST" name="form" id="f1" action="${pageContext.request.contextPath}/match/resist">
+		<form method="POST" name="form" id="f1" action="${pageContext.request.contextPath}/mercenary/resist">
 
-			<h3 class="h_tit">매치신청</h3>
+			<h3 class="h_tit">용병신청</h3>
 			<div class="write_wrap">
-				<h4 class="h_bar line">매치신청</h4>
+				<h4 class="h_bar line">용병신청</h4>
 				<div class="fl_wrap">
 				
 					<div class="input_wrap">
@@ -179,12 +179,12 @@
 					
 					<div class="input_wrap">
 						<p>매치일정</p>
-						<input type="date" class="date_all" name="mbTime">
+						<input type="date" class="date_all" name="mcbTime">
 					</div>
 					
 					<div class="input_wrap">
 						<p>시간선택</p>
-						<select class="select_all" name="mbTime2" >
+						<select class="select_all" name="mcbTime2" >
 							<option value="0">시간 선택</option>
 							<option value="08:00 ~ 10:00">08:00 ~ 10:00</option>
 							<option value="10:00 ~ 12:00">10:00 ~ 12:00</option>
@@ -197,17 +197,20 @@
 					</div>
 					
 					<div class="input_wrap">
-						<p>매치형태</p>
-						<select class="select_all" name="mbMatchForm">
-							<option value="0">매치형태 선택</option>
-							<option value="5:5">5:5</option>
-							<option value="6:6">6:6</option>
+						<p>모집인원</p>
+						<select class="select_all" name="mcbRmCnt">
+							<option value="0">모집인원 선택</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
 						</select>
 					</div>
 					
 					<div class="input_wrap">
 						<p>팀 수준</p>
-						<select class="select_all" name="mbLevel">
+						<select class="select_all" name="mcbLevel">
 							<option value="0">팀수준 선택</option>
 							<option value="상">상</option>
 							<option value="중상">중상</option>
@@ -221,11 +224,11 @@
 				
 				<div class="memo" >
 						<p>메모</p> 
-						<textarea class=input_fo name="mbContext" rows="" cols="" placeholder="내용을 입력하세요." style="width:100%; height:275px"></textarea>
+						<textarea class=input_fo name="mcbContext" rows="" cols="" placeholder="내용을 입력하세요." style="width:100%; height:275px"></textarea>
 					</div>
 				<div class="btn_wrap">
 						<input type="submit" value="등록하기" class="btn_big" id="">
-						<a href="${pageContext.request.contextPath}/match" class="btn_big gray" id="del_match">취소하기</a>
+						<a href="${pageContext.request.contextPath}/mercenary" class="btn_big gray" id="del_match">취소하기</a>
 					</div>
 			</div>
 		</form>

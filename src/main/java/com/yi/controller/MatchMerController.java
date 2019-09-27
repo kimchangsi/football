@@ -54,6 +54,9 @@ public class MatchMerController {
 	}
 	
 	
+	
+	
+	
 	//매치마감 눌렀을때
 		@RequestMapping(value = "/match2", method = RequestMethod.GET)
 		public String header2(SearchCriteria cri,Model model,int mbNo) throws Exception {
