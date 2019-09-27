@@ -37,7 +37,15 @@
 	
 	<!-- 마감한 경우 -->
 	<update id="updateDeadLine" parameterType="int">
-		UPDATE match_board SET mb_application=0 WHERE mb_no=#{mbNo};
+		UPDATE match_board SET mb_application=0,mb_enddate=now() WHERE mb_no=#{mbNo};
 	</update>
+	
+	<!-- 매치게시판 수정 -->
+	<update id="updateMatchBoard" parameterType="MatchBoardVo">
+	UPDATE match_board
+	SET mb_match_form=#{mbMatchForm}, mb_application=#{mbApplication}, mb_context=#{mbContext},  mb_gno=#{mbGno.gNo}, mb_time=#{mbTime}, mb_level=#{mbLevel}
+	WHERE mb_no=#{mbNo};
+	</update>
+	
 	
 </mapper>

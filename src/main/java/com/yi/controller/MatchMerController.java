@@ -114,5 +114,28 @@ public class MatchMerController {
 		return "redirect:/match";
 	}
 	
+	//매치게시판 수정 시
+	@RequestMapping(value = "/match/update", method = RequestMethod.POST)
+	public String update(SearchCriteria cri,MatchBoardVO vo,GroundVO gVo,SpotVO sVo, String mbTime2) throws Exception  {
+		logger.info("match/update");
+		logger.info(vo.toString());
+		logger.info(gVo.toString());
+		logger.info(sVo.toString());
+		logger.info(mbTime2);
+		
+		String mbTime = vo.getMbTime()+" "+mbTime2;
+		logger.info(mbTime);
+		gVo.setgSno(sVo);
+		vo.setMbGno(gVo);
+	    vo.setMbTime(mbTime);
+	    mService.updateMatchBoard(vo);
+		
+		
+		return "redirect:/match?page="+cri.getPage();
+	}
+	
+	
+	
+	
 	
 }
