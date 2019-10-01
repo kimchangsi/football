@@ -1512,6 +1512,7 @@ button.dis:hover	span	span {
 								
 								if ( $a.text() != '' ) {
 									$a.parent().removeClass('time_wrap_item_ok');
+									$a.parent().addClass('reserved_time');
 								}
 							}
 							/*  */
@@ -1528,15 +1529,24 @@ button.dis:hover	span	span {
 		
 		/* 시간 클릭시 */
 		$(".time_wrap_item_ok").click(function() {
+			if(  $(this).hasClass('reserved_time')==false  ){
+				$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
+				$(this).addClass("time_wrap_item_check");
+				$("#tdDate").text($("#sel_date").text());
+				$("#tdGround").text($("#select02 :selected").attr("data-a"));
+				$("#tdTime").text($(this).find(".ptime").text());
+				
+				var pPrice = $(this).find(".pPrice").text();
+				$("#tdPrice").text(pPrice.substring(0, pPrice.length-1));	
+			}else{
+				alert("이미 예약된 시간입니다. 다른 시간을 선택해주세요");
+			}
+		
+		
 			
-			$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
-			$(this).addClass("time_wrap_item_check");
-			$("#tdDate").text($("#sel_date").text());
-			$("#tdGround").text($("#select02 :selected").attr("data-a"));
-			$("#tdTime").text($(this).find(".ptime").text());
 			
-			var pPrice = $(this).find(".pPrice").text();
-			$("#tdPrice").text(pPrice.substring(0, pPrice.length-1));
+		
+			
 		})
 
 	})
@@ -1616,35 +1626,35 @@ button.dis:hover	span	span {
 				<div class="content2_1">
 					<span class="sel_span">시간 선택</span>
 					<div id="time_wrap">
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok"  style="cursor: pointer">
 							<p class="ptime">08:00 ~ 10:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok"  style="cursor: pointer">
 							<p class="ptime">10:00 ~ 12:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok"  style="cursor: pointer">
 							<p class="ptime">12:00 ~ 14:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok" style="cursor: pointer">
 							<p class="ptime">14:00 ~ 16:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok" style="cursor: pointer" >
 							<p class="ptime">16:00 ~ 18:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok" style="cursor: pointer">
 							<p class="ptime">18:00 ~ 20:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok" style="cursor: pointer">
 							<p class="ptime">20:00 ~ 22:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
-						<div class="time_wrap_item time_wrap_item_ok" >
+						<div class="time_wrap_item time_wrap_item_ok" style="cursor: pointer">
 							<p class="ptime">22:00 ~ 24:00</p>
 							<p class="pPrice">80000원</p>
 						</div>
