@@ -22,13 +22,11 @@ public class LeagueServiceImpl implements LeagueService{
 	
 	@Override
 	public List<LeagueKindVO> selectLeagueKindByAll() throws Exception {
-		// TODO Auto-generated method stub
 		return lkDao.selectLeagueKindByAll();
 	}
 
 	@Override
 	public void insertLeagueKind(LeagueKindVO vo) throws Exception {
-		// TODO Auto-generated method stub
 		lkDao.insertLeagueKind(vo);
 	}
 	
@@ -42,6 +40,11 @@ public class LeagueServiceImpl implements LeagueService{
 	@Override
 	public List<LeagueVO> selectLeagueByRandom() throws Exception {
 		return lDao.selectLeagueByRandom();
+	}
+
+	@Override
+	public List<LeagueVO> selectLeagueByAll() throws Exception {
+		return lDao.selectLeagueByAll();
 	}
 
 }

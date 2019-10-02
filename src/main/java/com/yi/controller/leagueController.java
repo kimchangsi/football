@@ -5,11 +5,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yi.domain.GroundVO;
 import com.yi.domain.LeagueKindVO;
 import com.yi.domain.LeagueVO;
 import com.yi.domain.MemberVO;
@@ -58,9 +62,25 @@ public class leagueController {
 	@RequestMapping(value = "/manager/leagueMgn", method = RequestMethod.GET)
 	public String leagueMgn(Model model) throws Exception {
 		logger.info("leagueMgn");
-		List<LeagueVO> list = service.selectLeagueByRandom(); 
+		/*List<LeagueVO> list = service.selectLeagueByRandom(); 
 		logger.info(list.toString());
-		model.addAttribute("list",list);
+		model.addAttribute("list",list)*/;
 		return "/manager/leagueMgn";
 	}
+	
+	// 리그 리스트 가져오기(ajax)
+	@RequestMapping(value="/manager/leagueMgn2",method=RequestMethod.GET)
+	public ResponseEntity<List<LeagueVO>> selectlist(){
+		ResponseEntity<List<LeagueVO>> entiy = null;
+		try {
+			List<LeagueVO> list =  service.selectLeagueByAll();
+			entiy = new ResponseEntity<List<LeagueVO>>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entiy = new ResponseEntity<List<LeagueVO>>(HttpStatus.BAD_REQUEST);
+		}
+		return entiy;
+	}
+	
+	
 }

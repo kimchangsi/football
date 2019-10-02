@@ -10,81 +10,98 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-	table{
-		width: 700px;  
-	}
-	
-	table,th,td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
+table {
+	width: 700px;
+}
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
-		$(".a").click(function() {
-			
-			
-			
+
+		$.ajax({
+			url : "leagueMgn2",
+			type : "get",
+			dataType : "json",
+			success : function(res) {
+				console.log(res);
+				for (var i = 0; i < res.length; i++) {
+					var list = res[i];
+					
+					if( list.lQuarterfinals==0 && list.lSemifianl==0 && list.lFinal == 0){ //8강 리스트
+						$("#draw").find("tr").eq(i+1).find("td").eq(0).text(list.lTeam.tName);	
+					}else if( list.lQuarterfinals==0 && list.lSemifianl==1 && list.lFinal==0 && list.lState==0 ){ //4강 리스트
+						
+						if(list.lTeam.tName==$("#draw").find("tr").eq(1).find("td").eq(0).text() || list.lTeam.tName==$("#draw").find("tr").eq(2).find("td").eq(0).text()){
+							$("#draw").find("tr").eq(1).find("td").eq(1).text(list.lTeam.tName);
+						}else if(list.lTeam.tName==$("#draw").find("tr").eq(3).find("td").eq(0).text() || list.lTeam.tName==$("#draw").find("tr").eq(4).find("td").eq(0).text()){
+							$("#draw").find("tr").eq(3).find("td").eq(1).text(list.lTeam.tName);
+						}else if(list.lTeam.tName==$("#draw").find("tr").eq(5).find("td").eq(0).text() || list.lTeam.tName==$("#draw").find("tr").eq(6).find("td").eq(0).text()){
+							$("#draw").find("tr").eq(5).find("td").eq(1).text(list.lTeam.tName);
+						}else if(list.lTeam.tName==$("#draw").find("tr").eq(7).find("td").eq(0).text() || list.lTeam.tName==$("#draw").find("tr").eq(8).find("td").eq(0).text()){
+							$("#draw").find("tr").eq(7).find("td").eq(1).text(list.lTeam.tName); 
+						} 
+					
+					}else if(list.lQuarterfinals==0 && list.lSemifianl==0 && list.lFinal==1 && list.lState==0){ //결승 리스트
+						
+						if( list.lTeam.tName==$("#draw").find("tr").eq(1).find("td").eq(1).text() ||  list.lTeam.tName==$("#draw").find("tr").eq(3).find("td").eq(1).text() ){
+							$("#draw").find("tr").eq(1).find("td").eq(2).text(list.lTeam.tName);
+						}else if( list.lTeam.tName==$("#draw").find("tr").eq(5).find("td").eq(1).text() ||  list.lTeam.tName==$("#draw").find("tr").eq(7).find("td").eq(1).text()  ){
+							$("#draw").find("tr").eq(5).find("td").eq(2).text(list.lTeam.tName);
+						} 
+					}else if(list.lQuarterfinals==0 && list.lSemifianl==0 && list.lFinal==1 && list.lState==1 && list.lOout==0){ //우승
+						$("#draw").find("tr").eq(8).find("td").eq(0).text(list.lTeam.tName);
+					}
+									 
+				}
+			}  
 		})
-		
+
 	})
 </script>
 </head>
 <body>
-	<table>
+	<table id="draw">
 		<tr>
 			<th>8강</th>
 			<th>4강</th>
 			<th>결승</th>
 			<th>우승</th>
 		</tr>
-		
+
 		<tr>
-			<td>1-1 <c:if test="${list[0]!=null}"> 
-				<span class="s">${list[0].lTeam.tName }</span>
-			</c:if> <button class="a">승자</button> </td>  
+			<td>1-1</td>
 			<td rowspan="2">2-1</td>
 			<td rowspan="4">3-1</td>
-			<td rowspan="8">3-1</td>
+			<td rowspan="8">4-1</td>
 		</tr>
 		<tr>
-			<td>1-2<c:if test="${list[1]!=null}"> 
-				${list[1].lTeam.tName }
-			</c:if></td>
+			<td>1-2</td>
 		</tr>
 		<tr>
-			<td>1-3<c:if test="${list[2]!=null}"> 
-				${list[2].lTeam.tName }
-			</c:if></td>
+			<td>1-3</td>
 			<td rowspan="2">2-3</td>
 		</tr>
-		<tr> 
-			<td>1-4<c:if test="${list[3]!=null}"> 
-				${list[3].lTeam.tName }
-			</c:if></td>
+		<tr>
+			<td>1-4</td>
 		</tr>
 		<tr>
-			<td>1-5<c:if test="${list[4]!=null}"> 
-				${list[4].lTeam.tName }
-			</c:if></td>
+			<td>1-5</td>
 			<td rowspan="2">2-5</td>
 			<td rowspan="4">3-5</td>
 		</tr>
 		<tr>
-			<td>1-6<c:if test="${list[5]!=null}"> 
-				${list[5].lTeam.tName }
-			</c:if></td>
+			<td>1-6</td>
 		</tr>
 		<tr>
-			<td>1-7<c:if test="${list[6]!=null}"> 
-				${list[6].lTeam.tName }
-			</c:if></td>
+			<td>1-7</td>
 			<td rowspan="2">2-7</td>
 		</tr>
 		<tr>
-			<td>1-8<c:if test="${list[7]!=null}">  
-				${list[7].lTeam.tName }
-			</c:if></td>
+			<td>1-8</td>
 		</tr>
 	</table>
 </body>
