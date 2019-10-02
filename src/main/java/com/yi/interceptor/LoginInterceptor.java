@@ -33,7 +33,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			Object dest = session.getAttribute("dest");
 			String path = (dest != null) ? (String) dest : request.getContextPath();			
 			response.sendRedirect(path);//home화면
-		}
+		}/*else {
+			 session.setAttribute("error", "notMatch");
+	         response.sendRedirect(request.getContextPath()+"/auth/login");
+		}*/
 	}
 
 	

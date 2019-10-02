@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page session="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,9 +80,13 @@
 						<li class="face"><a href="https://www.facebook.com/HMfutsalpark/" target="_blank"><span class="hide">facebook</span></a></li>
 						<li class="insta"><a href="https://www.instagram.com/hmfutsalpark/" target="_blank"><span class="hide">instagram</span></a></li>
 
-						
-						<li class="login"><a href="auth/login">MEMBER LOGIN</a></li>
-						
+						<c:if test="${login.mId == null }">
+							<li class="login"><a href="auth/login">MEMBER LOGIN</a></li>
+						</c:if>
+							
+						<c:if test="${login.mId != null }"> 
+							<li class="logout"><a href="auth/logout">MEMBER LOGOUT</a></li>  
+						</c:if>
 					</ul>
 				</div>
 			</nav>

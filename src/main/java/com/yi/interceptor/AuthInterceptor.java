@@ -2,7 +2,6 @@ package com.yi.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,7 @@ import com.yi.controller.LoginController;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@Override
+	/*@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		logger.info("AuthInterceptor preHandler-------------------------------");
@@ -24,12 +23,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(session.getAttribute("Auth") == null) { //로그인 안되었음
 			logger.info("current user is not login.................");
 			saveDest(request);//원래의 목적지와 매개변수를 저장함
-			response.sendRedirect(request.getContextPath()+"/auth/login");//home 화면
+			response.sendRedirect(request.getContextPath()+"/");//home 화면
 			return false; //controller 진입을 막음
 		}
 		
 		return true;
-	}
+	}*/
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,

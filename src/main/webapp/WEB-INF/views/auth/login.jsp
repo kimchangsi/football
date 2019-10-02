@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html> 
 <html lang="ko" class="memb">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -52,6 +53,7 @@
 	$(document).ready(function() {
 		$('html').addClass('memb');
 	});
+	
 </script>
 <style type="text/css">
 .fb_hidden {
@@ -413,18 +415,36 @@ transform
 .fb_iframe_widget_fluid span {
 	width: 100%
 }
+
+#btn_loginH{
+	width:100%;
+	font-size: 24px;
+	margin-top: 40px;
+	line-height: 68px;
+	position: relative;
+	padding: 0 15px;
+	min-width: 180px;
+	background: #2c3c57;
+	color: #fff;
+	vertical-align: middle;
+    box-sizing: border-box;
+}
+#btn_loginH:hover {
+	background: #003f96 !important;
+}
 </style>
 </head>
 
 
 
 <body>
+	
 	<div id="wrapper">
 
 
 		<section id="container">
 			<!-- Contents -->
-			<form name="frmLogin" method="post" action="loginPost">
+			<form name="frmLogin" method="post" action="login" id="frmLogin">
 				<input type="hidden" name="c_type" value="">
 				<div class="content">
 					<div class="member_wrap">
@@ -436,8 +456,8 @@ transform
 								</dt>
 								<dd>
 									<input type="text" name="mId" value="" size="120"
-										maxlength="120" style="width: 100%" placeholder="이메일"
-										tabindex="1">
+										maxlength="120" style="width: 100%" placeholder="아이디"
+										tabindex="1" id="mId">
 								</dd>
 								<dt>
 									<label for="pass">패스워드</label>
@@ -445,13 +465,13 @@ transform
 								<dd>
 									<input type="password" name="mPwd" value="" size="12"
 										maxlength="50" style="width: 100%" placeholder="비밀번호"
-										tabindex="2">
+										tabindex="2" id="mPwd">
 								</dd>
 							</dl>
 							<span class="chk"><input type="checkbox" name="id_mem"
 								id="idsave"><label for="idsave">아이디 저장</label></span>
-								<a href="#" onclick="OLoginM();" class="btn_middle">로그인</a>
-
+								<!-- <a href="#" onclick="OLoginM();" class="btn_middle">로그인</a> -->
+								<button type="submit" id="btn_loginH" onclick="checkd()">로그인</button> 
 							<div class="btn_wrap">
 								<a href="#" class="find_id" onclick="openLayer('findIdDiv');">아이디 찾기</a>
 								<a href="#" class="find_pw"	onclick="openLayer('findPwDiv');">비밀번호 찾기</a>
@@ -529,11 +549,9 @@ transform
 						<div class="layer_cont">
 							<div class="find_wrap">
 								<form method="post" name="fpwForm">
-									<input type="text" name="fpw_mail" placeholder="아이디 입력"
-										style="width: 100%"> <input type="text"
-										name="fpw_name" placeholder="이름입력" style="width: 100%">
-									<input type="text" name="fpw_phone" placeholder="휴대전화번호 입력"
-										style="width: 100%">
+									<input type="text" name="fpw_mail" placeholder="아이디 입력" style="width: 100%">
+									<input type="text" name="fpw_name" placeholder="이름입력" style="width: 100%">
+									<input type="text" name="fpw_phone" placeholder="휴대전화번호 입력" style="width: 100%">
 
 									<div class="btn_wrap">
 										<button type="button" class="btn_middle" onclick="fpw();">확인</button>
@@ -551,8 +569,7 @@ transform
 						<div class="layer_cont">
 							<div class="find_comp pass">
 								<p>
-									가입한 이메일로 임시 비밀번호를 전송하였습니다.<br>로그인 후 마이페이지를 통해 <span>비밀번호를
-										변경</span>해 주십시요.
+									가입한 이메일로 임시 비밀번호를 전송하였습니다.<br>로그인 후 마이페이지를 통해 <span>비밀번호를 변경</span>해 주십시요.
 								</p>
 
 								<div class="btn_wrap">
@@ -567,6 +584,7 @@ transform
 
 				</div>
 			</form>
+			
 			<!-- //Contents -->
 		</section>
 
@@ -606,7 +624,7 @@ transform
 						});
 			}
 
-			function OLoginM() {
+			/* function OLoginM() {
 				$.ajax({
 					url : "loginPost",
 					type : "post",
@@ -623,10 +641,60 @@ transform
 					}
 				})
 				
-				<c:if test="${result=='success' }">
-					alert("가입성공. 로그인페이로 이동");
-				</c:if> 
+			} */
+			
+			function checkd() {
+				
+				var mId = $("#mId").val();
+				var mPwd = $("#mPwd").val();
+				
+				if(mId == ""){
+					alert("[아이디]를 입력하세요.");
+					$("#mId").focus();
+					return;
+				}
+				if(mPwd == ""){
+					alert("[비밀번호]를 인력하세요.");
+					$("#mPwd").focus();
+					return;
+				}
+				
+				
+				 
+				
+				document.frmLogin.action="${pageContext.request.contextPath }/auth/login"   
+				document.frmLogin.submit();
 			}
+			
+			
+			
+			 
+			/* function toJson_submit() {
+				ajax_request();
+			}
+			
+			function ajax_request() {
+				var mId = frmLogin.mId.value;
+				var mPwd = frmLogin.mPwd.value;
+				
+				$.ajax({
+					url:'login',
+					type: 'POST',
+					data:{'mId':mId, 'mPwd':mPwd},
+					dataType: 'json',
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					success:function(login){
+						if(login.result==true){
+							$('#result').html('로그인 성공');
+						}else{
+							$('#result').html('로그인 실패');
+						}
+					},
+					error:function(errMsg){alert("에러:"+errMsg);}
+				})
+			} */
+			
+			
 		</script>
 
 
@@ -727,6 +795,16 @@ transform
 				});
 			}
 		</script>
+		<c:if test="${error == 'notMatch'}">
+		      <script>
+		         setTimeout(function(){
+		            alert("아이디와 비밀번호가 일치하지 않습니다.");
+		         }, 100); 
+		      </script>
+		      <%
+		         session.removeAttribute("error");
+		      %> 
+  		 </c:if>
 		<!-- //페이스북 로그인-->
 
 

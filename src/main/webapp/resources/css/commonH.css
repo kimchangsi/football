@@ -885,6 +885,7 @@ a.rollover:hover img.on {
 }
 
 #wrapper #header nav .util li.login a {
+	display: inline-block;
 	padding-right: 32px;
 	width: auto;
 	background: url('../images/common/icon_login.png') no-repeat right center;
@@ -911,9 +912,9 @@ a.rollover:hover img.on {
 	background-size: auto 18px;
 }
 
-#wrapper #header nav .util li.logout a.logout {
+#wrapper #header nav .util li.logout a {
 	padding-right: 32px;
-	margin-left: 20px;
+	margin-left: 20px;  
 	background: url('../images/common/icon_logout.png') no-repeat right center;
 	background-size: auto 18px;
 }
