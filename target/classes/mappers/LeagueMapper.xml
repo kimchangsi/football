@@ -60,7 +60,7 @@
 
 	<update id="updateLeagueQuarterfinals" parameterType="LeagueVO">
 		UPDATE league
-		SET  l_quarterfinals=1, l_away=#{lAway},l_out=#{lOut},
+		SET  l_quarterfinals=#{lQuarterfinals}, l_semifianl=#{lSemifianl},l_final=#{lFinal},l_away=#{lAway},l_out=#{lOut},
 		l_goal=#{lGoal}, l_state=1
 		WHERE l_team=#{lTeam.tName} AND l_quarterfinals=#{lQuarterfinals} AND l_semifianl = #{lSemifianl} AND l_final=#{lFinal}
 	</update>

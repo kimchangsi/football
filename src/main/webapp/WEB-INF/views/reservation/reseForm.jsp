@@ -1489,7 +1489,7 @@ button.dis:hover	span	span {
 		//구장선택박스 체인지 이벤트
 		
 		$("#select02").on("change", function() {
-			var gNo = $("#select02 :selected").val();
+			var gNo = $("#select02 :selected").val(); //선택된값 가져오기
 			var sDate = $("#sel_date").text();
 			
 			if(gNo!=0){

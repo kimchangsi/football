@@ -46,5 +46,14 @@ public class LeagueServiceImpl implements LeagueService{
 	public List<LeagueVO> selectLeagueByAll() throws Exception {
 		return lDao.selectLeagueByAll();
 	}
+	
+	@Transactional
+	@Override
+	public void LeagueAfter(LeagueVO InsertWinVO, LeagueVO updateWinVO, LeagueVO updateLoseVO) throws Exception {
+		lDao.insertLeagueAfer(InsertWinVO);
+		lDao.updateLeagueQuarterfinals(updateWinVO);
+		lDao.updateLeagueQuarterfinals(updateLoseVO);
+		
+	}
 
 }

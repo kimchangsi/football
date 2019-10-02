@@ -11,4 +11,5 @@ public interface LeagueService {
 	public void insertLeague(LeagueVO vo) throws Exception; // 리그접수 / 팀등록
 	public List<LeagueVO> selectLeagueByRandom() throws Exception; // 리그 리스트 
 	public List<LeagueVO> selectLeagueByAll() throws Exception; //ㄹㅣ그 리스트
+	public void LeagueAfter(LeagueVO InsertWinVO,LeagueVO updateWinVO,LeagueVO updateLoseVO) throws Exception; //리그 점수 입력후(경기종료 후) 
 }
