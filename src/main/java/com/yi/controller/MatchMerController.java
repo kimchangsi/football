@@ -41,15 +41,30 @@ public class MatchMerController {
 		}
 		
 		List<MatchBoardVO> list2 = mService.selectByAllMatch();
+		List<SpotVO> spotList = mService.selectByAll();
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(list2.size());
 		
+		model.addAttribute("spotList",spotList);
 		model.addAttribute("list",list);
 		model.addAttribute("pageMaker",pageMaker);
 		return "match/match";
 	}
+	
+	
+	
+	
+	
+	//매치마감 눌렀을때
+		@RequestMapping(value = "/match2", method = RequestMethod.GET)
+		public String header2(SearchCriteria cri,Model model,int mbNo) throws Exception {
+			logger.info("match2");
+			mService.updateDeadLine(mbNo);
+			return "redirect:/match?page="+cri.getPage();
+		}
+	
 	
 	//매치 등록화면
 	@RequestMapping(value = "/match/apply", method = RequestMethod.GET)
@@ -101,6 +116,29 @@ public class MatchMerController {
 		
 		return "redirect:/match";
 	}
+	
+	//매치게시판 수정 시
+	@RequestMapping(value = "/match/update", method = RequestMethod.POST)
+	public String update(SearchCriteria cri,MatchBoardVO vo,GroundVO gVo,SpotVO sVo, String mbTime2) throws Exception  {
+		logger.info("match/update");
+		logger.info(vo.toString());
+		logger.info(gVo.toString());
+		logger.info(sVo.toString());
+		logger.info(mbTime2);
+		
+		String mbTime = vo.getMbTime()+" "+mbTime2;
+		logger.info(mbTime);
+		gVo.setgSno(sVo);
+		vo.setMbGno(gVo);
+	    vo.setMbTime(mbTime);
+	    mService.updateMatchBoard(vo);
+		
+		
+		return "redirect:/match?page="+cri.getPage();
+	}
+	
+	
+	
 	
 	
 }

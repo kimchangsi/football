@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mappers.leagueKindMapper">
+	<resultMap type="com.yi.domain.LeagueKindVO" id="resultLeagueKind">
+		<id column="lk_name" property="lkName"/>
+		<result column="lk_deadline" property="lkDeadline"/>
+		<result column="lk_start" property="lkStart"/>
+		<result column="lk_end" property="lkEdn"/>
+	</resultMap>
+	
+	
+	
+	
+
+
+	<select id="selectLeagueKindByAll" resultMap="resultLeagueKind">
+		select * from league_kind;
+	</select>
+</mapper>

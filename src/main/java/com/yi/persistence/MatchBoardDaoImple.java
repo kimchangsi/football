@@ -33,4 +33,16 @@ public class MatchBoardDaoImple implements MatchBoardDao {
 		return sqlSession.selectList(namespace+".selectByAll2");
 	}
 
+	@Override
+	public void updateDeadLine(int mbNo) throws Exception {
+		sqlSession.update(namespace+".updateDeadLine",mbNo);
+		
+	}
+
+	@Override
+	public void updateMatchBoard(MatchBoardVO vo) throws Exception {
+		sqlSession.update(namespace + ".updateMatchBoard",vo);
+		
+	}
+
 }

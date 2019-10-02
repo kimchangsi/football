@@ -8,6 +8,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/commonH.css"
 	type="text/css">
+	
 <style>
 .btn_base.match span {
 	display: inline-block;
@@ -129,9 +130,9 @@
 		<ul>
 
 			<li class="on"><a
-				href="http://localhost:8080/football/reservation">매치신청</a></li>
+				href="${pageContext.request.contextPath}/match">매치신청</a></li>
 
-			<li><a href="http://localhost:8080/football/reservation/check">용병모집</a></li>
+			<li><a href="${pageContext.request.contextPath}/mercenary">용병모집</a></li>
 
 		</ul>
 	</div>
