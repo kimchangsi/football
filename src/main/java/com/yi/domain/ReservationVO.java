@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ReservationVO {
 	private int rNo;
-	private String rtime;
+	private String rTime;
 	private Date rPayTime;
 	private MemberVO rMember;
 	private int rCancel;
@@ -22,14 +22,14 @@ public class ReservationVO {
 
 
 
-	public String getRtime() {
-		return rtime;
+	public String getrTime() {
+		return rTime;
 	}
 
 
 
-	public void setRtime(String rtime) {
-		this.rtime = rtime;
+	public void setrTime(String rTime) {
+		this.rTime = rTime;
 	}
 
 
@@ -85,7 +85,7 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return String.format("ReservationVO [rNo=%s, rtime=%s, rPayTime=%s, rMember=%s, rCancel=%s, rGno=%s]", rNo,
-				rtime, rPayTime, rMember, rCancel, rGno);
+				rTime, rPayTime, rMember, rCancel, rGno);
 	}
 	
 	

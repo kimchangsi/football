@@ -27,9 +27,9 @@
 
 	<insert id="insertLeague" parameterType="com.yi.domain.LeagueVO">
 		INSERT INTO league
-		(l_name, l_tel,l_team, l_league_name)
+		(l_name, l_tel,l_team, l_league_name,l_quarterfinals)
 		VALUES(#{lName}, #{lTel},
-		#{lTeam.tName}, #{lLeagueName.lkName})
+		#{lTeam.tName}, #{lLeagueName.lkName},1)
 	</insert>
 
 	<select id="selectLeagueByRandom" resultMap="resultLeagueByKcm">
@@ -72,6 +72,14 @@
 		l_goal=#{lGoal}, l_state=1
 		WHERE l_team=#{lTeam.tName} AND l_quarterfinals=#{lQuarterfinals} AND l_semifianl = #{lSemifianl} AND l_final=#{lFinal}
 	</update>
+	
+	<select id="selectLeagueByLeagueKind" parameterType="com.yi.domain.LeagueKindVO" resultMap="resultLeagueByKcm">
+		select l_no, l_name,
+		l_tel, l_rank, l_out, l_quarterfinals, l_semifianl, l_final, l_away,
+		t_name,lk_name, l_goal, l_state from league join team on league.l_team
+		= team.t_name join league_kind on league.l_league_name =
+		league_kind.lk_name  where l_league_name=#{lkName} order by l_no asc
+	</select>
 	
 	
 

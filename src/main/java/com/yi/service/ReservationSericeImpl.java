@@ -36,4 +36,10 @@ public class ReservationSericeImpl implements ReservationService {
 		return sDao.selectBySno(sNo);
 	}
 
+	@Override
+	public void insertReservation(ReservationVO vo) throws Exception {
+		rDao.insertReservation(vo);
+		
+	}
+
 }

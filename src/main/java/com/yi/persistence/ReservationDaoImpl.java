@@ -24,4 +24,9 @@ public class ReservationDaoImpl implements ReservationDao {
 		return sqlSession.selectList(namespace + ".selectByrGnoRtime", map);
 	}
 
+	@Override
+	public void insertReservation(ReservationVO vo) throws Exception {
+		sqlSession.insert(namespace + ".insertReservation",vo);
+	}
+
 }

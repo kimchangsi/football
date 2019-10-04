@@ -56,4 +56,10 @@ public class LeagueServiceImpl implements LeagueService{
 		
 	}
 
+	@Override
+	public List<LeagueVO> selectLeagueByLeagueKind(LeagueKindVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return lDao.selectLeagueByLeagueKind(vo);
+	}
+
 }
