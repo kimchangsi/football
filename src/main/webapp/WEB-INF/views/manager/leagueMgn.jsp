@@ -89,8 +89,8 @@ function getLeagueList() {
 						}
 						
 					} 
-				}else if(list.lQuarterfinals==0 && list.lSemifianl==0 && list.lFinal==1 && list.lState==1 && list.lOout==0){ //우승
-					$("#draw").find("tr").eq(8).find("td").eq(0).find(".TeamName").text(list.lTeam.tName);
+				}else if( list.lFinal==2){ //우승
+					$("#draw").find("tr").eq(1).find("td").eq(3).find(".TeamName").text(list.lTeam.tName);
 				}
 								 
 			}
@@ -181,12 +181,15 @@ function getLeagueListScore(leagueSelVal) {
 			var json = "";
 			
 			
-			if(type="8강"){
+			if(type=="8강"){
+				alert("8강");
 				json = [ {lTeam:{tName:team1}, lGoal:score1,lQuarterfinals:1}, {lTeam:{tName:team2}, lGoal:score2,lQuarterfinals:1},{lSemifianl:1} ];
-			}else if(type="4강"){
-				json = [{lTeam:{tName:team1}, lGoal:score1,lSemifianl:1}, {lTeam:{tName:team2}, lGoal:score2,l_lSemifianl:1},{lFinal:1}];
-			}else if(type="결승"){
-				json = [{lTeam:{tName:team1}, lGoal:score1,lFinal:1}, {lTeam:{tName:team2}, lGoal:score2,lFinal:1}];
+			}else if(type=="4강"){
+				alert("4강");
+				json = [{lTeam:{tName:team1}, lGoal:score1,lSemifianl:1}, {lTeam:{tName:team2}, lGoal:score2,lSemifianl:1},{lFinal:1}];
+			}else if(type=="결승"){
+				alert("결승");
+				json = [{lTeam:{tName:team1}, lGoal:score1,lFinal:1}, {lTeam:{tName:team2}, lGoal:score2,lFinal:1},{lFinal:2}];
 			}
 			
 			var data = JSON.stringify(json);

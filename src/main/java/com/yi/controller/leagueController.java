@@ -119,6 +119,7 @@ public class leagueController {
 				//update
 				vo2.setlOut(1); //패자팀 탈락여부
 				vo2.setlAway(vo1.getlTeam().gettName()); //상대팀 등록
+				logger.info("패자패자패자"+vo2.toString());
 				
 				service.LeagueAfter(insertVo, vo1, vo2);
 				
