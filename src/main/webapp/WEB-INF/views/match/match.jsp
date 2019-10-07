@@ -224,6 +224,29 @@ a.btn_page.next {
 	background-color: red;
 	color: white;
 }
+
+.state{
+	border-radius: 50% !important;
+	width: 100px !important; 
+	height: 100px;
+	line-height: 100px !important;
+}
+
+table tr td:nth-child(4) {
+	font-weight: bold;
+}
+
+#searchDiv{
+	width: 850px;
+	margin: 0 auto;
+	margin-top: 30px;
+	
+}
+
+#searchSel{
+	width: 215px;
+	height: 43px;
+}
 </style>
 <script>
 
@@ -328,11 +351,11 @@ a.btn_page.next {
 		/* 상세보기클릭시 */
 		$(".detailItem").click(function() {
 			$("#detailDiv").show();
-			var matchForm = $(this).find("td").eq(0).text();
-			var spotName = $(this).find("td").eq(1).text();
-			var time = $(this).find("td").eq(2).text();
-			var name = $(this).find("td").eq(3).text();
-			var application = $(this).find("td").eq(5).find("span").text();
+			var matchForm = $(this).find("td").eq(1).text();
+			var spotName = $(this).find("td").eq(2).text();
+			var time = $(this).find("td").eq(3).text();
+			var name = $(this).find("td").eq(4).text(); 
+			var application = $(this).find("td").eq(0).find("span").text(); 
 			var ground = $(this).attr("data-ground");
 			var tel = $(this).attr("data-tel");
 			var level = $(this).attr("data-level");
@@ -454,9 +477,7 @@ a.btn_page.next {
 		
 		
 		
-		
-		
-		
+
 		
 		
 		
@@ -501,12 +522,13 @@ a.btn_page.next {
 
 					<thead>
 						<tr>
+						<th scope="col">신청</th>
 							<th scope="col" class="tb">매치형태</th>
 							<th scope="col">지점구분</th>
 							<th scope="col">매치일자</th>
 							<th scope="col" class="tb">작성자</th>
 							<th scope="col" class="tb">작성일자</th>
-							<th scope="col">신청</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -521,18 +543,19 @@ a.btn_page.next {
 								data-sNo="${matchList.mbGno.gSno.sNo}"
 								
 								 >
+								 <c:if test="${matchList.mbApplication==1}">
+									<td><span class="state">가능</span></td>
+								</c:if>
+								<c:if test="${matchList.mbApplication==0}">
+									<td><span class="state end">마감</span></td>
+								</c:if>
 								<td class="tb tbcolor">${matchList.mbMatchForm }</td>
 								<td>${matchList.mbGno.gSno.sName }</td>
 								<td>${matchList.mbTime }</td>
 								<td class="tb">${matchList.mbMember.mName }</td>
 								<td class="tb"><fmt:formatDate
 										value="${matchList.mbRegdate }" pattern="yyyy-MM-dd" /></td>
-								<c:if test="${matchList.mbApplication==1}">
-									<td><span class="state">가능</span></td>
-								</c:if>
-								<c:if test="${matchList.mbApplication==0}">
-									<td><span class="state end">마감</span></td>
-								</c:if>
+								
 
 							</tr>
 
@@ -546,6 +569,19 @@ a.btn_page.next {
 					</tbody>
 				</table>
 			</div>
+			
+			<div id="searchDiv">
+			<select name="searchType" id="searchSel">
+						<option value="n" ${cri.searchType==null?'selected':'' }>선택하세요</option>
+						<option value="t" ${cri.searchType=='t'?'selected':'' }>지점</option>
+						<option value="c" ${cri.searchType=='c'?'selected':'' }>작성자</option>
+						<option value="f" ${cri.searchType=='t'?'selected':'' }>매치형태</option>
+					</select>
+					<input type="text" id="keywordInput" name="keyword" value="${cri.keyword }">
+					<button id="btnSearch" class="btn_base match">검색</button>
+					<button id="btnAll" class="btn_base match">전체보기</button>
+			</div>
+			
 
 			<div id="page">
 				<ul class="pagination">
@@ -688,8 +724,16 @@ a.btn_page.next {
 		})
 	</script>
 
-
-
+	
+	<!-- 검색버튼 클릭시 -->
+	<script>
+		$("#btnSearch").click(function() {
+			var select = $("select[name='searchType']").val();
+			var keyword = $("input[name='keyword']").val();
+			location.href = "${pageContext.request.contextPath }/match?page=1"
+				+"&searchType="+select+"&keyword="+keyword;
+		})
+	</script>
 
 
 

@@ -51,6 +51,12 @@ public class MercenaryDaoImpl implements MercenaryDao {
 		return sqlSession.selectList(namespace + ".selectByall",cri);
 	}
 
+	@Override
+	public void updateApplicationMer() throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".updateApplicationMer");
+	}
+
 	
 
 }

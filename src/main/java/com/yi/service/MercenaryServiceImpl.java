@@ -67,4 +67,10 @@ public class MercenaryServiceImpl implements MercenaryService {
 		return gDao.selectBygNo(gno);
 	}
 
+	@Override
+	public void updateApplicationMer() throws Exception {
+		// TODO Auto-generated method stub
+		mcDao.updateApplicationMer();
+	}
+
 }

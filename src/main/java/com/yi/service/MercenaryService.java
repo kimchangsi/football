@@ -19,4 +19,5 @@ public interface MercenaryService {
 	public MemberVO selectByID(String mId); // 멤버 아이디로 멤버가져오기
 	public List<SpotVO> selectByAll() throws Exception; //전체지점가져오기
 	public List<GroundVO> selectBygNo(int gno)throws Exception;//선택된 지점의 구장리스트 가져오기
+	public void updateApplicationMer() throws Exception;
 }

@@ -31,10 +31,9 @@ public class MercenaryController {
 	public String header(SearchCriteria cri,Model model) throws Exception {
 		logger.info("용병게시판~");
 		logger.info(cri.toString());
+		mcService.updateApplicationMer();
 		List<MercenaryBoardVO> list = mcService.selectByall(cri);
-		for (MercenaryBoardVO MercenaryBoardVO : list) {
-			logger.info(MercenaryBoardVO.toString());
-		}
+		
 		
 		List<MercenaryBoardVO> list2 = mcService.selectByall2();
 		List<SpotVO> spotList = mcService.selectByAll();

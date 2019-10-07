@@ -1500,7 +1500,8 @@ button.dis:hover	span	span {
 			var sDate = $("#sel_date").text();
 			
 			if(gNo!=0){
-				$("#time_wrap").slideDown(500);
+				$("#time_wrap").slideDown(500); 
+				$(".time_wrap_item").removeClass('reserved_time ');
 				$(".time_wrap_item").addClass('time_wrap_item_ok');
 				$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
 			
