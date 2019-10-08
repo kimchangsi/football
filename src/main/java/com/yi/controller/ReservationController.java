@@ -6,12 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yi.domain.GroundVO;
+import com.yi.domain.ReservationVO;
 import com.yi.domain.SpotVO;
 import com.yi.service.ReservationService;
 import com.yi.service.SpotService;
@@ -63,6 +66,14 @@ public class ReservationController {
 			model.addAttribute("s",s);
 			
 			return "reservation/reseForm";
+		}
+		
+		//구장예약 완료
+		@RequestMapping(value = "/reservation/ok", method = RequestMethod.POST)
+		public String reservationPage( ReservationVO vo) throws Exception { 
+			logger.info(vo.toString());
+			reseService.insertReservation(vo); 
+			return "redirect:/reservation";
 		}
 	
 }

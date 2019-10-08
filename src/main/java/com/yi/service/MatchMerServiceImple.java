@@ -78,6 +78,13 @@ public class MatchMerServiceImple implements MatchMerService {
 		mbDao.updateMatchBoard(vo);
 		
 	}
+
+
+	@Override
+	public void updateApplication() throws Exception {
+		// TODO Auto-generated method stub
+		mbDao.updateApplication();
+	}
 	
 	
 

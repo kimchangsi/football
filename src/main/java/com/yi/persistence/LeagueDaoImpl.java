@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yi.domain.LeagueKindVO;
 import com.yi.domain.LeagueVO;
 @Repository
 public class LeagueDaoImpl implements LeagueDao {
@@ -55,6 +56,13 @@ public class LeagueDaoImpl implements LeagueDao {
 	public void updateLeagueSemifianl(LeagueVO vo) throws Exception {
 		sqlSession.update(namespace + ".updateLeagueSemifianl",vo);
 		
+	}
+
+
+	@Override
+	public List<LeagueVO> selectLeagueByLeagueKind(LeagueKindVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".selectLeagueByLeagueKind",vo);
 	}
 
 }

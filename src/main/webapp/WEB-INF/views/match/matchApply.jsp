@@ -146,13 +146,13 @@
 				
 					<div class="input_wrap">
 						<p>신청자명</p>
-						<input type="text" class="input_fo" title=""  style="width:100%" value="${member.mName }" readonly="readonly">
-						<input type="hidden" name="mId" value="${member.mId }"> 
+						<input type="text" class="input_fo" title=""  style="width:100%" value="${login.mName }" readonly="readonly">
+						<input type="hidden" name="mId" value="${login.mId}"> 
 					</div>
 					
 					<div class="input_wrap">
 						<p>연락처</p>
-						<input type="text" class="input_fo" title=""  style="width:100%" value="${member.mTel }"  readonly="readonly">
+						<input type="text" class="input_fo" title=""  style="width:100%" value="${login.mTel }"  readonly="readonly">
 					</div>
 					
 					<div class="input_wrap">

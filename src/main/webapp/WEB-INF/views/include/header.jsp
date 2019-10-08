@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>풋살 예약</title>
+ 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script> 
 	$(function() {
 		
@@ -49,7 +51,7 @@
 					<li><a href="${pageContext.request.contextPath}/spot" class="nav_li">지점</a></li>
 					<li><a href="${pageContext.request.contextPath}/reservation" class="nav_li">구장</a></li>
 					<li><a href="${pageContext.request.contextPath}/match" class="nav_li">매치/용병</a></li>
-					<li><a href="#" class="nav_li">리그</a></li>
+					<li><a href="${pageContext.request.contextPath}/league" class="nav_li">리그</a></li>
 					<li><a href="#" class="nav_li">고객센터</a></li>
 				</ul>
 			</nav>

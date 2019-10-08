@@ -12,4 +12,5 @@ public interface MercenaryDao {
 	public void insertMercenary(MercenaryBoardVO vo) throws Exception;
 	public void updateDeadLine(int mcbNo) throws Exception;
 	public void updateMercenaryBoard(MercenaryBoardVO vo) throws Exception;
+	public void updateApplicationMer() throws Exception;
 }

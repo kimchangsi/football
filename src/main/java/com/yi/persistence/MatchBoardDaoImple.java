@@ -45,4 +45,10 @@ public class MatchBoardDaoImple implements MatchBoardDao {
 		
 	}
 
+	@Override
+	public void updateApplication() throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".updateApplication");
+	}
+
 }

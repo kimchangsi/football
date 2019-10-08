@@ -25,10 +25,17 @@
 	<insert id="insertMercenary" parameterType="com.yi.domain.MercenaryBoardVO">
 		insert into mercenary_board(mcb_rm_cnt,mcb_deadline_wd,mcb_regdate,mcb_context,mcb_member,mcb_gno,mcb_time,mcb_level) values (#{mcbRmCnt},1,now(),#{mcbContext},#{mcbMember.mId},#{mcbGno.gNo},#{mcbTime},#{mcbLevel})
 	</insert>
-	
+		<sql id="search">
+		<if test="searchType=='t'.toString()">
+			where s_name like CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='c'.toString()">
+			where m_name like CONCAT('%',#{keyword},'%')
+		</if>
+	</sql>
 	<!-- 용병 게시판 전체 리스트 (페이징) -->
 	<select id="selectByall" parameterType="SearchCriteria"  resultMap="resultMercenaryBoardByKcm">
-		select mcb_no, mcb_rm_cnt, mcb_regdate, mcb_enddate, mcb_context, mcb_deadline_wd, mcb_time, mcb_level,g_no, g_name, g_price, g_time,s_no, s_name, s_addr, m_id, m_name,m_tel from mercenary_board left join ground on mercenary_board.mcb_gno = ground.g_no left join spot on ground.g_sno = spot.s_no left join member on mercenary_board.mcb_member = member.m_id order by mcb_no desc limit #{pageStart}, #{perPageNum} 
+		select mcb_no, mcb_rm_cnt, mcb_regdate, mcb_enddate, mcb_context, mcb_deadline_wd, mcb_time, mcb_level,g_no, g_name, g_price, g_time,s_no, s_name, s_addr, m_id, m_name,m_tel from mercenary_board left join ground on mercenary_board.mcb_gno = ground.g_no left join spot on ground.g_sno = spot.s_no left join member on mercenary_board.mcb_member = member.m_id <include refid="search"></include> order by mcb_no desc limit #{pageStart}, #{perPageNum} 
 	</select> 
 	<!-- 용병 게시판 전체 리스트  -->
 	<select id="selectByall2"  resultMap="resultMercenaryBoardByKcm">
@@ -49,7 +56,10 @@
 	
 	</update>
 	
-	
+	<!-- 오늘날짜 지나면 자동 마감 처리 -->
+	<update id="updateApplicationMer">
+	<![CDATA[	update mercenary_board set mcb_deadline_wd = 0 where substring(mcb_time,1,10) < date_format(now(),'%Y-%m-%d') ]]> 
+	</update>
 	
 	
 </mapper>

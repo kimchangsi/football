@@ -224,6 +224,33 @@ a.btn_page.next {
 	background-color: red;
 	color: white;
 }
+
+.state{
+	border-radius: 50% !important;
+	width: 100px !important; 
+	height: 100px;
+	line-height: 100px !important;
+}
+
+#mainT tr td:nth-child(2) {
+	font-weight: bold;
+	color:#4d90fe !important; 
+}
+#mainT tr td:nth-child(3) {
+	font-weight: bold;
+}
+
+#searchDiv{
+	width: 850px;
+	margin: 0 auto;
+	margin-top: 30px;
+	
+}
+
+#searchSel{
+	width: 215px;
+	height: 43px;
+}
 </style>
 <script>
 
@@ -328,11 +355,11 @@ a.btn_page.next {
 		/* 상세보기클릭시 */
 		$(".detailItem").click(function() {
 			$("#detailDiv").show();
-			var matchForm = $(this).find("td").eq(2).text();  
-			var spotName = $(this).find("td").eq(0).text();
-			var time = $(this).find("td").eq(1).text();
-			var name = $(this).find("td").eq(3).text();
-			var application = $(this).find("td").eq(5).find("span").text();
+			var matchForm = $(this).find("td").eq(3).text();  
+			var spotName = $(this).find("td").eq(1).text();
+			var time = $(this).find("td").eq(2).text();
+			var name = $(this).find("td").eq(4).text();
+			var application = $(this).find("td").eq(0).find("span").text();
 			var ground = $(this).attr("data-ground");
 			var tel = $(this).attr("data-tel");
 			var level = $(this).attr("data-level");
@@ -490,23 +517,25 @@ a.btn_page.next {
 	<div class="match_wrap">
 		<h3 class="h_tit">용병신청</h3>
 		<div id="match_table_wrap">
-			<div class="table_top">
+			<div class="table_top"> 
+				
 				<a href="#" class="btn_base match" id="btn_match_add"><span>용병등록</span></a>
 			</div>
 
 
 			<div class="table_wrap list">
-				<table>
+				<table id="mainT">
 					<caption>용병신청 리스트</caption>
 
 					<thead>
 						<tr>
+							<th scope="col">신청</th>
 							<th scope="col">지점구분</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">모집인원</th>
 							<th scope="col" class="tb">작성자</th>
 							<th scope="col" class="tb">작성일자</th>
-							<th scope="col">신청</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -521,18 +550,19 @@ a.btn_page.next {
 								data-sNo="${merList.mcbGno.gSno.sNo}"
 								
 								 >
+								 <c:if test="${merList.mcbDeadlineWd==1}">
+									<td><span class="state">가능</span></td>
+								</c:if>
+								<c:if test="${merList.mcbDeadlineWd==0}">
+									<td><span class="state end">마감</span></td>
+								</c:if>
 								<td>${merList.mcbGno.gSno.sName }</td>
 								<td>${merList.mcbTime }</td>
 								<td>${merList.mcbRmCnt }</td>
 								<td class="tb">${merList.mcbMember.mName }</td>
 								<td class="tb"><fmt:formatDate
 										value="${merList.mcbRegdate }" pattern="yyyy-MM-dd" /></td>
-								<c:if test="${merList.mcbDeadlineWd==1}">
-									<td><span class="state">가능</span></td>
-								</c:if>
-								<c:if test="${merList.mcbDeadlineWd==0}">
-									<td><span class="state end">마감</span></td>
-								</c:if>
+								
 
 							</tr>
 
@@ -545,6 +575,18 @@ a.btn_page.next {
 
 					</tbody>
 				</table>
+			</div>
+			<div id="searchDiv">
+			<select name="searchType" id="searchSel">
+						<option value="n" ${cri.searchType==null?'selected':'' }>선택하세요</option> 
+						<option value="t" ${cri.searchType=='t'?'selected':'' }>지점</option> 
+						
+						<option value="c" ${cri.searchType=='c'?'selected':'' }>작성자</option>
+						
+					</select>
+					<input type="text" id="keywordInput" name="keyword" value="${cri.keyword }">
+					<button id="btnSearch" class="btn_base match">검색</button>
+					<button id="btnAll" class="btn_base match">전체보기</button>
 			</div>
 
 			<div id="page">
@@ -575,10 +617,11 @@ a.btn_page.next {
 
 	<div class="layer_popup class" id="detailDiv" style="display: none;">
 		<h1 class="h_bar" id="h_bar2">용병신청 상세보기</h1>
+		
 		<button type="button" class="btn_closed close">
 			<span class="hide">closed</span>
 		</button>
-
+ 
 		<div class="layer_cont">
 			<div class="table_wrap" id="detail">
 				<form action="${pageContext.request.contextPath}/mercenary/update" method="POST">
@@ -692,8 +735,15 @@ a.btn_page.next {
 		})
 	</script>
 
-
-
+	<!-- 검색버튼 클릭시 -->
+	<script>
+		$("#btnSearch").click(function() {
+			var select = $("select[name='searchType']").val();
+			var keyword = $("input[name='keyword']").val();
+			location.href = "${pageContext.request.contextPath }/mercenary?page=1"
+				+"&searchType="+select+"&keyword="+keyword;
+		})
+	</script>
 
 
 

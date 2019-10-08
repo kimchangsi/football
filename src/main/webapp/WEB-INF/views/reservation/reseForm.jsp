@@ -138,8 +138,8 @@
 	width: 98px;
 	height: 2px;
 	background: #bfc4cc;
-}
-
+} 
+                   
 .h_bar {
 	position: relative;
 	padding-left: 26px;
@@ -1413,6 +1413,10 @@ button.dis:hover	span	span {
 }
 
 </style>
+<script
+	src="${pageContext.request.contextPath}/resources/js/popupWindow.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/popupWindow.css" />
 <script>
 
 	//오늘 날짜 구하는 함수 (00년00월00일)
@@ -1434,6 +1438,9 @@ button.dis:hover	span	span {
 
 
 	$(function() {
+		
+		
+		
 		
 		var sNo = ${sNo};
 		
@@ -1489,11 +1496,12 @@ button.dis:hover	span	span {
 		//구장선택박스 체인지 이벤트
 		
 		$("#select02").on("change", function() {
-			var gNo = $("#select02 :selected").val();
+			var gNo = $("#select02 :selected").val(); //선택된값 가져오기
 			var sDate = $("#sel_date").text();
 			
 			if(gNo!=0){
-				$("#time_wrap").slideDown(500);
+				$("#time_wrap").slideDown(500); 
+				$(".time_wrap_item").removeClass('reserved_time ');
 				$(".time_wrap_item").addClass('time_wrap_item_ok');
 				$(".time_wrap_item_ok").removeClass("time_wrap_item_check");
 			
@@ -1503,9 +1511,9 @@ button.dis:hover	span	span {
 					dataType:"json",
 					success:function(res){
 						console.log(res); 
-						console.log(res[0].rtime); 
+						console.log(res[0].rTime); 
 						for (var i = 0; i < res.length; i++) {
-							var text = res[i].rtime;
+							var text = res[i].rTime;
 							var subText = text.substr(11, 13);
 							for (var j = 0; j < $(".ptime").length; j++) {
 								var $a = $(".ptime:contains("+subText+")").eq(j);
@@ -1539,14 +1547,53 @@ button.dis:hover	span	span {
 				var pPrice = $(this).find(".pPrice").text();
 				$("#tdPrice").text(pPrice.substring(0, pPrice.length-1));	
 			}else{
-				alert("이미 예약된 시간입니다. 다른 시간을 선택해주세요");
+				//alert("이미 예약된 시간입니다. 다른 시간을 선택해주세요");
+				
+				$.popupWindow({
+					  type:'alert',
+					  title:'알림',
+					  content:'이미 예약된 시간입니다. 다른 시간을 선택해주세요',
+					  onClosed:function(arg){
+					  }
+					});
+
+				
 			}
+		})
 		
-		
-			
-			
-		
-			
+		//예약하기 버튼 클릭시
+		$("#gg").click(function() {
+			 var subDate = $("#tdDate").text()+" "+	$("#tdTime").text();
+			 var gNo = $("#select02 :selected").val(); //선택된값 가져오기
+			 
+			 $("input[name='rTime']").val(subDate);
+			 $("input[name='rGno.gNo']").val(gNo);
+			 
+			 if( $("#select02 :selected").val()==0 ||  $("#tdDate").text()=="" || 	$("#tdTime").text()==""){ 
+				// alert("구장 예약자 정보를 확인해주세요.");
+				 $.popupWindow({
+					  type:'alert',
+					  title:'알림',
+					  content:'구장 예약자 정보를 확인해주세요.',
+					  onClosed:function(arg){
+					  }
+					});
+			 }else {
+				 $.popupWindow({
+					   type:'confirm',
+					   title:'예약',
+					   content:'정말 예약하시겠습니까?',
+					   cancelText:'취소',
+					   confirmText:'확인',
+					   onClosed:function(arg){
+													   
+					   }
+					 });
+				 $(".popConfirm").click(function() {
+					 $("#f1").submit();
+				 })
+			}
+			 
 		})
 
 	})
@@ -1674,12 +1721,12 @@ button.dis:hover	span	span {
 								<tbody>
 									<tr>
 										<th scope="row">신청자</th>
-										<td><span id="tdMember"></span></td>
+										<td><span id="tdMember">${login.mName }</span></td>
 									</tr>
 									<tr>
 										<th scope="row">연락처</th>
 										<td>
-											<span id="tdTel"></span>
+											<span id="tdTel">${login.mTel}</span>
 										</td>
 									</tr>
 								  
@@ -1709,6 +1756,11 @@ button.dis:hover	span	span {
 							  
 
 							<div class="btn_wrap">
+							<form action="${pageContext.request.contextPath}/reservation/ok" id="f1" method="POST" enctype="multipart/form-data">
+								 <input type="hidden" name="rMember.mId" value="${login.mId} "> 
+								<input type="hidden" name="rTime">
+								 <input type="hidden" name="rGno.gNo">  
+							</form>
 								<button type="button" class="btn_big gray" id="gg"><span>구장예약하기</span></button>
 							</div>
 				</div>

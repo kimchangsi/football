@@ -53,8 +53,8 @@
 	<div class="tab_wrap">
 		<ul>
 			<li class="on"><a
-				href="${pageContext.request.contextPath}/mercenary">리그</a></li>
-			<li><a href="${pageContext.request.contextPath}/mercenary">리그현황</a></li>
+				href="${pageContext.request.contextPath}/league">리그</a></li>
+			<li><a href="${pageContext.request.contextPath}/league/check">리그현황</a></li>
 		</ul>
 	</div>
 	<div id="league_wrap">
