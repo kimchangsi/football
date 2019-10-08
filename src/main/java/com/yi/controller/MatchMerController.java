@@ -70,7 +70,7 @@ public class MatchMerController {
 	@RequestMapping(value = "/match/apply", method = RequestMethod.GET)
 	public String matchApply(Model model) throws Exception {
 		logger.info("match apply");
-		MemberVO member = mService.selectByID("kcm");
+		MemberVO member = mService.selectByID("a");
 		List<SpotVO> spotList = mService.selectByAll();
 		
 		model.addAttribute("member",member);

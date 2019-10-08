@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mappers.customerMapper">
+	<insert id="create">
+		INSERT INTO notice
+		(n_title, n_regdate, n_read_count, n_context, n_img)
+		VALUES(#{nTitle}, now(), 0, #{nContext}, #{nImg})
+	</insert>
+	
+	<select id="listAll" resultType="CustomerVO">
+            SELECT n_no, n_title, n_regdate, n_read_count, n_context, n_img
+            FROM notice
+            ORDER BY n_no desc,
+            n_regdate desc
+    </select>
+    
+    <update id="updateArticle">
+    	UPDATE notice
+		SET n_title=#{nTitle}, n_regdate=now(), n_context=#{nContext}, n_img=#{nImg}
+		WHERE n_no=#{nNo}
+    </update>
+    
+    <update id="increaseViewcnt">
+        UPDATE notice SET n_read_count = n_read_count + 1 
+        WHERE n_no = #{nNo}
+    </update>
+    
+    <select id="view" resultType="CustomerVO">
+    	select * from notice
+    	where n_no = #{nNo}
+    </select>
+    
+    <delete id="Ndelete">
+    	DELETE FROM notice
+		WHERE n_no=#{nNo}
+    </delete>
+</mapper>
