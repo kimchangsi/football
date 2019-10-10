@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 import com.yi.domain.GroundVO;
 import com.yi.domain.MemberVO;
 import com.yi.domain.MercenaryBoardVO;
+import com.yi.domain.MercenaryDetailVO;
+import com.yi.domain.RankMerVO;
 import com.yi.domain.SearchCriteria;
 import com.yi.domain.SpotVO;
 import com.yi.persistence.GroundDao;
 import com.yi.persistence.MemberDao;
 import com.yi.persistence.MercenaryDao;
+import com.yi.persistence.MercenaryDetailDao;
+import com.yi.persistence.RankMerDao;
 import com.yi.persistence.SpotDao;
 
 @Service
@@ -25,6 +29,11 @@ public class MercenaryServiceImpl implements MercenaryService {
 	GroundDao gDao;
 	@Autowired
 	MercenaryDao mcDao;
+	@Autowired
+	MercenaryDetailDao mdDao;
+	@Autowired
+	RankMerDao rmDao;
+	
 
 	@Override
 	public List<MercenaryBoardVO> selectByall(SearchCriteria cri) throws Exception {
@@ -71,6 +80,54 @@ public class MercenaryServiceImpl implements MercenaryService {
 	public void updateApplicationMer() throws Exception {
 		// TODO Auto-generated method stub
 		mcDao.updateApplicationMer();
+	}
+
+	@Override
+	public void insertMD(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mdDao.insertMD(vo);
+	}
+
+	@Override
+	public void deleteMD(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mdDao.deleteMD(vo);
+	}
+
+	@Override
+	public void updateMD(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mdDao.updateMD(vo);
+	}
+
+	@Override
+	public List<MercenaryDetailVO> selectMDByIDNO(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mdDao.selectMDByIDNO(vo);
+	}
+
+	@Override
+	public List<MercenaryDetailVO> selectMDByID(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mdDao.selectMDByID(vo);
+	}
+
+	@Override
+	public List<MercenaryDetailVO> selectMDByAll() throws Exception {
+		// TODO Auto-generated method stub
+		return mdDao.selectMDByAll();
+	}
+
+	@Override
+	public List<MercenaryDetailVO> selectMDByNo(MercenaryDetailVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mdDao.selectMDByNo(vo);
+	}
+
+	@Override
+	public List<RankMerVO> selectByAllRank() throws Exception {
+		// TODO Auto-generated method stub
+		return rmDao.selectByAll();
 	}
 
 }

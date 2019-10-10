@@ -42,4 +42,10 @@ public class ReservationSericeImpl implements ReservationService {
 		
 	}
 
+	@Override
+	public List<ReservationVO> selecyByID(String mId) throws Exception {
+		// TODO Auto-generated method stub
+		return rDao.selecyByID(mId);
+	}
+
 }

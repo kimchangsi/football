@@ -2,18 +2,19 @@ package com.yi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yi.domain.GroundVO;
+import com.yi.domain.MemberVO;
 import com.yi.domain.ReservationVO;
 import com.yi.domain.SpotVO;
 import com.yi.service.ReservationService;
@@ -42,10 +43,17 @@ public class ReservationController {
 	
 	//구장예약 확인 화면
 	@RequestMapping(value = "/reservation/check", method = RequestMethod.GET)
-	public String check(Model model) throws Exception {
+	public String check(Model model,HttpSession session) throws Exception {
+		
 		logger.info("reservation Check");
 		
-		return "reservation/reseCheck";
+			MemberVO vo =  (MemberVO) session.getAttribute("login");
+			List<ReservationVO> list = reseService.selecyByID(vo.getmId());
+			model.addAttribute("list",list);
+		
+		
+		
+		return "reservation/reseMyCheck";
 	} 
 	
 	//구장예약 화면

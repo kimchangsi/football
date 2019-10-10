@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mappers.mercenaryDetailMapper">
+
+	<resultMap type="com.yi.domain.MercenaryDetailVO" id="resultByMD">
+		<id property="mdNo" column="md_no"/>
+		<result property="mdId" column="md_id"/>
+		<result property="mdMcbNo" column="md_mcbNo"/>
+		<result property="mdWithDrwal" column="md_withdrwal"/>
+	</resultMap>
+
+	<insert id="insertMD" parameterType="com.yi.domain.MercenaryDetailVO">
+		insert into mercenary_detail(md_id,md_mcbNo,md_withdrwal) values (#{mdId},#{mdMcbNo},0)
+	</insert>
+	
+	
+ 	<delete id="deleteMD" parameterType="com.yi.domain.MercenaryDetailVO">
+		delete from mercenary_detail where md_mcbNo=#{mdMcbNo} AND md_id=#{mdId} 
+	</delete>
+	
+	<update id="updateMD" parameterType="com.yi.domain.MercenaryDetailVO">
+		update mercenary_detail set md_withdrwal = 1 where md_mcbNo=#{mdMcbNo} AND md_id=#{mdId}
+	</update>
+	
+	 <select id="selectByID" parameterType="com.yi.domain.MercenaryDetailVO" resultMap="resultByMD">
+		select * from mercenary_detail where md_id=#{mdId}
+	</select>
+	<select id="selectMDByIDNO" parameterType="com.yi.domain.MercenaryDetailVO" resultMap="resultByMD">
+		select * from mercenary_detail where md_mcbNo=#{mdMcbNo} AND md_id=#{mdId}
+	</select>
+	<select id="selectMDByAll" resultMap="resultByMD">
+		select * from mercenary_detail
+	</select>  
+	<select id="selectMDByNo" parameterType="com.yi.domain.MercenaryDetailVO" resultMap="resultByMD">
+		select * from mercenary_detail where md_mcbNo=#{mdMcbNo} 
+	</select>
+</mapper>
