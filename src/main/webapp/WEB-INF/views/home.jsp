@@ -64,15 +64,14 @@
 				<div class="nav_wrap">
 					<ul>
 						<li>
-							<a href="https://www.aia.co.kr/ko/index.html" class="aia" target="_blank"><span class="hide">AIA Vitaliity</span></a>
 							<a href="https://www.facebook.com/HMfutsalpark/" class="face" target="_blank"><span class="hide">facebook</span> </a>
 							<a href="https://www.instagram.com/hmfutsalpark/" class="insta" target="_blank"><span class="hide">instagram</span></a>
 						</li>
-						<li><a href="/locate/locate.asp">지점</a></li>
-						<li><a href="/rese/rese.asp">구장</a></li>
-						<li><a href="/comm/match/match_apply.asp">매치/용병</a></li>
-						<li><a href="/league/league.asp" class="f_hvn">H-LEAGUE</a></li>
-						<li><a href="/cust/comm_notice.asp">고객센터</a></li> 
+						<li><a href="${pageContext.request.contextPath}/spot">지점</a></li>
+						<li><a href="${pageContext.request.contextPath}/reservation">구장</a></li>
+						<li><a href="${pageContext.request.contextPath}/match">매치/용병</a></li>
+						<li><a href="${pageContext.request.contextPath}/league" class="f_hvn">H-리그</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer">고객센터</a></li> 
 					</ul>
 				</div>
 				<div class="util">
@@ -108,8 +107,8 @@
 						<li><a href="${pageContext.request.contextPath}/spot"><span>BRANCH</span><span class="ov">지점</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/reservation"><span>RESERVATION</span><span class="ov">구장</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/match"><span>MATCHING</span><span class="ov">매치/용병</span></a></li>
-						<li><a href="/league/league.asp"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
-						<li><a href="/cust/comm_notice.asp"><span>CUSTOMER</span><span class="ov">고객센터</span></a></li> 
+						<li><a href="${pageContext.request.contextPath}/league"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/customer"><span>CUSTOMER</span><span class="ov">고객센터</span></a></li> 
 					</ul>
 				</div>
 
