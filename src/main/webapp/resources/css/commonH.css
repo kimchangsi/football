@@ -810,8 +810,7 @@ a.rollover:hover img.on {
 }
 
 #wrapper #header nav .nav_wrap ul li a.f_hvn {
-	font-size: 24px;
-	font-family: 'HN_hvc';
+	font-size: 21px;
 }
 
 #wrapper #header nav .nav_wrap ul li a:after {
@@ -1316,7 +1315,7 @@ a.rollover:hover img.on {
 .tab_wrap ul li {
 	position: relative;
 	float: left;
-	width: 50%;
+	width: 100%;
 }
 
 .tab_wrap ul li>a {

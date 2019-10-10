@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yi.domain.CustomerVO;
+import com.yi.domain.SearchCriteria;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao{
@@ -43,6 +44,11 @@ public class CustomerDaoImpl implements CustomerDao{
 	@Override
 	public void increaseViewcnt(int nNo) throws Exception {
 		sqlSession.update(namespace+".increaseViewcnt", nNo);
+	}
+
+	@Override
+	public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception {
+		return sqlSession.selectList(namespace+".listSearch", cri);
 	}
 
 	

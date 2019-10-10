@@ -36,4 +36,24 @@
     	DELETE FROM notice
 		WHERE n_no=#{nNo}
     </delete>
+    
+    
+    <sql id="search">
+		<if test="searchType=='t'.toString()">
+			where n_title like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType=='c'.toString()">
+			where n_context like CONCAT('%', #{keyword}, '%')
+		</if>
+	</sql>
+    
+    
+    <select id="listSearch" resultType="CustomerVO">
+		select * from tbl_board	
+		<include refid="search"></include>
+		order by bno desc 
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	
 </mapper>

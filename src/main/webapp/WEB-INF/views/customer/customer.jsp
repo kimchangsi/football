@@ -57,10 +57,10 @@
 </head> 
 
 <script>
-$("#btn_notice_add").on("click", function(event) {
+/* $("#btn_notice_add").on("click", function(event) {
 	location.href = "${pageContext.request.contextPath}/customer/Apply";
 	event.preventDefault();
-});
+}); */
 </script>
 <body>
 
@@ -87,7 +87,7 @@ $("#btn_notice_add").on("click", function(event) {
 						<li><a href="${pageContext.request.contextPath}/spot">지점</a></li>
 						<li><a href="${pageContext.request.contextPath}/reservation">구장</a></li>
 						<li><a href="${pageContext.request.contextPath}/match">매치/용병</a></li>
-						<li><a href="#" class="f_hvn">리그</a></li>
+						<li><a href="${pageContext.request.contextPath}/league" class="f_hvn">리그</a></li>
 						<li><a href="${pageContext.request.contextPath}/customer">고객센터</a></li>
 					</ul>
 				</div>
@@ -97,10 +97,13 @@ $("#btn_notice_add").on("click", function(event) {
 						<li class="insta"><a href="https://www.instagram.com/hmfutsalpark/" target="_blank"><span class="hide">instagram</span></a></li>
 
 						
-						
+						<c:if test="${login.mId == null }">
 							<li class="login"><a href="${pageContext.request.contextPath}/auth/login">MEMBER LOGIN</a></li>
+						</c:if>
 							
-						
+						<c:if test="${login.mId != null }">
+							<li class="logout"><a href="${pageContext.request.contextPath}/auth/logout">MEMBER LOGOUT</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</nav>
@@ -128,7 +131,7 @@ $("#btn_notice_add").on("click", function(event) {
 				<h3 class="h_tit">공지사항</h3>
 				
 				<div class="table_top">
-					<a href="${pageContext.request.contextPath}/customer/noticeApply" class="btn_base notice" id="btn_notice_add"><span>등록</span></a>
+					<a href="${pageContext.request.contextPath}/customer/noticeApply" class="btn_base notice" ><span>등록</span></a>
 				</div>
 				
 				<div class="table_wrap list"> 

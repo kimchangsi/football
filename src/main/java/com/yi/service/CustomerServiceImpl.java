@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yi.domain.CustomerVO;
+import com.yi.domain.SearchCriteria;
 import com.yi.persistence.CustomerDao;
 
 @Service
@@ -58,5 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
             // 세션에 시간을 저장 : "update_time_"+bno는 다른변수와 중복되지 않게 명명한 것
             session.setAttribute("update_time_"+nNo, current_time);
 	}
+	}
+
+	@Override
+	public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception {
+		return dao.listSearch(cri);
 	}
 }

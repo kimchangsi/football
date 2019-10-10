@@ -52,7 +52,7 @@
 					<li><a href="${pageContext.request.contextPath}/reservation" class="nav_li">구장</a></li>
 					<li><a href="${pageContext.request.contextPath}/match" class="nav_li">매치/용병</a></li>
 					<li><a href="${pageContext.request.contextPath}/league" class="nav_li">리그</a></li>
-					<li><a href="#" class="nav_li">고객센터</a></li>
+					<li><a href="${pageContext.request.contextPath}/customer" class="nav_li">고객센터</a></li>
 				</ul>
 			</nav>
 			
@@ -60,7 +60,13 @@
 				<ul>
 					<li><a href="#"> <img id="logo" src="${pageContext.request.contextPath}/resources/images/icon_facebook.png" width="26px" height="26px"></a></li>
 					<li><a href="#"><img id="logo" src="${pageContext.request.contextPath}/resources/images/icon_instagram.png" width="26px" height="26px"></a></li>
-					<li><a href="#"><span id="login">MEMBER LOGIN</span> <img id="logo" src="${pageContext.request.contextPath}/resources/images/icon_login.png" width="26px" height="26px"></a></li>
+					<c:if test="${login.mId == null }">
+							<li class="login"><a href="${pageContext.request.contextPath}/auth/login">MEMBER LOGIN<img id="logo" src="${pageContext.request.contextPath}/resources/images/common/icon_login.png" width="26px" height="26px"></a></li>
+					</c:if>
+							
+					<c:if test="${login.mId != null }">
+							<li class="logout"><a href="${pageContext.request.contextPath}/auth/logout">MEMBER LOGOUT<img id="logo" src="${pageContext.request.contextPath}/resources/images/common/icon_logout.png" width="26px" height="26px"></a></li>
+					</c:if>
 				</ul>
 			</nav>
 			

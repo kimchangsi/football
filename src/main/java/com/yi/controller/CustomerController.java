@@ -35,12 +35,13 @@ public class CustomerController {
 	
 	@RequestMapping(value="/customer/noticeApply", method=RequestMethod.GET)
 	public String write(){
-		logger.info("notice apply");
+		logger.info("---------------------------write");
 		return "customer/noticeApply";
 	}
 
 	@RequestMapping(value="customer/create", method=RequestMethod.POST)
     public String insert(@ModelAttribute CustomerVO vo) throws Exception{
+		logger.info("---------------------------insert");
         service.create(vo);
         return "redirect:/customer";
     }
@@ -48,6 +49,7 @@ public class CustomerController {
 	
 	 @RequestMapping(value="customer/view", method=RequestMethod.GET)
      public ModelAndView view(@RequestParam int nNo, HttpSession session) throws Exception{
+		 logger.info("---------------------------view");
         // 조회수 증가 처리
 		service.increaseViewcnt(nNo, session);
         // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
@@ -71,12 +73,14 @@ public class CustomerController {
 	 
 	 @RequestMapping(value="customer/noticeModify", method=RequestMethod.POST)
 	 public String update2(@ModelAttribute CustomerVO vo) throws Exception{
+		 logger.info("---------------------------update2");
 	 	service.update(vo);
         return "redirect:/customer";
     }
 
 	 @RequestMapping("delete")
 	    public String delete(@RequestParam int nNo) throws Exception{
+		 logger.info("---------------------------delete");
 		 service.delete(nNo);
 	        return "redirect:/customer";
 	    }

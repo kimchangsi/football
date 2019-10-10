@@ -3,6 +3,7 @@ package com.yi.persistence;
 import java.util.List;
 
 import com.yi.domain.CustomerVO;
+import com.yi.domain.SearchCriteria;
 
 public interface CustomerDao {
 	 public List<CustomerVO> listAll() throws Exception;
@@ -17,4 +18,5 @@ public interface CustomerDao {
 	 
 	 public void increaseViewcnt(int nNo) throws Exception;
 	 
+	 public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception;
 }

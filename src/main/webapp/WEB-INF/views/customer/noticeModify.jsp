@@ -83,7 +83,26 @@
 }
 </style>
 <script>
-	
+$(document).ready(function(){
+    $("#btnMod").click(function(){
+        
+        var nTitle = $("#nTitle").val();
+        var nContext = $("#nContext").val();
+        if(nTitle == ""){
+            alert("제목을 입력하세요");
+            document.form.nTitle.focus();
+            return;
+        }
+        if(nContext == ""){
+            alert("내용을 입력하세요");
+            document.form.nContext.focus();
+            return;
+        }
+        
+        // 폼에 입력한 데이터를 서버로 전송
+        document.form.submit();
+    });
+});
 </script>
 <div id="video_wrap">
 	<video id="v"
@@ -112,7 +131,7 @@
 				<input type="hidden" name="nNo" value="${dto.nNo }">
 					<div class="input_wrap">
 						<p>제목</p>
-						<input type="text" class="input_fo" title=""  style="width:100%" name="nTitle" value="${dto.nTitle }">  
+						<input type="text" class="input_fo" title=""  style="width:100%" name="nTitle" value="${dto.nTitle }" id="nTitle">  
 					</div>
 					
 					
@@ -120,12 +139,12 @@
 				
 				<div class="memo" >
 						<p>내용</p> 
-						<textarea class=input_fo name="nContext" rows="" cols="" placeholder="내용을 입력하세요." style="width:100%; height:275px" >${dto.nContext}</textarea>
+						<textarea class=input_fo name="nContext" rows="" cols="" placeholder="내용을 입력하세요." style="width:100%; height:275px" id="nContext">${dto.nContext}</textarea>
 				</div>
 				
 				
 				<div class="btn_wrap">
-						<input type="submit" value="수정하기" class="btn_big" id="">
+						<button type="button" class="btn_big" id="btnMod">수정하기</button>
 						<a href="${pageContext.request.contextPath}/customer" class="btn_big gray" id="del_match">취소하기</a>
 				</div>
 			</div>

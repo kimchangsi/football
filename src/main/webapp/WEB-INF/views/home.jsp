@@ -70,7 +70,7 @@
 						<li><a href="${pageContext.request.contextPath}/spot">지점</a></li>
 						<li><a href="${pageContext.request.contextPath}/reservation">구장</a></li>
 						<li><a href="${pageContext.request.contextPath}/match">매치/용병</a></li>
-						<li><a href="/league/league.asp" class="f_hvn">H-리그</a></li>
+						<li><a href="${pageContext.request.contextPath}/league" class="f_hvn">H-리그</a></li>
 						<li><a href="${pageContext.request.contextPath}/customer">고객센터</a></li> 
 					</ul>
 				</div>
@@ -107,7 +107,7 @@
 						<li><a href="${pageContext.request.contextPath}/spot"><span>BRANCH</span><span class="ov">지점</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/reservation"><span>RESERVATION</span><span class="ov">구장</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/match"><span>MATCHING</span><span class="ov">매치/용병</span></a></li>
-						<li><a href="/league/league.asp"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/league"><span>H-LEAGUE</span><span class="ov">H-리그</span></a></li>
 						<li><a href="${pageContext.request.contextPath}/customer"><span>CUSTOMER</span><span class="ov">고객센터</span></a></li> 
 					</ul>
 				</div>

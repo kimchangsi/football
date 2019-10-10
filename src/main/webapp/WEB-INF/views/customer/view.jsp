@@ -55,7 +55,11 @@
 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/content.css">
 </head> 
-
+<style>
+	#centerbtn{
+		text-align: center;
+	}
+</style>
 <script>
 $("#btn_notice_add").on("click", function(event) {
 	location.href = "${pageContext.request.contextPath}/customer/noticeModify";
@@ -131,7 +135,7 @@ $(document).ready(function(){
 
 			<div class="tab_wrap">
 				<ul class="t03">
-					<li class="on"><a href="comm_notice.asp">공지사항</a></li>
+					<li class="on"><a href="${pageContext.request.contextPath}/customer">공지사항</a></li>
 				</ul>
 			</div>
 			<div class="notice_wrap view">
@@ -151,32 +155,24 @@ $(document).ready(function(){
 					<div class="info_text" id="txt">
 						<p>${dto.nContext }</p>
 					</div>
-
-					<input type="hidden" name="nNo" value="${dto.nNo }">
-					<a href="${pageContext.request.contextPath}/customer/noticeModify?nNo=${dto.nNo}" class="btn_base notice" id="btn_notice_add"><span>수정</span></a>
-       				<button type="button" id="btnDelete">삭제</button>
 					
+					<div id="centerbtn">
+					<input type="hidden" name="nNo" value="${dto.nNo }">
+					<a href="${pageContext.request.contextPath}/customer/noticeModify?nNo=${dto.nNo}" class="btn_base notice" id="btn_notice_mod"><span>수정</span></a>
+       				<button type="button" id="btnDelete" class="btn_base">삭제</button>
+					</div>
 					
 					<div class="btn_wrap right">
 						<a href="${pageContext.request.contextPath}/customer" class="btn_middle">목록으로</a>
-					</div>
+					</div> 
 					
-					<div class="list_pn">
+					<div class="list_pn"> 
 						<table>
 							<colgroup>
 								<col style="width:178px" class="w01"/>
 								<col style="" />
 							</colgroup>
-							<tbody>
-								<tr>
-									<th scope="row"><span class="prev">이전글</span></th>
-									<td><a href="comm_notice_view.asp?cno=20&page=1">이전글이 없습니다.</a></td>
-								</tr>
-								<tr>
-									<th scope="row"><span class="next">다음글</span></th>
-									<td>다음글이 없습니다.</td>
-								</tr>
-							</tbody>
+							
 						</table>
 					</div>
 					

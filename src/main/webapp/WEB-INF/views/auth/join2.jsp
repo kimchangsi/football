@@ -64,7 +64,7 @@
 					<dl>
 						<dt>아이디 <span>(필수)</span></dt>
 						<dd>
-							<input type="text"  name="mId" style="width:75%" />
+							<input type="text"  name="mId" style="width:75%" id="mId"/>
 							<span class="t_help">이미 사용중이거나 탈퇴한 아이디 입니다.</span>
 							<button id="" type="button" class="btn_check" onclick="cnfm_sms2();">중복확인</button>
 							<div id="checkMsg"></div>
