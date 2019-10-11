@@ -19,4 +19,5 @@ public interface CustomerDao {
 	 public void increaseViewcnt(int nNo) throws Exception;
 	 
 	 public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception;
+	 public int listSearchCount(SearchCriteria cri) throws Exception;
 }

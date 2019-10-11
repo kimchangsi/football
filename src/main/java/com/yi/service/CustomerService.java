@@ -21,4 +21,6 @@ public interface CustomerService {
 	public void increaseViewcnt(int nNo, HttpSession session) throws Exception;
 	
 	public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 }

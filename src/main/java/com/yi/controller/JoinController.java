@@ -26,7 +26,7 @@ import com.yi.service.MemberService;
 @RequestMapping("/auth")
 @Controller
 public class JoinController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	private String innerUploadPath = "resources/images/spot"; //서버에 업로드
 	
 	@Autowired

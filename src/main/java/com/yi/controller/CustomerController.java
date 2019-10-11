@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,18 +16,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yi.domain.CustomerVO;
+import com.yi.domain.PageMaker;
+import com.yi.domain.SearchCriteria;
 import com.yi.service.CustomerService;
 
 @Controller
 public class CustomerController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	@Autowired
 	CustomerService service;
 	
 	@RequestMapping(value="customer", method=RequestMethod.GET)
-	public ModelAndView customerGET() throws Exception {
+	public ModelAndView customerGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("------------customer GET");
-		List<CustomerVO> list = service.listAll();
+		List<CustomerVO> list = service.listSearch(cri);
+		model.addAttribute("list",list);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listSearchCount(cri));
+		model.addAttribute("pageMaker",pageMaker);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("customer/customer");
 		mav.addObject("list", list);

@@ -50,17 +50,60 @@
 	  gtag('js', new Date());
 
 	  gtag('config', 'UA-116234591-1');
+	  
+	 
 	</script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/content.css">
 </head> 
-
+<style>
+	#alllists{
+		background: #2c3c57;
+		color: white;
+		width: 66px;
+		height: 41px;
+	} 
+	.divss{
+		text-align: center;
+		margin-left: 102px;
+	}
+	.ulss{  
+		margin-left: 10px; 
+		display: inline-block;
+		display: inline;
+		zoom: 1; 
+		list-style: none;
+	}
+	.ulss li{
+		float: left;
+		margin-left: -1px;
+		z-index: 1;
+	}
+	#aaaa{
+		background: black;
+		color:white;
+		text-decoration: none;
+	}
+	
+	#aleft{
+		background: black;
+		color: white;
+	}
+	#aright{
+		background: black;
+		color: white;
+	}
+</style>
 <script>
 /* $("#btn_notice_add").on("click", function(event) {
 	location.href = "${pageContext.request.contextPath}/customer/Apply";
 	event.preventDefault();
 }); */
+$("#aaaa").click(function() {
+	toggleClass(".active-color");
+})
+
 </script>
 <body>
 
@@ -156,7 +199,7 @@
 							<c:forEach var="row" items="${list}">
 								<tr>
 								<td>${row.nNo }</td>
-								<td class="al_left"><a href="${pageContext.request.contextPath}/customer/view?nNo=${row.nNo}" class="tit">${row.nTitle }</a></td>
+								<td class="al_left"><a href="${pageContext.request.contextPath}/customer/view?nNo=${row.nNo}&page=${pageMaker.cri.page}&searchType=${cri.searchType}&keyword=${cri.keyword}=${cri.keyword}" class="tit">${row.nTitle }</a></td>
 								<td>
 									<fmt:formatDate value="${row.nRegdate }" pattern="yyyy.MM.dd"/>
 								</td>
@@ -297,18 +340,40 @@
 				<!-- Page -->
 				<div class="pager_wrap">
 					<div class="search">
-						<FORM NAME="frm_search" METHOD="get" ACTION="?" onsubmit="Fn_Search(); return false;">
 						<span class="select" style="width:100px">
 							<label for="select01">제목</label>
-							<select id="select01" name="s_kinds" class="select_box">
-								<option value="title" >제목</option>
+							<select id="select01" name="searchType" class="select_box">
+								<option value="t" ${cri.searchType=='t'?'selected':'' }>제목</option>
 							</select>
 						</span>
-						<input type="text" id="searchstr" title="" name="searchstr" value="" style="width:200px" />
-						<button type="input" class="btn_search" onclick="Fn_Search(); return false;"></button>
-						</FORM>
+						<input type="text" id="keywordInput" name="keyword" value="${cri.keyword }" style="width:200px" />
+						<button class="btn_search" id="btnSearch" type="button"></button>
+						<a href="${pageContext.request.contextPath}/customer" id="alllists">전체보기</a>
 					</div>
-					<a href="comm_notice.asp?page=1" class="btn_page prev"><span class='hide'>이전 페이지</span></a><span class='page'><a href="comm_notice.asp?page=1" class="on">1</a></span><a href="comm_notice.asp?page=1" class="btn_page next"><span class='hide'>다음 페이지</span></a>
+					
+					<c:if test="${pageMaker.prev }">
+					<div class="divss">
+						<ul class="ulss">
+							<li><a href="${pageContext.request.contextPath}/customer?page=${pageMaker.startPage-1 }&searchType=${cri.searchType}&keyword=${cri.keyword}" id="aleft">&laquo;</a></li>
+						</ul>
+					</div>
+					</c:if>
+					
+					<c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+					<div class="divss">
+						<ul class="ulss">
+							<li ${pageMaker.cri.page == idx ? 'class="active"' :'' } ><a href="customer?page=${idx }&searchType=${cri.searchType}&keyword=${cri.keyword}" id="aaaa">${idx }</a></li>
+						</ul>
+					</div>
+					</c:forEach>
+					
+					<c:if test="${pageMaker.next }">
+					<div class="divss">
+						<ul class="ulss">
+							<li><a href="${pageContext.request.contextPath}/customer?page=${pageMaker.endPage+1 }&searchType=${cri.searchType}&keyword=${cri.keyword}" id="aright"> &raquo; </a></li>
+						</ul>
+					</div>
+					</c:if>	
 				</div>
 				<!-- //Page -->
 			</div>
@@ -335,5 +400,14 @@
 </div>
 
 <iframe name="HiddenFrame" style="display:none;"></iframe>
+
+<script>
+	$("#btnSearch").click(function() {
+		var select = $("select[name='searchType']").val();
+		var keyword = $("input[name='keyword']").val();
+		
+		location.href = "customer?page="+${cri.page}+"&searchType="+select+"&keyword="+keyword;
+	})
+</script>
 </body>
 </html>
