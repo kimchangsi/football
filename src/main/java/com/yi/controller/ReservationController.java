@@ -1,19 +1,25 @@
 package com.yi.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yi.domain.GroundVO;
+import com.yi.domain.MemberVO;
 import com.yi.domain.ReservationVO;
 import com.yi.domain.SpotVO;
 import com.yi.service.ReservationService;
@@ -42,10 +48,17 @@ public class ReservationController {
 	
 	//구장예약 확인 화면
 	@RequestMapping(value = "/reservation/check", method = RequestMethod.GET)
-	public String check(Model model) throws Exception {
+	public String check(Model model,HttpSession session) throws Exception {
+		
 		logger.info("reservation Check");
 		
-		return "reservation/reseCheck";
+			MemberVO vo =  (MemberVO) session.getAttribute("login");
+			List<ReservationVO> list = reseService.selecyByID(vo.getmId());
+			model.addAttribute("list",list);
+		
+		
+		
+		return "reservation/reseMyCheck";
 	} 
 	
 	//구장예약 화면
@@ -74,6 +87,25 @@ public class ReservationController {
 			logger.info(vo.toString());
 			reseService.insertReservation(vo); 
 			return "redirect:/reservation";
+		}
+		
+		//구장예약 취소
+		@RequestMapping(value="reservation/update/{rNo}",method=RequestMethod.GET)
+		public ResponseEntity<List<ReservationVO>> updateRes(ReservationVO vo, HttpSession session){
+			logger.info(vo.toString()+"============================================================");
+			ResponseEntity<List<ReservationVO>> entiy = null;
+			MemberVO mem = (MemberVO)session.getAttribute("login");
+			
+			try {
+				reseService.updateReservation(vo);
+				List<ReservationVO> Rlist = reseService.selecyByID(mem.getmId());
+				
+				entiy = new ResponseEntity<List<ReservationVO>>(Rlist,HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entiy = new ResponseEntity<List<ReservationVO>>(HttpStatus.BAD_REQUEST);
+			}
+			return entiy;
 		}
 	
 }

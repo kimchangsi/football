@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mappers.rankMerMapper">
+	<resultMap type="com.yi.domain.RankMerVO" id="resultRankMer">
+		<id column="rm_id" property="rmId"/>
+		<result column="rm_name" property="rmName"/>
+		<result column="rm_count" property="rmCount"/>
+		<result column="rm_img" property="rmImg"/>
+	</resultMap>
+	<select id="selectByAll" resultMap="resultRankMer">
+		select * from rankMer
+	</select>
+</mapper>

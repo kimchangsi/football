@@ -36,12 +36,12 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/auth/login"/>
+			<mapping path="/auth/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/"/>
+			<mapping path="/reservation/check"></mapping>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

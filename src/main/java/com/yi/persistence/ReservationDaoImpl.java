@@ -29,4 +29,16 @@ public class ReservationDaoImpl implements ReservationDao {
 		sqlSession.insert(namespace + ".insertReservation",vo);
 	}
 
+	@Override
+	public List<ReservationVO> selecyByID(String mId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace +".selecyByID",mId);
+	}
+
+	@Override
+	public void updateReservation(ReservationVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".updateReservation",vo);
+	}
+
 }

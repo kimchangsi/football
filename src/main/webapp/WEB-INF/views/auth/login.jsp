@@ -444,7 +444,7 @@ transform
 
 		<section id="container">
 			<!-- Contents -->
-			<form name="frmLogin" method="post" action="login" id="frmLogin">
+			<form name="frmLogin" method="post" action="loginPost" id="frmLogin">
 				<input type="hidden" name="c_type" value="">
 				<div class="content">
 					<div class="member_wrap">
@@ -662,7 +662,7 @@ transform
 				
 				 
 				
-				document.frmLogin.action="${pageContext.request.contextPath }/auth/login"   
+				document.frmLogin.action="${pageContext.request.contextPath }/auth/loginPost"   
 				document.frmLogin.submit();
 			}
 			

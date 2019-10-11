@@ -46,8 +46,8 @@ public class LoginController {
 	
 	
 	// 되는거임
-	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String loginPOST(MemberVO vo, Model model, HttpSession session) {
+	@RequestMapping(value="loginPost", method=RequestMethod.POST)
+	public void loginPOST(MemberVO vo, Model model, HttpSession session) {
 		logger.info("-----------------login POST,"+vo);
 		
 		String returnURL ="";
@@ -59,16 +59,14 @@ public class LoginController {
         // 로그인이 성공하면 UserVO 객체를 반환함.
         MemberVO mvo = service.selectMemberByIdAndPw(vo.getmId(), vo.getmPwd());
          
-        if ( mvo !=null ){ // 로그인 성공
-            session.setAttribute("login", mvo); // 세션에 login인이란 이름으로 UserVO 객체를 저장해 놈.
-            returnURL ="redirect:/"; // 로그인 성공시 게시글 목록페이지로 바로 이동하도록 하고
-        }else { // 로그인에 실패한 경우
-        	session.setAttribute("error", "notMatch");
-            returnURL ="redirect:/auth/login"; // 로그인 폼으로 다시 가도록 함
+        if ( mvo !=null ){ // db에 회원잇을경우
             
+            model.addAttribute("loginDTO",mvo);
+            //returnURL ="redirect:/"; // 로그인 성공시 게시글 목록페이지로 바로 이동하도록 하고
+      
         }
          
-        return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
+       
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
