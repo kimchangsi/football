@@ -27,7 +27,7 @@ import com.yi.service.MemberService;
 @Controller
 public class JoinController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	private String innerUploadPath = "resources/images/spot"; //서버에 업로드
+	private String innerUploadPath = "resources/images/member"; //서버에 업로드
 	
 	@Autowired
 	MemberService service;

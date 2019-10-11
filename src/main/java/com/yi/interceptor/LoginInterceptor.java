@@ -29,14 +29,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		Object loginDTO = modelAndView.getModel().get("loginDTO");
 		if(loginDTO != null) {
-			session.setAttribute("Auth", loginDTO);		
+			//session.setAttribute("Auth", loginDTO);
+			session.setAttribute("login", loginDTO); // 세션에 login인이란 이름으로 memberVO 객체를 저장해 놈.
 			Object dest = session.getAttribute("dest");
 			String path = (dest != null) ? (String) dest : request.getContextPath();			
 			response.sendRedirect(path);//home화면
-		}/*else {
+		}else {
 			 session.setAttribute("error", "notMatch");
 	         response.sendRedirect(request.getContextPath()+"/auth/login");
-		}*/
+		}
 	}
 
 	

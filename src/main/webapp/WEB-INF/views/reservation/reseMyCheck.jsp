@@ -8,6 +8,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/commonH.css"
 	type="text/css">
+	
 <style>
 .rese_wrap .rese_start .tit {
 	
@@ -39,8 +40,45 @@
 	color:blue;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.min.js"></script>
 <script>
-
+	$(function() {
+		
+		Handlebars.registerHelper("if",function(v1,v2,options){
+			if(v1 == v2){
+				return options.fn(this);//헬퍼 사이의 구문이 통채로 return
+			}else{
+				return ''; //빈 글자만 return
+			}
+			
+		});
+		
+		
+		$(document).on("click", ".cancel2", function(){
+			var rNo = $(this).attr("data-rNo");
+			$("#tb").empty();
+			//예약 취소
+			$.ajax({
+					url : "${pageContext.request.contextPath}/reservation/update/"+rNo,
+					type : "get",
+					dataType : "json",
+					success : function(res) {
+						console.log(res);
+						
+												
+						
+						 var source = $("#template").html();
+						var fn = Handlebars.compile(source);
+						var str = fn(res);
+						$("#tb").append(str); 
+					}
+				})
+		
+		})
+		
+		
+		
+	})
 </script>
 <div id="video_wrap">
 	<video id="v"
@@ -77,7 +115,7 @@
 
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tb">
 						<c:forEach  items="${list}" var="rList" varStatus="s">
 							<tr>
 								<td>${s.count }</td>
@@ -104,7 +142,29 @@
 
 	</div>
 
-
+	<script id="template" type="text/x-handlebars-template">
+		{{#each.}}
+		<tr>
+								<td>1</td>
+								<td>{{rTime }}</td>
+								<td>
+									{{rPayTime }}
+								</td>
+								<td>{{rMember.mName }}( {{rMember.mId}} )</td>  
+								<td>{{rGno.gName }}</td>
+								<td>
+									{{#if rCancel 0}}
+										<span class='okSpan'>예약완료</span><button class='cancel2' data-rNo="{{rNo}}">취소하기</button>
+									{{/if}}
+									{{#if rCancel 1}}
+										<span class='cancelSpan'>취소</span>
+									{{/if}}
+									
+									
+								</td>
+		</tr>
+		{{/each}}
+		</script>
 
 </div>
 <%@ include file="../../views/include/footer.jsp"%>

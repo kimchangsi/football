@@ -305,6 +305,8 @@ float: left;
 	height: 100%;
 	float: left;
 	border: 1px solid black;
+	text-align: center;
+	padding-top: 30px; 
 }
 
 .contenRank{ 
@@ -331,6 +333,11 @@ padding-top: 30px;
 .c3{
 	color : green;
 	font-weight: bold;
+}
+
+.imgRank img{
+	width: 130px;
+	height: 130px;
 }
 
 </style>
@@ -615,26 +622,31 @@ padding-top: 30px;
 			if($("#dApp").text() =="마감"){
 				alert("이미 마감된 글입니다.");
 			}else{
-				var c = confirm("신청하시겠습니까?");
-				var mdId = "${login.mId}";
-				var mdMcbNo = $("#mbNo").text();
-				if (c) {
-					$.ajax({
-						url : "mercenary/app/" + mdMcbNo + "/" + mdId,
-						type : "get",
-						dataType : "text",
-						success : function(res) {
-							console.log(res);
-							if (res == "success") {
-								alert("신청이 완료되었습니다.");
-								$("#detailDiv").hide();
-								hideInput();
-								showSapn();
-							}
+				if(${login.mId!=null}){
+					var c = confirm("신청하시겠습니까?");
+					var mdId = "${login.mId}";
+					var mdMcbNo = $("#mbNo").text();
+					if (c) {
+						$.ajax({
+							url : "mercenary/app/" + mdMcbNo + "/" + mdId,
+							type : "get",
+							dataType : "text",
+							success : function(res) {
+								console.log(res);
+								if (res == "success") {
+									alert("신청이 완료되었습니다.");
+									$("#detailDiv").hide();
+									hideInput();
+									showSapn();
+								}
 
-						}
-					})
+							}
+						})
+					}
+				}else{
+					alert("회원만 가능합니다");
 				}
+				
 			}
 			
 		})
@@ -730,6 +742,7 @@ padding-top: 30px;
 		<c:forEach var="rank" items="${rankList}">
 			<div class="merRankItem">
 				<div class='imgRank'>
+					 <img src="${pageContext.request.contextPath }/resources/images/member/${rank.rmImg}"/>
 					<%-- ${rank.rmImg} --%>
 				</div> 
 				<div class='contenRank'>

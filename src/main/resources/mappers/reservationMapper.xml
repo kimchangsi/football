@@ -32,6 +32,10 @@
 		select r_no,r_time,r_pay_time,r_cancel,g_name,g_price,s_name,m_id,m_name from reservation left join ground on reservation.r_gno= ground.g_no left join spot on ground.g_sno = spot.s_no left join member on reservation.r_member = member.m_id where  r_member =  #{mId} order by r_no desc
 	</select>
 	
-	
+	<update id="updateReservation" parameterType="com.yi.domain.ReservationVO">
+		UPDATE reservation
+		SET r_cancel=1
+		WHERE r_no=#{rNo};
+	</update>
 	
 </mapper>

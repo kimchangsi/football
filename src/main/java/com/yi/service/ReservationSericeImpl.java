@@ -48,4 +48,10 @@ public class ReservationSericeImpl implements ReservationService {
 		return rDao.selecyByID(mId);
 	}
 
+	@Override
+	public void updateReservation(ReservationVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		rDao.updateReservation(vo);
+	}
+
 }
