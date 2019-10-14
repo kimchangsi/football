@@ -3937,7 +3937,11 @@
 }
 
 .join_wrap.info dl dd input {
-	height: 60px
+	height: 60px;
+}
+.join_wrap.info dl dd .btn_check{
+	height: 60px;
+	width: 101px;
 }
 
 .join_wrap.info dl dd input:focus {

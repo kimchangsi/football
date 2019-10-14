@@ -158,12 +158,12 @@ $(document).ready(function(){
 					
 					<div id="centerbtn">
 					<input type="hidden" name="nNo" value="${dto.nNo }">
-					<%-- <a href="${pageContext.request.contextPath}/customer/noticeModify?nNo=${dto.nNo}" class="btn_base notice" id="btn_notice_mod"><span>수정</span></a>
-       				<button type="button" id="btnDelete" class="btn_base">삭제</button> --%>
+					<a href="${pageContext.request.contextPath}/customer/noticeModify?nNo=${dto.nNo}" class="btn_base notice" id="btn_notice_mod"><span>수정</span></a>
+       				<button type="button" id="btnDelete" class="btn_base">삭제</button>
 					</div>
 					
 					<div class="btn_wrap right">
-						<a href="${pageContext.request.contextPath}/customer" class="btn_middle">목록으로</a>
+						<a href="${pageContext.request.contextPath}/customer2" class="btn_middle">목록으로</a>
 					</div> 
 					
 					<div class="list_pn"> 

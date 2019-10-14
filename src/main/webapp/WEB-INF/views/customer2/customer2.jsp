@@ -165,7 +165,7 @@ $("#aaaa").click(function() {
 
 			<div class="tab_wrap">
 				<ul class="t03">
-					<li class="on"><a href="${pageContext.request.contextPath}/customer">공지사항</a></li>
+					<li class="on"><a href="${pageContext.request.contextPath}/customer2">공지사항</a></li>
 					 
 				</ul>
 			</div>
@@ -173,9 +173,9 @@ $("#aaaa").click(function() {
 			<div class="notice_wrap list">
 				<h3 class="h_tit">공지사항</h3>
 				
-				<%-- <div class="table_top">
-					<a href="${pageContext.request.contextPath}/customer/noticeApply" class="btn_base notice" ><span>등록</span></a>
-				</div> --%>
+				<div class="table_top">
+					<a href="${pageContext.request.contextPath}/customer2/noticeApply2" class="btn_base notice" ><span>등록</span></a>
+				</div>
 				
 				<div class="table_wrap list"> 
 					<table>
@@ -199,7 +199,7 @@ $("#aaaa").click(function() {
 							<c:forEach var="row" items="${list}">
 								<tr>
 								<td>${row.nNo }</td>
-								<td class="al_left"><a href="${pageContext.request.contextPath}/customer/view?nNo=${row.nNo}&page=${pageMaker.cri.page}&searchType=${cri.searchType}&keyword=${cri.keyword}=${cri.keyword}" class="tit">${row.nTitle }</a></td>
+								<td class="al_left"><a href="${pageContext.request.contextPath}/customer2/view2?nNo=${row.nNo}&page=${pageMaker.cri.page}&searchType=${cri.searchType}&keyword=${cri.keyword}=${cri.keyword}" class="tit">${row.nTitle }</a></td>
 								<td>
 									<fmt:formatDate value="${row.nRegdate }" pattern="yyyy.MM.dd"/>
 								</td>
@@ -348,7 +348,7 @@ $("#aaaa").click(function() {
 						</span>
 						<input type="text" id="keywordInput" name="keyword" value="${cri.keyword }" style="width:200px" />
 						<button class="btn_search" id="btnSearch" type="button"></button>
-						<a href="${pageContext.request.contextPath}/customer" id="alllists">전체보기</a>
+						<a href="${pageContext.request.contextPath}/customer2" id="alllists">전체보기</a>
 					</div>
 					
 					<c:if test="${pageMaker.prev }">
