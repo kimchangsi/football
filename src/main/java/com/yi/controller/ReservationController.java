@@ -86,7 +86,7 @@ public class ReservationController {
 		public String reservationPage( ReservationVO vo) throws Exception { 
 			logger.info(vo.toString());
 			reseService.insertReservation(vo); 
-			return "redirect:/reservation";
+			return "redirect:/reservation/check";
 		}
 		
 		//구장예약 취소

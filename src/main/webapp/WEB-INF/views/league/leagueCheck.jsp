@@ -54,9 +54,9 @@
 	<div class="tab_wrap">
 		<ul>
 
-			<li class="on"><a href="http://localhost:8080/football/reservation">대관예약</a></li>
-
-			<li><a href="http://localhost:8080/football/reservation/check">예약확인</a></li>
+			<li ><a
+				href="${pageContext.request.contextPath}/league">리그</a></li>
+			<li class="on"><a href="${pageContext.request.contextPath}/league/check">리그현황</a></li>
 
 		</ul>
 	</div>

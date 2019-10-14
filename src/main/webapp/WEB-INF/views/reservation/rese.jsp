@@ -15,6 +15,9 @@
 		0;
 	
 }
+#main_title{
+	margin-bottom:30px !important;   
+}
 </style>
 <script>
 

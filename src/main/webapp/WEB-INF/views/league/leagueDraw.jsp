@@ -15,14 +15,38 @@
 		0;
 	
 }
-table {
+#draw {
 	width: 800px;
 	height: 500px; 
 	font-weight: bold;
 	margin: 0 auto;
 }
 
-table, th, td {
+#teamList{
+	width: 800px;
+	
+	margin: 0 auto;
+	margin-top: 50px; 
+}
+
+#teamList td{
+ text-align: center;
+}
+#teamList tr{
+	background-color: #f1f1f1;
+}
+
+#teamList img{
+	width: 80px;
+	height: 80px;
+}
+
+#teamList,#teamList th,#teamList td{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+#draw, #draw th,#draw td {
 	border-collapse: collapse;
 }
 #draw tr{
@@ -37,6 +61,11 @@ table, th, td {
 #draw tr:first-child{
 	background-color: #2c3c57;
 	color:white;
+}
+#teamList tr:first-child{
+	background-color: #2c3c57;
+	color:white;
+	height: 50px;
 }
 
 #draw tr td:nth-child(1){
@@ -109,8 +138,14 @@ function getLeagueList() {
 		dataType : "json",
 		success : function(res) {
 			console.log(res);
-			for (var i = 0; i < res.length; i++) {
-				var list = res[i];
+			for (var i = 0; i < res.list.length; i++) {
+				var list = res.list[i];
+				
+				
+				
+				
+				
+				//대진표
 				
 				if( list.lQuarterfinals==1 && list.lSemifianl==0 && list.lFinal == 0){ //8강 리스트
 					$("#draw").find("tr").eq(i+1).find("td").eq(0).find(".TeamName").text(list.lTeam.tName);	
@@ -168,6 +203,17 @@ function getLeagueList() {
 				}
 								 
 			}
+			
+			
+			//팀리스트
+			for (var i = 0; i < res.tList.length; i++) {
+				var tList = res.tList[i];
+				var str = "<tr><td>"+(i+1)+"</td> <td><img src='${pageContext.request.contextPath}/resources/images/team/"+tList.lTeam.tMark+"'></td><td>"+tList.lTeam.tName+" </td><td>"+tList.lLeagueName.lkName+"</td><td>"+ tList.lGoal+"골</td><tr>"
+				$("#teamList").append(str);
+			}
+			
+			
+			
 		}  
 	})
 }
@@ -193,9 +239,9 @@ function getLeagueList() {
 	<div class="tab_wrap">
 		<ul>
 
-			<li class="on"><a href="http://localhost:8080/football/reservation">대관예약</a></li>
-
-			<li><a href="http://localhost:8080/football/reservation/check">예약확인</a></li>
+			<li ><a
+				href="${pageContext.request.contextPath}/league">리그</a></li>
+			<li class="on"><a href="${pageContext.request.contextPath}/league/check">리그현황</a></li>
 
 		</ul>
 	</div>
@@ -239,6 +285,16 @@ function getLeagueList() {
 		</tr>
 		<tr> 
 			<td><span class="TeamName"></span><span  class="score"></span></td>
+		</tr>
+	</table>
+	
+	<table id="teamList">
+		<tr>
+			<th>순번</th>
+			<th>팀 마크</th>
+			<th>팀 이름</th>
+			<th>참가 리그명</th>
+			<th>리그 득점 현황</th>
 		</tr>
 	</table>
 

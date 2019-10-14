@@ -42,6 +42,10 @@
 		
 		<interceptor>
 			<mapping path="/reservation/check"></mapping>
+			<mapping path="/mercenary/apply"></mapping>
+			<mapping path="/match/apply"></mapping>
+			<mapping path="/league/receipt"></mapping>
+			<mapping path="/reservation/form"></mapping>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

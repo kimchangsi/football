@@ -16,6 +16,10 @@
 		0;
 	
 }
+
+#main_title{
+	margin-bottom:30px !important;   
+}
 .cancelSpan{
 	color:red;
 }
@@ -53,26 +57,32 @@
 			
 		});
 		
-		
+		//예약취소 클릭시
 		$(document).on("click", ".cancel2", function(){
 			var rNo = $(this).attr("data-rNo");
-			$("#tb").empty();
-			//예약 취소
-			$.ajax({
-					url : "${pageContext.request.contextPath}/reservation/update/"+rNo,
-					type : "get",
-					dataType : "json",
-					success : function(res) {
-						console.log(res);
-						
-												
-						
-						 var source = $("#template").html();
-						var fn = Handlebars.compile(source);
-						var str = fn(res);
-						$("#tb").append(str); 
-					}
-				})
+			
+			var c = confirm("예약 취소하시겠습니까 ?");  
+			
+			if(c){ 
+				$("#tb").empty();
+				//예약 취소
+				$.ajax({
+						url : "${pageContext.request.contextPath}/reservation/update/"+rNo,
+						type : "get",
+						dataType : "json",
+						success : function(res) {
+							console.log(res);
+							
+													
+							
+							 var source = $("#template").html();
+							var fn = Handlebars.compile(source);
+							var str = fn(res);
+							$("#tb").append(str); 
+						}
+					})
+			}
+			
 		
 		})
 		
@@ -92,9 +102,9 @@
 	<div class="tab_wrap">
 		<ul>
 
-			<li class="on"><a href="http://localhost:8080/football/reservation">대관예약</a></li>
+			<li><a href="${pageContext.request.contextPath}/reservation">대관예약</a></li>
 
-			<li><a href="http://localhost:8080/football/reservation/check">예약확인</a></li>
+			<li class="on"><a href="${pageContext.request.contextPath}/reservaiton/check">예약확인</a></li> 
 
 		</ul>
 	</div>

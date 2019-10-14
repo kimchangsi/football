@@ -1,6 +1,12 @@
 package com.yi.controller;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.taglibs.standard.lang.jstl.LessThanOrEqualsOperator;
 import org.slf4j.Logger;
@@ -10,9 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yi.domain.LeagueKindVO;
 import com.yi.domain.LeagueVO;
@@ -27,7 +35,7 @@ public class leagueController {
 	LeagueService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(leagueController.class);
-
+	private String innerUploadPath = "resources/images/team"; //서버에 업로드
 	// 리그메인화면
 	@RequestMapping(value = "/league", method = RequestMethod.GET)
 	public String header(Model model) throws Exception {
@@ -53,16 +61,20 @@ public class leagueController {
 		return "league/leagueDraw";
 	}
 	
-	// 관리자 리그 리스트 가져오기(ajax)
+	// 관리자 리그 리스트 가져오기(ajax)  //여기에 처리해야함 팀리스같이 보여줄려면
 		@RequestMapping(value = "/league/leagueMgn4", method = RequestMethod.POST)
-		public ResponseEntity<List<LeagueVO>> selectlist2(@RequestBody LeagueKindVO vo) {
-			ResponseEntity<List<LeagueVO>> entiy = null;
+		public ResponseEntity<Map<String, Object>> selectlist2(@RequestBody LeagueKindVO vo) {
+			ResponseEntity<Map<String, Object>> entiy = null;
 			try {
 				List<LeagueVO> list = service.selectLeagueByLeagueKind(vo);
-				entiy = new ResponseEntity<List<LeagueVO>>(list, HttpStatus.OK);
+				List<LeagueVO> listTeam = service.selectLeagueTeam(vo);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("list", list);
+				map.put("tList", listTeam);
+				entiy = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				entiy = new ResponseEntity<List<LeagueVO>>(HttpStatus.BAD_REQUEST);
+				entiy = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 			}
 			return entiy;
 		}
@@ -86,9 +98,29 @@ public class leagueController {
 
 	// 리그 등록
 	@RequestMapping(value = "/league/resist", method = RequestMethod.POST)
-	public String leagueResister(Model model, LeagueVO vo) throws Exception {
+	public String leagueResister(Model model,HttpServletRequest request,MultipartFile file, LeagueVO vo) throws Exception {
 		logger.info("leaguerResist");
 		logger.info(vo.toString());
+		logger.info(file.getOriginalFilename()+"====================================");
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/"); // ex03서버
+		// ex03/resources/upload
+
+		File dirPath = new File(root_path + "/" + innerUploadPath);
+
+		if (dirPath.exists() == false) {// 폴더없음
+			dirPath.mkdir();// 업로드 폴더만듬
+		}
+		
+		// 빈 껍데기 파일이 만들어짐
+		UUID uid = UUID.randomUUID();// 중복되지 않는 고유한 키값을 설정할 때 사용
+		String saveName = uid + "_" + file.getOriginalFilename();
+		File target = new File(root_path + "/" + innerUploadPath, saveName);
+		FileCopyUtils.copy(file.getBytes(), target);// 파일 업로드 완료
+		
+		vo.getlTeam().settMark(saveName); 
+		
+		
 		service.insertLeague(vo);
 		return "redirect:/league";
 	}
@@ -97,6 +129,7 @@ public class leagueController {
 	@RequestMapping(value = "/manager/leagueMgn", method = RequestMethod.GET)
 	public String leagueMgn(Model model) throws Exception {
 		logger.info("leagueMgn");
+		
 		/*
 		 * List<LeagueVO> list = service.selectLeagueByRandom();
 		 * logger.info(list.toString()); model.addAttribute("list",list)
@@ -105,11 +138,11 @@ public class leagueController {
 	}
 
 	// 관리자 리그 리스트 가져오기(ajax)
-	@RequestMapping(value = "/manager/leagueMgn2", method = RequestMethod.GET)
-	public ResponseEntity<List<LeagueVO>> selectlist() {
+	@RequestMapping(value = "/manager/leagueMgn2/{lkName}", method = RequestMethod.GET)
+	public ResponseEntity<List<LeagueVO>> selectlist(LeagueKindVO vo) {
 		ResponseEntity<List<LeagueVO>> entiy = null;
 		try {
-			List<LeagueVO> list = service.selectLeagueByAll();
+			List<LeagueVO> list = service.selectLeagueByLeagueKind(vo);
 			entiy = new ResponseEntity<List<LeagueVO>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,15 +160,16 @@ public class leagueController {
 		// 승자 insert/update
 		// 패자 update
 
-		LeagueKindVO lkVo = new LeagueKindVO();
-		lkVo.setLkName("A리그");
+		
+		//lkVo.setLkName("A리그");
 		LeagueVO vo1 = lists.get(0);
 		LeagueVO vo2 = lists.get(1);
 		LeagueVO vo3 = lists.get(2);
-
+		LeagueKindVO lkVo = new LeagueKindVO();
+		lkVo.setLkName(vo1.getlLeagueName().getLkName());
 		// 잠시쓰는거 리그종류
-		vo1.setlLeagueName(lkVo);
-		vo2.setlLeagueName(lkVo);
+		//vo1.setlLeagueName(lkVo);
+		//vo2.setlLeagueName(lkVo);
 
 		int score1 = vo1.getlGoal();
 		int score2 = vo2.getlGoal();
@@ -179,7 +213,7 @@ public class leagueController {
 
 		ResponseEntity<List<LeagueVO>> entiy = null;
 		try {
-			List<LeagueVO> list = service.selectLeagueByAll();
+			List<LeagueVO> list = service.selectLeagueByLeagueKind(lkVo);
 			entiy = new ResponseEntity<List<LeagueVO>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

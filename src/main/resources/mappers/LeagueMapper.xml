@@ -81,6 +81,10 @@
 		league_kind.lk_name  where l_league_name=#{lkName} order by l_no asc
 	</select>
 	
+	<select id="selectLeagueTeam" parameterType="com.yi.domain.LeagueKindVO" resultMap="resultLeagueByKcm">
+		select lk_name,t_name,t_mark,sum(l_goal) as 'l_goal' from league join team on league.l_team = team.t_name join league_kind on l_league_name = league_kind.lk_name where l_league_name=#{lkName} group by l_team 
+	</select>
+	
 	
 
 </mapper>

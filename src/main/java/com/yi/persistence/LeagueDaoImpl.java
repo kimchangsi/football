@@ -65,4 +65,11 @@ public class LeagueDaoImpl implements LeagueDao {
 		return sqlSession.selectList(namespace + ".selectLeagueByLeagueKind",vo);
 	}
 
+
+	@Override
+	public List<LeagueVO> selectLeagueTeam(LeagueKindVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".selectLeagueTeam",vo);
+	}
+
 }

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yi.domain.LeagueKindVO;
 import com.yi.domain.SpotVO;
+import com.yi.service.LeagueService;
 import com.yi.service.SpotService;
 
 @Controller
@@ -25,7 +27,8 @@ public class SpotController {
 	private static final Logger logger = LoggerFactory.getLogger(SpotController.class);
 	@Autowired
 	private SpotService service;
-	
+	@Autowired
+	LeagueService sService;
 	private String innerUploadPath = "resources/images/spot"; //서버에 업로드
 	
 	//지점 메인화면
@@ -42,7 +45,9 @@ public class SpotController {
 	
 	//관리자 지점
 	@RequestMapping(value = "/innerUpload", method = RequestMethod.GET)
-	public String innerUploadForm() {
+	public String innerUploadForm(Model model) throws Exception {
+		List<LeagueKindVO> list = sService.selectLeagueKindByAll();
+		model.addAttribute("list", list);
 		logger.info("---------------------------innerUpload get");
 		return "manager/innerUploadForm";
 	}
@@ -73,7 +78,8 @@ public class SpotController {
 		spot.setsImg(saveName);
 
 		logger.info("spotVO -------------------------------------" ,spot);
-		
+		List<LeagueKindVO> list = sService.selectLeagueKindByAll();
+		model.addAttribute("list", list);
 		service.insert(spot);
 		return "manager/innerUploadForm";
 	}

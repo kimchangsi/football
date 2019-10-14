@@ -363,7 +363,8 @@ table tr td:nth-child(4) {
 			var mbNo = $(this).attr("data-mbNo");
 			var gNo = $(this).attr("data-gNo");
 			var sNo2 = $(this).attr("data-sNo"); 
-			
+			var mId = $(this).attr('data-mId');
+
 
 			$("#dName").text(name);
 			$("#dForm").text(matchForm);
@@ -379,6 +380,12 @@ table tr td:nth-child(4) {
 			$("#mbNo").text(mbNo);
 			$("#postmbNo").val(mbNo);
 			$("#postPage").val($(".active").text());
+			
+			if(mId!='${login.mId}'){   
+				$(".btn_wrap").hide();
+			}else{
+				$(".btn_wrap").show();  
+			}
 			
 			var datePickerDate = $("#dTime").text().substring(0, 10);
 			$("#datepicker").val(datePickerDate);
@@ -541,7 +548,7 @@ table tr td:nth-child(4) {
 								data-mbNo="${matchList.mbNo }" 
 								data-gNo="${matchList.mbGno.gNo}"
 								data-sNo="${matchList.mbGno.gSno.sNo}"
-								
+								data-mId="${matchList.mbMember.mId }"
 								 >
 								 <c:if test="${matchList.mbApplication==1}">
 									<td><span class="state">가능</span></td>

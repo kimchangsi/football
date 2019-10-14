@@ -14,7 +14,7 @@
 	
 	<insert id="insertTeam" parameterType="com.yi.domain.TeamVO">
 		INSERT INTO team
-		(t_name, t_cf, t_join, t_code)
-		VALUES(#{tName}, #{tCf}, now() ,  #{tCode});
+		(t_name, t_cf, t_join, t_code,t_mark)
+		VALUES(#{tName}, #{tCf}, now() ,  #{tCode} , #{tMark})
 	</insert>
 </mapper>

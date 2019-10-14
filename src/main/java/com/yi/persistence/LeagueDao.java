@@ -14,4 +14,5 @@ public interface LeagueDao {
 	
 	public void updateLeagueQuarterfinals(LeagueVO vo) throws Exception;
 	public void updateLeagueSemifianl(LeagueVO vo) throws Exception;
+	public List<LeagueVO> selectLeagueTeam(LeagueKindVO vo) throws Exception;
 }
