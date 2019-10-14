@@ -21,12 +21,12 @@ import com.yi.domain.SearchCriteria;
 import com.yi.service.CustomerService;
 
 @Controller
-public class CustomerController {
-	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+public class CustomerController2 {
+	private static final Logger logger = LoggerFactory.getLogger(CustomerController2.class);
 	@Autowired
 	CustomerService service;
 	
-	@RequestMapping(value="customer", method=RequestMethod.GET)
+	@RequestMapping(value="customer2", method=RequestMethod.GET)
 	public ModelAndView customerGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("------------customer GET");
 		List<CustomerVO> list = service.listSearch(cri);
@@ -38,61 +38,61 @@ public class CustomerController {
 		model.addAttribute("pageMaker",pageMaker);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("customer/customer");
+		mav.setViewName("customer2/customer2");
 		mav.addObject("list", list);
 		return mav;
 	}
 	
-	@RequestMapping(value="/customer/noticeApply", method=RequestMethod.GET)
+	@RequestMapping(value="/customer2/noticeApply2", method=RequestMethod.GET)
 	public String write(){
 		logger.info("---------------------------write");
-		return "customer/noticeApply";
+		return "customer2/noticeApply2";
 	}
 
-	@RequestMapping(value="customer/create", method=RequestMethod.POST)
+	@RequestMapping(value="customer2/create2", method=RequestMethod.POST)
     public String insert(@ModelAttribute CustomerVO vo) throws Exception{
 		logger.info("---------------------------insert");
         service.create(vo);
-        return "redirect:/customer";
+        return "redirect:/customer2";
     }
 	
 	
-	 @RequestMapping(value="customer/view", method=RequestMethod.GET)
+	 @RequestMapping(value="customer2/view2", method=RequestMethod.GET)
      public ModelAndView view(@RequestParam int nNo, HttpSession session) throws Exception{
-		 logger.info("---------------------------view");
+		 logger.info("---------------------------view2");
         // 조회수 증가 처리
 		service.increaseViewcnt(nNo, session);
         // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
         ModelAndView mav = new ModelAndView();
         // 뷰의 이름
-        mav.setViewName("customer/view");
+        mav.setViewName("customer2/view2");
         // 뷰에 전달할 데이터
         mav.addObject("dto", service.read(nNo));
         return mav;
     }
 	 
-	 @RequestMapping(value="customer/noticeModify", method=RequestMethod.GET)
+	 @RequestMapping(value="customer2/noticeModify2", method=RequestMethod.GET)
 	 public ModelAndView update1(@ModelAttribute CustomerVO vo,@RequestParam int nNo, HttpSession session) throws Exception{
 		 logger.info(vo.getnNo()+"");
 		 
 		 ModelAndView mav = new ModelAndView();
-		 mav.setViewName("customer/noticeModify");
+		 mav.setViewName("customer2/noticeModify2");
 		 mav.addObject("dto", service.read(nNo));
 		 return mav;
     }
 	 
-	 @RequestMapping(value="customer/noticeModify", method=RequestMethod.POST)
+	 @RequestMapping(value="customer2/noticeModify2", method=RequestMethod.POST)
 	 public String update2(@ModelAttribute CustomerVO vo) throws Exception{
 		 logger.info("---------------------------update2");
 	 	service.update(vo);
-        return "redirect:/customer";
+        return "redirect:/customer2";
     }
 
-	 @RequestMapping("delete")
+	 @RequestMapping("delete2")
 	    public String delete(@RequestParam int nNo) throws Exception{
 		 logger.info("---------------------------delete");
 		 service.delete(nNo);
-	        return "redirect:/customer";
+	        return "redirect:/customer2";
 	    }
 	
 	

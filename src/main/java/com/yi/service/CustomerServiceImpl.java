@@ -65,4 +65,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerVO> listSearch(SearchCriteria cri) throws Exception {
 		return dao.listSearch(cri);
 	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return dao.listSearchCount(cri);
+	}
 }

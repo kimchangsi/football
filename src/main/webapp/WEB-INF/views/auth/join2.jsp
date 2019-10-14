@@ -47,6 +47,7 @@
 	$(document).ready(function() {
 		$('html').addClass('memb');
 	});
+
 </script>
 </head>
 
@@ -64,9 +65,9 @@
 					<dl>
 						<dt>아이디 <span>(필수)</span></dt>
 						<dd>
-							<input type="text"  name="mId" style="width:75%" id="mId"/>
-							<span class="t_help">이미 사용중이거나 탈퇴한 아이디 입니다.</span>
-							<button id="" type="button" class="btn_check" onclick="cnfm_sms2();">중복확인</button>
+							<input type="text"  name="mId" style="width:100%" id="mId" onkeydown="inputIdChk"/>
+							<!-- <input type="button" value="중복확인" class="btn_check" onclick="openIdChk()"> -->
+							<input type="hidden" name="idDuplication" value="idUncheck">
 							<div id="checkMsg"></div>
 						</dd>
 						<dt>비밀번호 <span>(필수)</span></dt>
@@ -266,6 +267,10 @@ function checkForm(){
 		frm.mId.focus();
 		return;
 	}
+	/* if (frm.idDuplication.value != "idCheck"){
+		alert("아이디 중복체크를 해주세요.");
+		return;
+	} */
 	if (EmptyChk(frm.mPwd.value) < 4) {
 		alert("[비밀번호]는 4이상 입력되어야 합니다.");
 		frm.mPwd.focus();
@@ -325,6 +330,10 @@ function checkForm(){
 	frm.submit();
 }
 //-->
+
+function openIdChk() {
+	
+}
 </script>
 
 	<!-- Footer -->

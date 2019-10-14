@@ -400,7 +400,7 @@ function getLeagueListScore(leagueSelVal) {
 						<div class="collapse-divider"></div>
 						<h6 class="collapse-header">Other Pages:</h6>
 						<a class="collapse-item" href="404.html">404 Page</a> <a
-							class="collapse-item active" href="blank.html">Blank Page</a>
+							class="collapse-item active" href="${pageContext.request.contextPath}/customer2">공지사항</a>
 					</div>
 				</div></li>
 

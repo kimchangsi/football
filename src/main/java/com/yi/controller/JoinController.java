@@ -2,6 +2,8 @@ package com.yi.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yi.domain.MemberVO;
@@ -26,6 +30,7 @@ import com.yi.service.MemberService;
 @RequestMapping("/auth")
 @Controller
 public class JoinController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private String innerUploadPath = "resources/images/member"; //서버에 업로드
 	
@@ -66,17 +71,9 @@ public class JoinController {
 	}
 	
 	
-	@RequestMapping(value="join3/{mId}",method=RequestMethod.GET)
-	public ResponseEntity<MemberVO> idcheck(@PathVariable("mId") int mId){
-		ResponseEntity<MemberVO> entiy = null;
-		try {
-			MemberVO gList =  service.idcheck(mId);
-			entiy = new ResponseEntity<MemberVO>(gList,HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entiy = new ResponseEntity<MemberVO>(HttpStatus.BAD_REQUEST);
-		}
-		return entiy;
-	}
+	
+	
+	 
+	
 	
 }

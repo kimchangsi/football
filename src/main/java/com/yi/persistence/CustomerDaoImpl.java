@@ -51,6 +51,11 @@ public class CustomerDaoImpl implements CustomerDao{
 		return sqlSession.selectList(namespace+".listSearch", cri);
 	}
 
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return sqlSession.selectOne(namespace+".listSearchCount",cri);
+	}
+
 	
 
 }
