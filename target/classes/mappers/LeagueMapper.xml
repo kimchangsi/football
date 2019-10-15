@@ -53,8 +53,8 @@
 	<insert id="insertLeagueAfer" parameterType="LeagueVO">
 		insert into
 		league
-		(l_team,l_league_name,l_quarterfinals,l_semifianl,l_final)
-		values(#{lTeam.tName},#{lLeagueName.lkName},#{lQuarterfinals},#{lSemifianl},#{lFinal})
+		(l_team,l_league_name,l_quarterfinals,l_semifianl,l_final,l_rank)
+		values(#{lTeam.tName},#{lLeagueName.lkName},#{lQuarterfinals},#{lSemifianl},#{lFinal},#{lRank})
 	</insert>
 
 
@@ -82,7 +82,11 @@
 	</select>
 	
 	<select id="selectLeagueTeam" parameterType="com.yi.domain.LeagueKindVO" resultMap="resultLeagueByKcm">
-		select lk_name,t_name,t_mark,sum(l_goal) as 'l_goal' from league join team on league.l_team = team.t_name join league_kind on l_league_name = league_kind.lk_name where l_league_name=#{lkName} group by l_team 
+		<!-- select lk_name,t_name,t_mark,sum(l_goal) as 'l_goal' from league join team on league.l_team = team.t_name join league_kind on l_league_name = league_kind.lk_name where l_league_name=#{lkName} group by l_team order by l_final,l_semifianl,l_quarterfinals,l_state desc,l_out asc   -->
+		select  lk_name,t_name,t_mark ,sum(l_goal) as 'l_goal',sum(l_rank) as 'l_rank'
+from league   join team on league.l_team = team.t_name 
+			  join league_kind on l_league_name = league_kind.lk_name 
+where l_league_name=#{lkName} group by t_name order by sum(l_rank) desc
 	</select>
 	
 	

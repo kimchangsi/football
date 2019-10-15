@@ -180,6 +180,7 @@ public class leagueController {
 
 			// insert
 			LeagueVO insertVo = new LeagueVO();
+			insertVo.setlRank(vo1.getlRank());
 			insertVo.setlTeam(vo1.getlTeam());
 			insertVo.setlLeagueName(vo1.getlLeagueName());
 			insertVo.setlQuarterfinals(vo3.getlQuarterfinals());
@@ -198,6 +199,7 @@ public class leagueController {
 			vo2.setlAway(vo1.getlTeam().gettName()); // 상대팀 등록
 			// insert
 			LeagueVO insertVo = new LeagueVO();
+			insertVo.setlRank(vo2.getlRank());
 			insertVo.setlTeam(vo2.getlTeam());
 			insertVo.setlLeagueName(vo2.getlLeagueName());
 			insertVo.setlQuarterfinals(vo3.getlQuarterfinals());

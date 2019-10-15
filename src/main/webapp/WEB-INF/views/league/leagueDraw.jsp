@@ -290,7 +290,7 @@ function getLeagueList() {
 	
 	<table id="teamList">
 		<tr>
-			<th>순번</th>
+			<th>순위</th>
 			<th>팀 마크</th>
 			<th>팀 이름</th>
 			<th>참가 리그명</th>

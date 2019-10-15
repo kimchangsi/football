@@ -279,13 +279,13 @@ function getLeagueListScore(leagueSelVal) {
 			
 			if(type=="8강"){
 				alert("8강");
-				json = [ { lTeam:{tName:team1}, lLeagueName:{lkName:lkName2}, lGoal:score1,lQuarterfinals:1, }, {lTeam:{tName:team2},lLeagueName:{lkName:lkName2}, lGoal:score2,lQuarterfinals:1},{lSemifianl:1} ];
+				json = [ { lTeam:{tName:team1}, lLeagueName:{lkName:lkName2}, lGoal:score1,lQuarterfinals:1,lRank:10 }, {lTeam:{tName:team2},lLeagueName:{lkName:lkName2}, lGoal:score2,lQuarterfinals:1},{lSemifianl:1} ];
 			}else if(type=="4강"){
 				alert("4강");
-				json = [{lTeam:{tName:team1},lLeagueName:{lkName:lkName2}, lGoal:score1,lSemifianl:1}, {lTeam:{tName:team2}, lLeagueName:{lkName:lkName2},lGoal:score2,lSemifianl:1},{lFinal:1}];
+				json = [{lTeam:{tName:team1},lLeagueName:{lkName:lkName2}, lGoal:score1,lSemifianl:1,lRank:20}, {lTeam:{tName:team2}, lLeagueName:{lkName:lkName2},lGoal:score2,lSemifianl:1},{lFinal:1}];
 			}else if(type=="결승"){
 				alert("결승");
-				json = [{lTeam:{tName:team1}, lLeagueName:{lkName:lkName2},lGoal:score1,lFinal:1}, {lTeam:{tName:team2},lLeagueName:{lkName:lkName2}, lGoal:score2,lFinal:1},{lFinal:2}];
+				json = [{lTeam:{tName:team1}, lLeagueName:{lkName:lkName2},lGoal:score1,lFinal:1,lRank:30}, {lTeam:{tName:team2},lLeagueName:{lkName:lkName2}, lGoal:score2,lFinal:1},{lFinal:2}];
 			}
 			
 			var data = JSON.stringify(json);
